@@ -14,6 +14,14 @@ export const auth = betterAuth({
       role: {
         type: "string",
         defaultValue: "AFFILIATE"
+      },
+      firstName: {
+        type: "string",
+        required: false
+      },
+      lastName: {
+        type: "string",
+        required: false
       }
     }
   },
