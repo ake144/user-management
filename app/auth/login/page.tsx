@@ -90,15 +90,13 @@ export default function LoginPage() {
                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-indigo-400/10 rounded-full blur-3xl" />
             </div>
 
-            <div className="relative w-full max-w-md">
+            <div className="relative w-full max-w-2xl">
                 {/* Logo */}
                 <div className="text-center mb-8">
                     <Link href="/" className="inline-flex items-center gap-3 group">
-                        <div className="w-12 h-12 bg-gradient-to-br from-blue-600 to-indigo-600 rounded-xl flex items-center justify-center shadow-lg group-hover:scale-105 transition-transform">
-                            <BookOpen className="w-6 h-6 text-white" />
-                        </div>
-                        <span className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
-                            Global Pathways Academy
+                        
+                        <span className="text-2xl font-bold bg-linear-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
+                            SRE Affiliate Program
                         </span>
                     </Link>
                 </div>

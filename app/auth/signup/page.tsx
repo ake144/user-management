@@ -141,18 +141,17 @@ export default function SignupPage() {
                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-indigo-400/10 rounded-full blur-3xl" />
             </div>
 
-            <div className="relative w-full max-w-md">
-                {/* Logo */}
-                <div className="text-center mb-8">
+            <div className="relative w-full max-w-2xl">
+                {/* <div className="text-center mb-8">
                     <Link href="/" className="inline-flex items-center gap-3 group">
                     
                         <span className="text-2xl font-bold bg-linear-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
                             Global Pathways Academy
                         </span>
                     </Link>
-                </div>
+                </div> */}
 
-                <Card className="backdrop-blur-xl  bg-white/80 border-white/20 shadow-2xl">
+                <Card className="backdrop-blur-xl  bg-white/80  border-white/20 shadow-2xl">
                     <CardHeader className="text-center pb-4">
                         <h1 className="text-2xl font-bold text-gray-900">Create your account</h1>
                         <p className="text-gray-600 mt-1">Start your learning journey today</p>
