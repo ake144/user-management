@@ -65,7 +65,7 @@ export function DashboardCharts({ data }: { data: ChartData[] }) {
                             color: 'var(--card-foreground)'
                         }}
                         itemStyle={{ color: 'var(--primary)' }}
-                        formatter={(value: number) => [`$${value}`, 'Earnings']}
+                        formatter={(value: number | string | undefined) => [`$${value}`, 'Earnings']}
                     />
                     <Area
                         type="monotone"
