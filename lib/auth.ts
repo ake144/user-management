@@ -3,6 +3,7 @@ import { prismaAdapter } from 'better-auth/adapters/prisma'
 import prisma from './prisma'
 
 export const auth = betterAuth({
+  baseURL: process.env.BETTER_AUTH_URL || "https://user-management-nine-sooty.vercel.app",
   database: prismaAdapter(prisma, {
     provider: 'postgresql',
   }),
@@ -45,5 +46,10 @@ export const auth = betterAuth({
       clientSecret: process.env.GITHUB_CLIENT_SECRET || "",
     },
   },
-  trustedOrigins: ['http://localhost:3000', 'https://user-management-nine-sooty.vercel.app/' ,'http://localhost:3001'],
+  trustedOrigins: [
+    'http://localhost:3000', 
+    'http://localhost:3001',
+    'https://user-management-nine-sooty.vercel.app',
+    process.env.NEXT_PUBLIC_APP_URL || ""
+  ].filter(Boolean),
 })
