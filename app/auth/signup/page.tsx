@@ -1,19 +1,22 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect, Suspense } from "react"
 import Link from "next/link"
-import { useRouter } from "next/navigation"
+import { useRouter, useSearchParams } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Card, CardContent, CardHeader } from "@/components/ui/card"
-import { BookOpen, Mail, Lock, User, Phone, Eye, EyeOff, ArrowRight, CheckCircle } from "lucide-react"
+import { BookOpen, Mail, Lock, User, Phone, Eye, EyeOff, ArrowRight, CheckCircle, Gift } from "lucide-react"
 import { toast } from "sonner"
 import { signUp, signIn } from "@/lib/auth-client"
+import { getReferrerDetails, updateUserReferral } from "./actions"
 
-export default function SignupPage() {
+function SignupForm() {
     const router = useRouter()
+    const searchParams = useSearchParams()
     const [isLoading, setLoading] = useState(false)
+    const [referrer, setReferrer] = useState<{ id: string; name: string } | null>(null)
 
     const [formData, setFormData] = useState({
         name: "",
@@ -26,6 +29,27 @@ export default function SignupPage() {
     const [showConfirmPassword, setShowConfirmPassword] = useState(false)
     const [errors, setErrors] = useState<Record<string, string>>({})
     const [agreedToTerms, setAgreedToTerms] = useState(false)
+
+    useEffect(() => {
+        const checkReferral = async () => {
+            let refCode = searchParams.get("ref")
+
+            // Fallback to cookie if no URL param
+            if (!refCode) {
+                const match = document.cookie.match(new RegExp('(^| )referral_code=([^;]+)'));
+                if (match) refCode = match[2];
+            }
+
+            if (refCode) {
+                const details = await getReferrerDetails(refCode)
+                if (details) {
+                    setReferrer({ id: details.id, name: details.name })
+                    toast.success(`You were referred by ${details.name}!`)
+                }
+            }
+        }
+        checkReferral()
+    }, [searchParams])
 
     const validateForm = () => {
         const newErrors: Record<string, string> = {}
@@ -64,6 +88,12 @@ export default function SignupPage() {
         return Object.keys(newErrors).length === 0
     }
 
+    const generateReferralCode = (name: string) => {
+        const cleanName = name.toLowerCase().replace(/[^a-z0-9]/g, '');
+        const randomStr = Math.random().toString(36).substring(2, 7);
+        return `${cleanName}-${randomStr}`;
+    }
+
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault()
 
@@ -72,12 +102,21 @@ export default function SignupPage() {
         setLoading(true)
         setErrors({})
 
+        const newReferralCode = generateReferralCode(formData.name);
+
         await signUp.email({
             email: formData.email,
             password: formData.password,
-            name: formData.name,
+            name: formData.name
         }, {
-            onSuccess: () => {
+            onSuccess: async () => {
+                try {
+                    await updateUserReferral(newReferralCode, referrer?.id);
+                } catch (e) {
+                    console.error("Failed to update referral info", e);
+                }
+                toast.success("Account created successfully!");
+
                 router.push("/auth/verify")
             },
             onError: (ctx: any) => {
@@ -111,19 +150,17 @@ export default function SignupPage() {
             </div>
 
             <div className="relative w-full max-w-2xl">
-                {/* <div className="text-center mb-8">
-                    <Link href="/" className="inline-flex items-center gap-3 group">
-                    
-                        <span className="text-2xl font-bold bg-linear-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
-                            Global Pathways Academy
-                        </span>
-                    </Link>
-                </div> */}
-
                 <Card className="backdrop-blur-xl  bg-white/80  border-white/20 shadow-2xl">
                     <CardHeader className="text-center pb-4">
                         <h1 className="text-2xl font-bold text-gray-900">Create your account</h1>
                         <p className="text-gray-600 mt-1">Start your learning journey today</p>
+
+                        {referrer && (
+                            <div className="mt-4 inline-flex items-center gap-2 px-4 py-2 bg-green-50 border border-green-200 rounded-full text-green-700 text-sm font-medium animate-in fade-in slide-in-from-top-2">
+                                <Gift className="w-4 h-4" />
+                                Referred by {referrer.name}
+                            </div>
+                        )}
                     </CardHeader>
 
                     <CardContent>
@@ -349,5 +386,13 @@ export default function SignupPage() {
                 </Card>
             </div>
         </div>
+    )
+}
+
+export default function SignupPage() {
+    return (
+        <Suspense fallback={<div>Loading...</div>}>
+            <SignupForm />
+        </Suspense>
     )
 }

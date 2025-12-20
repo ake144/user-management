@@ -22,6 +22,16 @@ export const auth = betterAuth({
       lastName: {
         type: "string",
         required: false
+      },
+      referralCode: {
+        type: "string",
+        required: false,
+        input: true
+      },
+      referredById: {
+        type: "string",
+        required: false,
+        input: true
       }
     }
   },

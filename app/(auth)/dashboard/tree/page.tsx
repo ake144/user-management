@@ -3,7 +3,6 @@ import { headers } from "next/headers";
 import prisma from "@/lib/prisma";
 import { redirect } from "next/navigation";
 import { ReferralTree, TreeNode } from "@/components/referral-tree";
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"; // Assuming shadcn/ui alert exists or I'll use standard HTML
 import { Info } from "lucide-react";
 
 // Mock Tree Data

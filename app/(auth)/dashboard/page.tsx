@@ -31,6 +31,18 @@ async function getUserData(userId: string) {
       }
     },
   });
+  if (user && !user.referralCode) {
+    // Generate missing referral code
+    const cleanName = (user.name || "user").toLowerCase().replace(/[^a-z0-9]/g, '');
+    const randomStr = Math.random().toString(36).substring(2, 7);
+    const newCode = `${cleanName}-${randomStr}`;
+
+    await prisma.user.update({
+      where: { id: user.id },
+      data: { referralCode: newCode }
+    });
+    user.referralCode = newCode;
+  }
   return user;
 }
 
