@@ -1,10 +1,12 @@
 import type { FC, ComponentType } from "react"
-import { TrendingUp, Users, Wallet, Globe, ShieldCheck, Zap } from "lucide-react"
+import { TrendingUp, Users, Wallet, Globe, ShieldCheck, Zap, Code2, Palette } from "lucide-react"
 import AnalyticsIllustration from "./bento/analytics-illustration"
 import NetworkIllustration from "./bento/network-illustration"
 import PayoutsIllustration from "./bento/payouts-illustration"
 import GlobalReachIllustration from "./bento/global-reach-illustration"
 import SecurityIllustration from "./bento/security-illustration"
+import APIIllustration from "./bento/api-illustration"
+import MarketingIllustration from "./bento/marketing-illustration"
 
 type BentoCardProps = {
   title: string
@@ -76,17 +78,31 @@ export function BentoSection() {
       component: GlobalReachIllustration,
       className: "md:col-span-2",
     },
+     {
+      title: "Marketing Assets",
+      description: "Access a library of high-converting banners, templates, and brand kits to boost your promotions.",
+      icon: Palette,
+      component: MarketingIllustration,
+      className: "md:col-span-2",
+    },
     {
       title: "Bank-Grade Security",
       description: "Your data and earnings are protected by enterprise-level encryption and fraud protection.",
       icon: ShieldCheck,
       component: SecurityIllustration,
     },
-    {
-      title: "High Commission Rates",
-      description: "Enjoy some of the most competitive commission rates in the industry with lifetime rewards.",
-      icon: Zap,
-    },
+    // {
+    //   title: "API & Webhooks",
+    //   description: "Integrate Esperanza into your own tools with our powerful REST API and real-time webhooks.",
+    //   icon: Code2,
+    //   component: APIIllustration,
+    // },
+   
+    // {
+    //   title: "High Commission Rates",
+    //   description: "Enjoy some of the most competitive commission rates in the industry with lifetime rewards.",
+    //   icon: Zap,
+    // },
   ]
 
   return (

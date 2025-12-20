@@ -20,7 +20,8 @@ const SecurityIllustration: React.FC = () => {
       </div>
 
       {/* Security Logs Container */}
-      <div className="w-full max-w-[700px] space-y-3 relative z-10">
+      <div 
+      className="w-full max-w-8xl space-y-3 relative z-10">
         {securityLogs.map((log, index) => (
           <div
             key={index}
