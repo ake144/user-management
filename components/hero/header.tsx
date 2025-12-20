@@ -10,8 +10,8 @@ import Link from "next/link" // Import Link for client-side navigation
 export function Header() {
   const navItems = [
     { name: "Features", href: "#features-section" },
-    { name: "Pricing", href: "#pricing-section" },
-    { name: "Testimonials", href: "#testimonials-section" }, // Changed from Docs to Testimonials
+    { name: "Testimonials", href: "#testimonials-section" },
+    { name: "FAQ", href: "#faq-section" },
   ]
 
   const handleScroll = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {

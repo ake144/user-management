@@ -45,5 +45,5 @@ export const auth = betterAuth({
       clientSecret: process.env.GITHUB_CLIENT_SECRET || "",
     },
   },
-  trustedOrigins: ['http://localhost:3000', 'http://localhost:3001'],
+  trustedOrigins: ['http://localhost:3000', 'https://user-management-nine-sooty.vercel.app/' ,'http://localhost:3001'],
 })
