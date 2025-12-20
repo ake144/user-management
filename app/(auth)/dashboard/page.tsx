@@ -61,6 +61,23 @@ export default async function DashboardPage() {
     return <div>User not found</div>;
   }
 
+  // Mock data for fallback
+  const isDemoMode = user.transactions.length === 0;
+  const mockTransactions = [
+    { amount: 120.50, createdAt: new Date(Date.now() - 6 * 24 * 60 * 60 * 1000) },
+    { amount: 85.00, createdAt: new Date(Date.now() - 5 * 24 * 60 * 60 * 1000) },
+    { amount: 210.00, createdAt: new Date(Date.now() - 4 * 24 * 60 * 60 * 1000) },
+    { amount: 45.25, createdAt: new Date(Date.now() - 3 * 24 * 60 * 60 * 1000) },
+    { amount: 150.00, createdAt: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000) },
+    { amount: 95.75, createdAt: new Date(Date.now() - 1 * 24 * 60 * 60 * 1000) },
+    { amount: 130.00, createdAt: new Date() },
+  ];
+
+  const displayBalance = isDemoMode ? 836.50 : user.currentBalance;
+  const displayReferrals = isDemoMode ? 12 : user._count.referrals;
+  const displayTotalEarned = isDemoMode ? 2450.00 : user.totalEarnings;
+  const displayTransactions = isDemoMode ? mockTransactions : user.transactions;
+
   // Format currency
   const formatCurrency = (amount: number) => {
     return new Intl.NumberFormat('en-US', {
@@ -70,9 +87,9 @@ export default async function DashboardPage() {
   };
 
   // Prepare chart data (reverse to show chronological order)
-  const chartData = user.transactions
+  const chartData = displayTransactions
     .map(t => ({
-      date: t.createdAt.toLocaleDateString(),
+      date: t.createdAt.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }),
       amount: t.amount,
     }))
     .reverse();
@@ -81,7 +98,14 @@ export default async function DashboardPage() {
     <div className="flex flex-col gap-8">
       {/* Header */}
       <div className="flex flex-col gap-2">
-        <h1 className="text-3xl font-bold tracking-tight">Dashboard</h1>
+        <div className="flex items-center gap-3">
+          <h1 className="text-3xl font-bold tracking-tight">Dashboard</h1>
+          {isDemoMode && (
+            <span className="px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider bg-primary/10 text-primary border border-primary/20 rounded-full">
+              Demo Mode
+            </span>
+          )}
+        </div>
         <p className="text-muted-foreground">
           Welcome back, {user.firstName || user.name}. Here's what's happening with your affiliate network.
         </p>
@@ -95,7 +119,7 @@ export default async function DashboardPage() {
             <h3 className="tracking-tight text-sm font-medium text-muted-foreground">Current Balance</h3>
             <DollarSign className="h-4 w-4 text-primary" />
           </div>
-          <div className="text-2xl font-bold">{formatCurrency(user.currentBalance)}</div>
+          <div className="text-2xl font-bold">{formatCurrency(displayBalance)}</div>
           <p className="text-xs text-muted-foreground mt-1">Available for withdrawal</p>
         </div>
 
@@ -105,7 +129,7 @@ export default async function DashboardPage() {
             <h3 className="tracking-tight text-sm font-medium text-muted-foreground">Direct Referrals</h3>
             <Users className="h-4 w-4 text-blue-500" />
           </div>
-          <div className="text-2xl font-bold">{user._count.referrals}</div>
+          <div className="text-2xl font-bold">{displayReferrals}</div>
           <p className="text-xs text-muted-foreground mt-1">Active network members</p>
         </div>
 
@@ -115,7 +139,7 @@ export default async function DashboardPage() {
             <h3 className="tracking-tight text-sm font-medium text-muted-foreground">Total Earned</h3>
             <TrendingUp className="h-4 w-4 text-green-500" />
           </div>
-          <div className="text-2xl font-bold">{formatCurrency(user.totalEarnings)}</div>
+          <div className="text-2xl font-bold">{formatCurrency(displayTotalEarned)}</div>
           <p className="text-xs text-muted-foreground mt-1">Lifetime commissions</p>
         </div>
       </div>
@@ -127,7 +151,9 @@ export default async function DashboardPage() {
         <div className="col-span-4 rounded-xl border bg-card text-card-foreground shadow-sm">
           <div className="p-6 flex flex-col gap-1 border-b">
             <h3 className="font-semibold leading-none tracking-tight">Earnings Overview</h3>
-            <p className="text-sm text-muted-foreground">Recent commission activity</p>
+            <p className="text-sm text-muted-foreground">
+              {isDemoMode ? "Sample commission activity" : "Recent commission activity"}
+            </p>
           </div>
           <div className="p-6 pt-4 pl-0">
             <DashboardCharts data={chartData} />
