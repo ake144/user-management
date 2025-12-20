@@ -76,7 +76,7 @@ export default function LoginPage() {
                     <Link href="/dashboard" className="inline-flex items-center gap-3 group">
 
                         <span className="text-2xl font-bold bg-gradient-to-r from-primary to-purple-600 bg-clip-text text-transparent">
-                            SRE Affiliate Program
+                            Esperanza Affiliate Program
                         </span>
                     </Link>
                 </div>
