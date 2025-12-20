@@ -15,57 +15,57 @@ type TestimonialCardProps = Testimonial
 const testimonials: Testimonial[] = [
   {
     quote:
-      "The real-time code suggestions from Pointer feel like having a senior engineer reviewing every line of code as you write. The accuracy of its recommendations has improved our overall code quality, reduced review time.",
+      "The real-time dashboard gives me complete visibility into my network's performance. I can track commissions and downline growth as it happens.",
     name: "Annette Black",
-    company: "Sony",
+    company: "Elite Marketing",
     avatar: "/images/avatars/annette-black.png",
     type: "large-teal",
   },
   {
     quote:
-      "Integrating Pointer into our stack was smooth, and the MCP server connections saved us days of configuration work",
+      "Integrating Esperanza into our workflow was seamless. The automated tracking saved us countless hours of manual work.",
     name: "Dianne Russell",
-    company: "McDonald's",
+    company: "Growth Co.",
     avatar: "/images/avatars/dianne-russell.png",
     type: "small-dark",
   },
   {
     quote:
-      "Pointer’s multi-agent coding feature has been a game changer. We’re fixing complex bugs in hours instead of spending entire sprints on them.",
+      "The referral tree feature is a game changer. I can visualize my entire organization and help my team succeed.",
     name: "Cameron Williamson",
-    company: "IBM",
+    company: "Network Leaders",
     avatar: "/images/avatars/cameron-williamson.png",
     type: "small-dark",
   },
   {
     quote:
-      "We no longer juggle multiple tools. Pointer brought all our integrations together in one place, which simplified our entire workflow.",
+      "Everything I need is in one place. From earnings reports to withdrawal management, Esperanza simplifies my business.",
     name: "Robert Fox",
-    company: "MasterCard",
+    company: "Digital Ventures",
     avatar: "/images/avatars/robert-fox.png",
     type: "small-dark",
   },
   {
     quote:
-      "We started with the free plan just to test it out, but within a week we upgraded to Pro. Now, we can’t imagine coding without it",
+      "I started as a user and quickly upgraded to an affiliate. The potential for passive income here is unmatched.",
     name: "Darlene Robertson",
-    company: "Ferrari",
+    company: "Lifestyle Inc.",
     avatar: "/images/avatars/darlene-robertson.png",
     type: "small-dark",
   },
   {
     quote:
-      "Collaborative coding feels effortless now. With Pointer’s real-time previews, pair programming has become faster and more productive.",
+      "Collaborating with my downline feels effortless now. We can share strategies and track progress together in real-time.",
     name: "Cody Fisher",
-    company: "Apple",
+    company: "Team Alpha",
     avatar: "/images/avatars/cody-fisher.png",
     type: "small-dark",
   },
   {
     quote:
-      "Deploying on Vercel with Pointer was not just simple, it felt seamless. We went from coding to seeing our changes live in minutes without worrying about build pipelines or configuration issues.",
+      "Scaling my business with Esperanza was incredibly simple. I went from a few referrals to a massive network without worrying about the technical details.",
     name: "Albert Flores",
-    company: "Louis Vuitton",
+    company: "Future Systems",
     avatar: "/images/avatars/albert-flores.png",
     type: "large-light",
   },
@@ -145,11 +145,11 @@ export function TestimonialGridSection() {
       <div className="self-stretch py-6 md:py-8 lg:py-14 flex flex-col justify-center items-center gap-2">
         <div className="flex flex-col justify-start items-center gap-4">
           <h2 className="text-center text-foreground text-3xl md:text-4xl lg:text-[40px] font-semibold leading-tight md:leading-tight lg:leading-[40px]">
-            Coding made effortless
+            Growth made effortless
           </h2>
           <p className="self-stretch text-center text-muted-foreground text-sm md:text-sm lg:text-base font-medium leading-[18.20px] md:leading-relaxed lg:leading-relaxed">
-            {"Hear how developers ship products faster, collaborate seamlessly,"} <br />{" "}
-            {"and build with confidence using Pointer's powerful AI tools"}
+            {"Hear how partners grow their networks, track earnings,"} <br />{" "}
+            {"and build wealth using Esperanza's powerful tools"}
           </p>
         </div>
       </div>
