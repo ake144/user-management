@@ -62,77 +62,77 @@ export default function LoginPage() {
     }
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 flex items-center justify-center p-4">
+        <div className="min-h-screen bg-background flex items-center justify-center p-4">
             {/* Background Pattern */}
             <div className="absolute inset-0 overflow-hidden pointer-events-none">
-                <div className="absolute -top-40 -right-40 w-80 h-80 bg-blue-400/20 rounded-full blur-3xl" />
-                <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-purple-400/20 rounded-full blur-3xl" />
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-indigo-400/10 rounded-full blur-3xl" />
+                <div className="absolute -top-40 -right-40 w-80 h-80 bg-primary/20 rounded-full blur-3xl" />
+                <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-secondary/20 rounded-full blur-3xl" />
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-accent/10 rounded-full blur-3xl" />
             </div>
 
-            <div className="relative w-full max-w-2xl">
+            <div className="relative w-full max-w-xl">
                 {/* Logo */}
                 <div className="text-center mb-8">
                     <Link href="/dashboard" className="inline-flex items-center gap-3 group">
 
-                        <span className="text-2xl font-bold bg-linear-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
+                        <span className="text-2xl font-bold bg-gradient-to-r from-primary to-purple-600 bg-clip-text text-transparent">
                             SRE Affiliate Program
                         </span>
                     </Link>
                 </div>
 
-                <Card className="backdrop-blur-xl bg-white/80 border-white/20 shadow-2xl">
+                <Card className="backdrop-blur-xl bg-card/80 border-border shadow-2xl">
                     <CardHeader className="text-center pb-4">
-                        <h1 className="text-2xl font-bold text-gray-900">Welcome back</h1>
-                        <p className="text-gray-600 mt-1">Sign in to continue your learning</p>
+                        <h1 className="text-2xl font-bold text-foreground">Welcome back</h1>
+                        <p className="text-muted-foreground mt-1">Sign in to continue your learning</p>
                     </CardHeader>
 
                     <CardContent>
                         <form onSubmit={handleSubmit} className="space-y-5">
                             {/* Email Field */}
                             <div className="space-y-2">
-                                <Label htmlFor="email" className="text-gray-700">Email Address</Label>
+                                <Label htmlFor="email" className="text-foreground">Email Address</Label>
                                 <div className="relative">
-                                    <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+                                    <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
                                     <Input
                                         id="email"
                                         type="email"
                                         placeholder="john@example.com"
                                         value={formData.email}
                                         onChange={(e) => setFormData(prev => ({ ...prev, email: e.target.value }))}
-                                        className={`pl-10 h-12 bg-white/50 border-gray-200 focus:border-blue-500 ${errors.email ? "border-red-500" : ""}`}
+                                        className={`pl-10 h-12 bg-background border-input focus:border-primary ${errors.email ? "border-destructive" : ""}`}
                                     />
                                 </div>
-                                {errors.email && <p className="text-sm text-red-500">{errors.email}</p>}
+                                {errors.email && <p className="text-sm text-destructive">{errors.email}</p>}
                             </div>
 
                             {/* Password Field */}
                             <div className="space-y-2">
                                 <div className="flex items-center justify-between">
-                                    <Label htmlFor="password" className="text-gray-700">Password</Label>
-                                    <Link href="/auth/forgot-password" className="text-sm text-blue-600 hover:underline">
+                                    <Label htmlFor="password" className="text-foreground">Password</Label>
+                                    <Link href="/auth/forgot-password" className="text-sm text-primary hover:underline">
                                         Forgot password?
                                     </Link>
                                 </div>
                                 <div className="relative">
-                                    <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+                                    <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
                                     <Input
                                         id="password"
                                         type={showPassword ? "text" : "password"}
                                         placeholder="••••••••"
                                         value={formData.password}
                                         onChange={(e) => setFormData(prev => ({ ...prev, password: e.target.value }))}
-                                        className={`pl-10 pr-10 h-12 bg-white/50 border-gray-200 focus:border-blue-500 ${errors.password ? "border-red-500" : ""}`}
+                                        className={`pl-10 pr-10 h-12 bg-background border-input focus:border-primary ${errors.password ? "border-destructive" : ""}`}
                                     />
                                     <button
                                         type="button"
                                         onClick={() => setShowPassword(!showPassword)}
-                                        className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
+                                        className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
                                     >
                                         {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
                                     </button>
                                 </div>
-                                {errors.password && <p className="text-sm text-red-500">{errors.password}</p>}
+                                {errors.password && <p className="text-sm text-destructive">{errors.password}</p>}
                             </div>
 
                             {/* Remember Me */}
@@ -142,16 +142,16 @@ export default function LoginPage() {
                                     id="remember"
                                     checked={rememberMe}
                                     onChange={(e) => setRememberMe(e.target.checked)}
-                                    className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                                    className="rounded border-input text-primary focus:ring-primary bg-background"
                                 />
-                                <label htmlFor="remember" className="text-sm text-gray-600">
+                                <label htmlFor="remember" className="text-sm text-muted-foreground">
                                     Remember me for 30 days
                                 </label>
                             </div>
 
                             {/* Submit Error */}
                             {errors.submit && (
-                                <div className="p-3 bg-red-50 border border-red-200 rounded-lg text-red-600 text-sm">
+                                <div className="p-3 bg-destructive/10 border border-destructive/20 rounded-lg text-destructive text-sm">
                                     {errors.submit}
                                 </div>
                             )}
@@ -160,7 +160,7 @@ export default function LoginPage() {
                             <Button
                                 type="submit"
                                 disabled={isLoading}
-                                className="w-full h-12 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-semibold rounded-xl shadow-lg shadow-blue-500/25 transition-all hover:shadow-xl hover:shadow-blue-500/30"
+                                className="w-full h-12 bg-primary hover:bg-primary/90 text-primary-foreground font-semibold rounded-xl shadow-lg shadow-primary/25 transition-all hover:shadow-xl hover:shadow-primary/30"
                             >
                                 {isLoading ? (
                                     <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
@@ -178,7 +178,7 @@ export default function LoginPage() {
                                     <div className="w-full border-t border-gray-200" />
                                 </div>
                                 <div className="relative flex justify-center text-sm">
-                                    <span className="px-4 bg-white text-gray-500">Or continue with</span>
+                                    <span className="px-4 bg-card text-muted-foreground">Or continue with</span>
                                 </div>
                             </div>
 
@@ -187,7 +187,7 @@ export default function LoginPage() {
                                 <Button
                                     type="button"
                                     variant="outline"
-                                    className="h-12 bg-white hover:bg-gray-50 border-gray-200"
+                                    className="h-12 bg-background hover:bg-accent border-input"
                                     onClick={() => signIn.social({ provider: "google", callbackURL: "/" })}
                                 >
                                     <svg className="w-5 h-5 mr-2" viewBox="0 0 24 24">
@@ -213,7 +213,7 @@ export default function LoginPage() {
                                 <Button
                                     type="button"
                                     variant="outline"
-                                    className="h-12 bg-white hover:bg-gray-50 border-gray-200"
+                                    className="h-12 bg-background hover:bg-accent border-input"
                                     onClick={() => signIn.social({ provider: "github", callbackURL: "/" })}
                                 >
                                     <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
@@ -225,9 +225,9 @@ export default function LoginPage() {
                         </form>
 
                         {/* Signup Link */}
-                        <p className="text-center mt-6 text-gray-600">
+                        <p className="text-center mt-6 text-muted-foreground">
                             Don&apos;t have an account?{" "}
-                            <Link href="/auth/signup" className="text-blue-600 hover:underline font-medium">
+                            <Link href="/auth/signup" className="text-primary hover:underline font-medium">
                                 Sign up free
                             </Link>
                         </p>
@@ -236,7 +236,7 @@ export default function LoginPage() {
 
                 {/* Demo Credentials */}
                 <div className="mt-6 text-center">
-                    <p className="text-sm text-gray-500">
+                    <p className="text-sm text-muted-foreground">
                         Demo mode: Create an account to test the flow
                     </p>
                 </div>

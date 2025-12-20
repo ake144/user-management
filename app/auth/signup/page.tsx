@@ -141,22 +141,22 @@ function SignupForm() {
     const strengthLabels = ["", "Weak", "Fair", "Good", "Strong", "Very Strong"]
 
     return (
-        <div className="min-h-screen bg-linear-to-br from-blue-50 via-indigo-50 to-purple-50 flex items-center justify-center p-4 py-12">
+        <div className="min-h-screen bg-background flex items-center justify-center p-4 py-12">
             {/* Background Pattern */}
             <div className="absolute inset-0 overflow-hidden pointer-events-none">
-                <div className="absolute -top-40 -right-40 w-80 h-80 bg-blue-400/20 rounded-full blur-3xl" />
-                <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-purple-400/20 rounded-full blur-3xl" />
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-indigo-400/10 rounded-full blur-3xl" />
+                <div className="absolute -top-40 -right-40 w-80 h-80 bg-primary/20 rounded-full blur-3xl" />
+                <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-secondary/20 rounded-full blur-3xl" />
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-accent/10 rounded-full blur-3xl" />
             </div>
 
             <div className="relative w-full max-w-2xl">
-                <Card className="backdrop-blur-xl  bg-white/80  border-white/20 shadow-2xl">
+                <Card className="backdrop-blur-xl bg-card/80 border-border shadow-2xl">
                     <CardHeader className="text-center pb-4">
-                        <h1 className="text-2xl font-bold text-gray-900">Create your account</h1>
-                        <p className="text-gray-600 mt-1">Start your learning journey today</p>
+                        <h1 className="text-2xl font-bold text-foreground">Create your account</h1>
+                        <p className="text-muted-foreground mt-1">Start your learning journey today</p>
 
                         {referrer && (
-                            <div className="mt-4 inline-flex items-center gap-2 px-4 py-2 bg-green-50 border border-green-200 rounded-full text-green-700 text-sm font-medium animate-in fade-in slide-in-from-top-2">
+                            <div className="mt-4 inline-flex items-center gap-2 px-4 py-2 bg-green-500/10 border border-green-500/20 rounded-full text-green-600 dark:text-green-400 text-sm font-medium animate-in fade-in slide-in-from-top-2">
                                 <Gift className="w-4 h-4" />
                                 Referred by {referrer.name}
                             </div>
@@ -167,76 +167,76 @@ function SignupForm() {
                         <form onSubmit={handleSubmit} className="space-y-4">
                             {/* Name Field */}
                             <div className="space-y-2">
-                                <Label htmlFor="name" className="text-gray-700">Full Name</Label>
+                                <Label htmlFor="name" className="text-foreground">Full Name</Label>
                                 <div className="relative">
-                                    <User className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+                                    <User className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
                                     <Input
                                         id="name"
                                         placeholder="John Doe"
                                         value={formData.name}
                                         onChange={(e) => setFormData(prev => ({ ...prev, name: e.target.value }))}
-                                        className={`pl-10 h-12 bg-white/50 border-gray-200 focus:border-blue-500 ${errors.name ? "border-red-500" : ""}`}
+                                        className={`pl-10 h-12 bg-background border-input focus:border-primary ${errors.name ? "border-destructive" : ""}`}
                                     />
                                 </div>
-                                {errors.name && <p className="text-sm text-red-500">{errors.name}</p>}
+                                {errors.name && <p className="text-sm text-destructive">{errors.name}</p>}
                             </div>
 
                             {/* Email Field */}
                             <div className="space-y-2">
-                                <Label htmlFor="email" className="text-gray-700">Email Address</Label>
+                                <Label htmlFor="email" className="text-foreground">Email Address</Label>
                                 <div className="relative">
-                                    <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+                                    <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
                                     <Input
                                         id="email"
                                         type="email"
                                         placeholder="john@example.com"
                                         value={formData.email}
                                         onChange={(e) => setFormData(prev => ({ ...prev, email: e.target.value }))}
-                                        className={`pl-10 h-12 bg-white/50 border-gray-200 focus:border-blue-500 ${errors.email ? "border-red-500" : ""}`}
+                                        className={`pl-10 h-12 bg-background border-input focus:border-primary ${errors.email ? "border-destructive" : ""}`}
                                     />
                                 </div>
-                                {errors.email && <p className="text-sm text-red-500">{errors.email}</p>}
+                                {errors.email && <p className="text-sm text-destructive">{errors.email}</p>}
                             </div>
 
                             {/* Phone Field */}
                             <div className="space-y-2">
-                                <Label htmlFor="phone" className="text-gray-700">Phone Number</Label>
+                                <Label htmlFor="phone" className="text-foreground">Phone Number</Label>
                                 <div className="relative">
-                                    <Phone className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+                                    <Phone className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
                                     <Input
                                         id="phone"
                                         type="tel"
                                         placeholder="+251 9XX XXX XXX"
                                         value={formData.phone}
                                         onChange={(e) => setFormData(prev => ({ ...prev, phone: e.target.value }))}
-                                        className={`pl-10 h-12 bg-white/50 border-gray-200 focus:border-blue-500 ${errors.phone ? "border-red-500" : ""}`}
+                                        className={`pl-10 h-12 bg-background border-input focus:border-primary ${errors.phone ? "border-destructive" : ""}`}
                                     />
                                 </div>
-                                {errors.phone && <p className="text-sm text-red-500">{errors.phone}</p>}
+                                {errors.phone && <p className="text-sm text-destructive">{errors.phone}</p>}
                             </div>
 
                             {/* Password Field */}
                             <div className="space-y-2">
-                                <Label htmlFor="password" className="text-gray-700">Password</Label>
+                                <Label htmlFor="password" className="text-foreground">Password</Label>
                                 <div className="relative">
-                                    <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+                                    <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
                                     <Input
                                         id="password"
                                         type={showPassword ? "text" : "password"}
                                         placeholder="••••••••"
                                         value={formData.password}
                                         onChange={(e) => setFormData(prev => ({ ...prev, password: e.target.value }))}
-                                        className={`pl-10 pr-10 h-12 bg-white/50 border-gray-200 focus:border-blue-500 ${errors.password ? "border-red-500" : ""}`}
+                                        className={`pl-10 pr-10 h-12 bg-background border-input focus:border-primary ${errors.password ? "border-destructive" : ""}`}
                                     />
                                     <button
                                         type="button"
                                         onClick={() => setShowPassword(!showPassword)}
-                                        className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
+                                        className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
                                     >
                                         {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
                                     </button>
                                 </div>
-                                {errors.password && <p className="text-sm text-red-500">{errors.password}</p>}
+                                {errors.password && <p className="text-sm text-destructive">{errors.password}</p>}
 
                                 {/* Password Strength Indicator */}
                                 {formData.password && (
@@ -245,33 +245,33 @@ function SignupForm() {
                                             {[1, 2, 3, 4, 5].map((level) => (
                                                 <div
                                                     key={level}
-                                                    className={`h-1 flex-1 rounded-full transition-colors ${passwordStrength >= level ? strengthColors[passwordStrength] : "bg-gray-200"
+                                                    className={`h-1 flex-1 rounded-full transition-colors ${passwordStrength >= level ? strengthColors[passwordStrength] : "bg-muted"
                                                         }`}
                                                 />
                                             ))}
                                         </div>
-                                        <p className="text-xs text-gray-500">{strengthLabels[passwordStrength]}</p>
+                                        <p className="text-xs text-muted-foreground">{strengthLabels[passwordStrength]}</p>
                                     </div>
                                 )}
                             </div>
 
                             {/* Confirm Password Field */}
                             <div className="space-y-2">
-                                <Label htmlFor="confirmPassword" className="text-gray-700">Confirm Password</Label>
+                                <Label htmlFor="confirmPassword" className="text-foreground">Confirm Password</Label>
                                 <div className="relative">
-                                    <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+                                    <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
                                     <Input
                                         id="confirmPassword"
                                         type={showConfirmPassword ? "text" : "password"}
                                         placeholder="••••••••"
                                         value={formData.confirmPassword}
                                         onChange={(e) => setFormData(prev => ({ ...prev, confirmPassword: e.target.value }))}
-                                        className={`pl-10 pr-10 h-12 bg-white/50 border-gray-200 focus:border-blue-500 ${errors.confirmPassword ? "border-red-500" : ""}`}
+                                        className={`pl-10 pr-10 h-12 bg-background border-input focus:border-primary ${errors.confirmPassword ? "border-destructive" : ""}`}
                                     />
                                     <button
                                         type="button"
                                         onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                                        className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
+                                        className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
                                     >
                                         {showConfirmPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
                                     </button>
@@ -279,7 +279,7 @@ function SignupForm() {
                                         <CheckCircle className="absolute right-10 top-1/2 -translate-y-1/2 w-5 h-5 text-green-500" />
                                     )}
                                 </div>
-                                {errors.confirmPassword && <p className="text-sm text-red-500">{errors.confirmPassword}</p>}
+                                {errors.confirmPassword && <p className="text-sm text-destructive">{errors.confirmPassword}</p>}
                             </div>
 
                             {/* Terms Checkbox */}
@@ -289,20 +289,20 @@ function SignupForm() {
                                     id="terms"
                                     checked={agreedToTerms}
                                     onChange={(e) => setAgreedToTerms(e.target.checked)}
-                                    className="mt-1 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                                    className="mt-1 rounded border-input text-primary focus:ring-primary bg-background"
                                 />
-                                <label htmlFor="terms" className="text-sm text-gray-600">
+                                <label htmlFor="terms" className="text-sm text-muted-foreground">
                                     I agree to the{" "}
-                                    <Link href="/terms" className="text-blue-600 hover:underline">Terms of Service</Link>
+                                    <Link href="/terms" className="text-primary hover:underline">Terms of Service</Link>
                                     {" "}and{" "}
-                                    <Link href="/privacy" className="text-blue-600 hover:underline">Privacy Policy</Link>
+                                    <Link href="/privacy" className="text-primary hover:underline">Privacy Policy</Link>
                                 </label>
                             </div>
-                            {errors.terms && <p className="text-sm text-red-500">{errors.terms}</p>}
+                            {errors.terms && <p className="text-sm text-destructive">{errors.terms}</p>}
 
                             {/* Submit Error */}
                             {errors.submit && (
-                                <div className="p-3 bg-red-50 border border-red-200 rounded-lg text-red-600 text-sm">
+                                <div className="p-3 bg-destructive/10 border border-destructive/20 rounded-lg text-destructive text-sm">
                                     {errors.submit}
                                 </div>
                             )}
@@ -311,7 +311,7 @@ function SignupForm() {
                             <Button
                                 type="submit"
                                 disabled={isLoading}
-                                className="w-full h-12 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-semibold rounded-xl shadow-lg shadow-blue-500/25 transition-all hover:shadow-xl hover:shadow-blue-500/30"
+                                className="w-full h-12 bg-primary hover:bg-primary/90 text-primary-foreground font-semibold rounded-xl shadow-lg shadow-primary/25 transition-all hover:shadow-xl hover:shadow-primary/30"
                             >
                                 {isLoading ? (
                                     <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
@@ -326,10 +326,10 @@ function SignupForm() {
                             {/* Divider */}
                             <div className="relative my-6">
                                 <div className="absolute inset-0 flex items-center">
-                                    <div className="w-full border-t border-gray-200" />
+                                    <div className="w-full border-t border-border" />
                                 </div>
                                 <div className="relative flex justify-center text-sm">
-                                    <span className="px-4 bg-white text-gray-500">Or sign up with</span>
+                                    <span className="px-4 bg-card text-muted-foreground">Or sign up with</span>
                                 </div>
                             </div>
 
@@ -338,7 +338,7 @@ function SignupForm() {
                                 <Button
                                     type="button"
                                     variant="outline"
-                                    className="h-12 bg-white hover:bg-gray-50 border-gray-200"
+                                    className="h-12 bg-background hover:bg-accent border-input"
                                     onClick={() => signIn.social({ provider: "google", callbackURL: "/" })}
                                 >
                                     <svg className="w-5 h-5 mr-2" viewBox="0 0 24 24">
@@ -364,7 +364,7 @@ function SignupForm() {
                                 <Button
                                     type="button"
                                     variant="outline"
-                                    className="h-12 bg-white hover:bg-gray-50 border-gray-200"
+                                    className="h-12 bg-background hover:bg-accent border-input"
                                     onClick={() => signIn.social({ provider: "github", callbackURL: "/" })}
                                 >
                                     <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
@@ -376,9 +376,9 @@ function SignupForm() {
                         </form>
 
                         {/* Login Link */}
-                        <p className="text-center mt-6 text-gray-600">
+                        <p className="text-center mt-6 text-muted-foreground">
                             Already have an account?{" "}
-                            <Link href="/auth/login" className="text-blue-600 hover:underline font-medium">
+                            <Link href="/auth/login" className="text-primary hover:underline font-medium">
                                 Sign in
                             </Link>
                         </p>
