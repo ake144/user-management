@@ -73,7 +73,7 @@ export default function LoginPage() {
             <div className="relative w-full max-w-2xl">
                 {/* Logo */}
                 <div className="text-center mb-8">
-                    <Link href="/" className="inline-flex items-center gap-3 group">
+                    <Link href="/dashboard" className="inline-flex items-center gap-3 group">
 
                         <span className="text-2xl font-bold bg-linear-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
                             SRE Affiliate Program
