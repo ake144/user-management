@@ -48,7 +48,7 @@ export const auth = betterAuth({
   },
   trustedOrigins: [
     'http://localhost:3000', 
-    'http://localhost:3001',
+    'http://localhost:3000/api',
     'https://user-management-nine-sooty.vercel.app',
     process.env.NEXT_PUBLIC_APP_URL || ""
   ].filter(Boolean),
