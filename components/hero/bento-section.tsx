@@ -1,14 +1,20 @@
 import type { FC, ComponentType } from "react"
 import { TrendingUp, Users, Wallet, Globe, ShieldCheck, Zap } from "lucide-react"
+import AnalyticsIllustration from "./bento/analytics-illustration"
+import NetworkIllustration from "./bento/network-illustration"
+import PayoutsIllustration from "./bento/payouts-illustration"
+import GlobalReachIllustration from "./bento/global-reach-illustration"
+import SecurityIllustration from "./bento/security-illustration"
 
 type BentoCardProps = {
   title: string
   description: string
   icon: React.ElementType
   className?: string
+  component?: ComponentType<any>
 }
 
-const BentoCard: FC<BentoCardProps> = ({ title, description, icon: Icon, className }) => (
+const BentoCard: FC<BentoCardProps> = ({ title, description, icon: Icon, className, component: Component }) => (
   <div className={`overflow-hidden rounded-2xl border border-white/20 flex flex-col justify-start items-start relative ${className}`}>
     {/* Background with blur effect */}
     <div
@@ -34,6 +40,11 @@ const BentoCard: FC<BentoCardProps> = ({ title, description, icon: Icon, classNa
         </div>
       </div>
     </div>
+    {Component ? (
+      <div className="self-stretch h-72 relative -mt-0.5 z-10 w-full">
+        <Component />
+      </div>
+    ) : null}
   </div>
 )
 
@@ -43,32 +54,37 @@ export function BentoSection() {
       title: "Real-Time Analytics",
       description: "Track every click, sign-up, and commission as it happens. Deep insights into your network's performance.",
       icon: TrendingUp,
+      component: AnalyticsIllustration,
       className: "md:col-span-2",
     },
     {
       title: "Multi-Tier Rewards",
       description: "Earn from your direct referrals and their referrals. Build a deep, profitable network.",
       icon: Users,
+      component: NetworkIllustration,
     },
     {
       title: "Instant Payouts",
-      description: "Withdraw your earnings instantly. No hidden fees or long waiting periods.",
+      description: "Withdraw your earnings instantly through multiple gateways. No more waiting for monthly cycles.",
       icon: Wallet,
+      component: PayoutsIllustration,
     },
     {
       title: "Global Reach",
-      description: "Recruit affiliates from anywhere in the world. No borders for your empire.",
+      description: "Recruit affiliates from anywhere in the world. Our platform supports localized payments globally.",
       icon: Globe,
+      component: GlobalReachIllustration,
       className: "md:col-span-2",
     },
     {
       title: "Bank-Grade Security",
-      description: "Your data and earnings are protected by enterprise-level encryption.",
+      description: "Your data and earnings are protected by enterprise-level encryption and fraud protection.",
       icon: ShieldCheck,
+      component: SecurityIllustration,
     },
     {
       title: "High Commission Rates",
-      description: "Enjoy some of the most competitive commission rates in the industry.",
+      description: "Enjoy some of the most competitive commission rates in the industry with lifetime rewards.",
       icon: Zap,
     },
   ]
