@@ -32,18 +32,19 @@ export const metadata: Metadata = {
     siteName: "Esperanza Affiliate Program",
     images: [
       {
-        url: "/og-image.png",
+        url: "/images/og-image.png",
         width: 1200,
         height: 630,
-        alt: "SRE Affiliate Program Dashboard",
+        alt: "Esperanza Affiliate Program Dashboard",
       },
     ],
   },
+
   twitter: {
     card: "summary_large_image",
     title: "Esperanza Affiliate Program - Turn Your Network Into Passive Income",
     description: "Join the Esperanza Affiliate Program and earn lifetime commissions. Multi-tier rewards, instant payouts, and powerful tools to grow your network.",
-    images: ["/og-image.png"],
+    images: ["/images/og-image.png"],
     creator: "@esperanza_affiliate",
   },
   robots: {
