@@ -94,7 +94,7 @@ export default function DashboardLayout({
                 )}
             >
                 <div className="flex h-16 items-center justify-between px-6 border-b">
-                    <span className="text-xl font-bold tracking-tight">AffiliatePro</span>
+                    <span className="text-xl font-bold tracking-tight">Esperanza</span>
                     <button
                         onClick={() => setIsSidebarOpen(false)}
                         className="lg:hidden"

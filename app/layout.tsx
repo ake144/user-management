@@ -16,20 +16,20 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: "SRE Affiliate Program - Turn Your Network Into Passive Income",
-    template: "%s | SRE Affiliate Program"
+    default: "Esperanza - Turn Your Network Into Passive Income",
+    template: "%s | Esperanza"
   },
-  description: "Join the SRE Affiliate Program and earn lifetime commissions. Multi-tier rewards, instant payouts, and powerful tools to grow your network.",
-  keywords: ["affiliate program", "passive income", "referral rewards", "SRE", "multi-tier marketing", "developer tools", "tech affiliate"],
-  authors: [{ name: "SRE Team" }],
-  creator: "SRE Team",
+  description: "Join the Esperanza Affiliate Program and earn lifetime commissions. Multi-tier rewards, instant payouts, and powerful tools to grow your network.",
+  keywords: ["affiliate program", "passive income", "referral rewards", "Esperanza", "multi-tier marketing", "developer tools", "tech affiliate"],
+  authors: [{ name: "Esperanza Team" }],
+  creator: "Esperanza Team",
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://sre-affiliate.com",
-    title: "SRE Affiliate Program - Turn Your Network Into Passive Income",
-    description: "Join the SRE Affiliate Program and earn lifetime commissions. Multi-tier rewards, instant payouts, and powerful tools to grow your network.",
-    siteName: "SRE Affiliate Program",
+    url: "https://esperanza.com",
+    title: "Esperanza Affiliate Program - Turn Your Network Into Passive Income",
+    description: "Join the Esperanza Affiliate Program and earn lifetime commissions. Multi-tier rewards, instant payouts, and powerful tools to grow your network.",
+    siteName: "Esperanza Affiliate Program",
     images: [
       {
         url: "/og-image.png",
@@ -41,10 +41,10 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "SRE Affiliate Program - Turn Your Network Into Passive Income",
-    description: "Join the SRE Affiliate Program and earn lifetime commissions. Multi-tier rewards, instant payouts, and powerful tools to grow your network.",
+    title: "Esperanza Affiliate Program - Turn Your Network Into Passive Income",
+    description: "Join the Esperanza Affiliate Program and earn lifetime commissions. Multi-tier rewards, instant payouts, and powerful tools to grow your network.",
     images: ["/og-image.png"],
-    creator: "@sre_affiliate",
+    creator: "@esperanza_affiliate",
   },
   robots: {
     index: true,
