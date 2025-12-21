@@ -1,6 +1,6 @@
 "use client";
 
-import { useSession } from "@/lib/auth-client";
+import { useSession, signOut } from "@/lib/auth-client";
 import { useRouter, usePathname } from "next/navigation";
 import Link from "next/link";
 import {
@@ -20,8 +20,30 @@ import {
     Award,
     Rocket,
     Cpu,
-    Globe2
+    Globe2,
+    User,
+    Settings,
+    CreditCard,
+    Bell,
+    ChevronsUpDown,
+    Sparkles
 } from "lucide-react";
+
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuPortal,
+  DropdownMenuSeparator,
+  DropdownMenuShortcut,
+  DropdownMenuSub,
+  DropdownMenuSubContent,
+  DropdownMenuSubTrigger,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
+
 import { useState, useEffect } from "react";
 // Assuming utils exists, if not I'll inline or create it. 
 // If utils doesn't exist, I'll use a simple helper or clsx/tailwind-merge directly if installed.
@@ -31,6 +53,7 @@ import { useState, useEffect } from "react";
 // I'll assume it might be there, but to be safe I'll just use clsx/tailwind-merge directly or define it here.
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
+import { Button } from "@/components/ui/button";
 
 function cn(...inputs: ClassValue[]) {
     return twMerge(clsx(inputs));
@@ -76,14 +99,12 @@ export default function DashboardLayout({
         {
             title: "E-Commerce & Retail",
             items: [
-                { title: "E-Commerce", href: "/dashboard/modules/e-commerce", icon: ShoppingBag },
                 { title: "Adulian", href: "/dashboard/modules/adulian", icon: Store },
             ],
         },
         {
             title: "Education & Learning",
             items: [
-                { title: "E-Learning", href: "/dashboard/modules/e-learning", icon: GraduationCap },
                 { title: "Kefita Skill Academy", href: "/dashboard/modules/kefita-skill-academy", icon: Award },
                 { title: "SolidStart Academy", href: "/dashboard/modules/solidstart-academy", icon: Rocket },
                 { title: "Global Pathway Academy", href: "/dashboard/modules/global-pathway-academy", icon: Globe2 },
@@ -170,16 +191,74 @@ export default function DashboardLayout({
                         ))}
                     </nav>
 
-                    <div className="border-t pt-4">
-                        <div className="flex items-center gap-3 px-2 py-2">
-                            <div className="h-8 w-8 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold">
-                                {session.user.name?.[0] || session.user.email?.[0] || "U"}
-                            </div>
-                            <div className="flex-1 overflow-hidden">
-                                <p className="truncate text-sm font-medium">{session.user.name}</p>
-                                <p className="truncate text-xs text-muted-foreground">{session.user.email}</p>
-                            </div>
-                        </div>
+                    <div className="border-t p-2">
+                        <DropdownMenu>
+                            <DropdownMenuTrigger asChild>
+                                <Button variant="ghost" className="w-full justify-start px-2 h-auto py-2 hover:bg-accent hover:text-accent-foreground">
+                                    <div className="h-8 w-8 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold mr-2">
+                                        {session.user.name?.[0] || session.user.email?.[0] || "U"}
+                                    </div>
+                                    <div className="flex flex-col items-start flex-1 overflow-hidden text-left">
+                                        <p className="truncate text-sm font-medium w-full">{session.user.name}</p>
+                                        <p className="truncate text-xs text-muted-foreground w-full">{session.user.email}</p>
+                                    </div>
+                                    <ChevronsUpDown className="ml-auto h-4 w-4 opacity-50" />
+                                </Button>
+                            </DropdownMenuTrigger>
+                            <DropdownMenuContent className="w-56" align="end" forceMount>
+                                <DropdownMenuLabel className="font-normal">
+                                    <div className="flex flex-col space-y-1">
+                                        <p className="text-sm font-medium leading-none">{session.user.name}</p>
+                                        <p className="text-xs leading-none text-muted-foreground">
+                                            {session.user.email}
+                                        </p>
+                                    </div>
+                                </DropdownMenuLabel>
+                                <DropdownMenuSeparator />
+                                <DropdownMenuGroup>
+                                    <DropdownMenuItem>
+                                        <Sparkles className="mr-2 h-4 w-4 text-yellow-500" />
+                                        Upgrade to Pro
+                                    </DropdownMenuItem>
+                                </DropdownMenuGroup>
+                                <DropdownMenuSeparator />
+                                <DropdownMenuGroup>
+                                    <DropdownMenuItem>
+                                        <User className="mr-2 h-4 w-4" />
+                                        Profile
+                                        <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
+                                    </DropdownMenuItem>
+                                    <DropdownMenuItem>
+                                        <CreditCard className="mr-2 h-4 w-4" />
+                                        Billing
+                                        <DropdownMenuShortcut>⌘B</DropdownMenuShortcut>
+                                    </DropdownMenuItem>
+                                    <DropdownMenuItem>
+                                        <Settings className="mr-2 h-4 w-4" />
+                                        Settings
+                                        <DropdownMenuShortcut>⌘S</DropdownMenuShortcut>
+                                    </DropdownMenuItem>
+                                    <DropdownMenuItem>
+                                        <Bell className="mr-2 h-4 w-4" />
+                                        Notifications
+                                    </DropdownMenuItem>
+                                </DropdownMenuGroup>
+                                <DropdownMenuSeparator />
+                                <DropdownMenuItem onClick={async () => {
+                                    await signOut({
+                                        fetchOptions: {
+                                            onSuccess: () => {
+                                                router.push("/auth/login");
+                                            },
+                                        },
+                                    });
+                                }}>
+                                    <LogOut className="mr-2 h-4 w-4" />
+                                    Log out
+                                    <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
+                                </DropdownMenuItem>
+                            </DropdownMenuContent>
+                        </DropdownMenu>
                     </div>
                 </div>
             </aside>
