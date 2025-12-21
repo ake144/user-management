@@ -13,7 +13,14 @@ import {
     LogOut,
     Menu,
     X,
-    ChevronRight
+    ChevronRight,
+    Store,
+    Film,
+    Plane,
+    Award,
+    Rocket,
+    Cpu,
+    Globe2
 } from "lucide-react";
 import { useState, useEffect } from "react";
 // Assuming utils exists, if not I'll inline or create it. 
@@ -67,11 +74,38 @@ export default function DashboardLayout({
             ],
         },
         {
-            title: "Modules",
+            title: "E-Commerce & Retail",
+            items: [
+                { title: "E-Commerce", href: "/dashboard/modules/e-commerce", icon: ShoppingBag },
+                { title: "Adulian", href: "/dashboard/modules/adulian", icon: Store },
+            ],
+        },
+        {
+            title: "Education & Learning",
             items: [
                 { title: "E-Learning", href: "/dashboard/modules/e-learning", icon: GraduationCap },
-                { title: "E-Commerce", href: "/dashboard/modules/e-commerce", icon: ShoppingBag },
+                { title: "Kefita Skill Academy", href: "/dashboard/modules/kefita-skill-academy", icon: Award },
+                { title: "SolidStart Academy", href: "/dashboard/modules/solidstart-academy", icon: Rocket },
+                { title: "Global Pathway Academy", href: "/dashboard/modules/global-pathway-academy", icon: Globe2 },
+            ],
+        },
+        {
+            title: "Entertainment & Media",
+            items: [
                 { title: "Video Generator", href: "/dashboard/modules/video-generator", icon: Video },
+                { title: "Hooraflix", href: "/dashboard/modules/hooraflix", icon: Film },
+            ],
+        },
+        {
+            title: "Technology & Innovation",
+            items: [
+                { title: "Technova", href: "/dashboard/modules/technova", icon: Cpu },
+            ],
+        },
+        {
+            title: "Travel & Tourism",
+            items: [
+                { title: "Visit Ethiopia", href: "/dashboard/modules/visit-ethiopia", icon: Plane },
             ],
         },
     ];
