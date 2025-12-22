@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button"
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet"
 import { Menu } from "lucide-react"
 import Link from "next/link" // Import Link for client-side navigation
+import { HyperText } from "../ui/hyper-text"
 
 export function Header() {
   const navItems = [
@@ -36,17 +37,19 @@ export function Header() {
                 key={item.name}
                 href={item.href}
                 onClick={(e) => handleScroll(e, item.href)} // Add onClick handler
-                className="text-[#888888] hover:text-foreground px-4 py-2 rounded-full font-medium transition-colors"
+                
               >
-                {item.name}
+                <HyperText className="text-[#888888] hover:text-foreground text-md px-4 py-2 rounded-full font-medium transition-colors" >{item.name}</HyperText>
               </Link>
             ))}
           </nav>
         </div>
         <div className="flex items-center gap-4">
           <Link href="/auth/login"  rel="noopener noreferrer" className="hidden md:block">
-            <Button className="bg-secondary text-secondary-foreground hover:bg-secondary/90 px-6 py-2 rounded-full font-medium shadow-sm">
+            <Button className="bg-secondary cursor-pointer text-secondary-foreground hover:bg-secondary/90 px-6 py-2 rounded-full font-medium shadow-sm">
+             <HyperText className="text-md">
               Try for Free
+              </HyperText>  
             </Button>
           </Link>
           <Sheet>
@@ -72,8 +75,10 @@ export function Header() {
                   </Link>
                 ))}
                 <Link href="/auth/login" rel="noopener noreferrer" className="w-full mt-4">
-                  <Button className="bg-secondary text-secondary-foreground hover:bg-secondary/90 px-6 py-2 rounded-full font-medium shadow-sm">
-                    Try for Free
+                  <Button className="bg-secondary cursor-pointer text-secondary-foreground hover:bg-secondary/90 px-6 py-2 rounded-full font-medium shadow-sm">
+                    <HyperText className="text-md">
+                      Try for Free
+                    </HyperText>
                   </Button>
                 </Link>
               </nav>

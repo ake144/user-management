@@ -5,6 +5,7 @@ import { Header } from "./header"
 import { ReferralTree } from "@/components/referral-tree"
 import { Sparkles, ArrowRight } from "lucide-react"
 import { Spotlight } from "../ui/spotlight"
+import { HyperText } from "../ui/hyper-text"
 
 export function HeroSection() {
   return (
@@ -215,14 +216,20 @@ export function HeroSection() {
 
         <div className="flex flex-col sm:flex-row gap-4 mt-8">
           <Link href="/auth/login">
-            <Button className="bg-primary text-primary-foreground hover:bg-primary/90 px-8 py-6 rounded-full font-semibold text-lg shadow-lg shadow-primary/25 transition-all hover:scale-105">
-              Start Earning Now
+            <Button className="bg-primary cursor-pointer text-primary-foreground hover:bg-primary/90 px-8 py-6 rounded-full font-semibold text-lg shadow-lg shadow-primary/25 transition-all hover:scale-105">
+              <HyperText className="text-sm font-semibold">
+                   Start Earning Now
+              </HyperText>
+             
               <ArrowRight className="ml-2 h-5 w-5" />
             </Button>
           </Link>
           <Link href="#whyus">
-            <Button variant="outline" className="bg-background/50 backdrop-blur-sm px-8 py-6 rounded-full font-semibold text-lg transition-all duration-300 hover:scale-105 hover:bg-background/80 hover:border-primary/50 hover:shadow-lg hover:shadow-primary/10 hover:text-primary">
-              Why Esperanza
+            <Button variant="outline" className="bg-background/50 cursor-pointer backdrop-blur-sm px-8 py-6 rounded-full font-semibold text-lg transition-all duration-300 hover:scale-105 hover:bg-background/80 hover:border-primary/50 hover:shadow-lg hover:shadow-primary/10 hover:text-primary">
+              
+              <HyperText className="text-md">
+                Why Esperanza
+              </HyperText>
             </Button>
           </Link>
         </div>
