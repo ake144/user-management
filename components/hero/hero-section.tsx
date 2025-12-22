@@ -4,13 +4,22 @@ import Link from "next/link"
 import { Header } from "./header"
 import { ReferralTree } from "@/components/referral-tree"
 import { Sparkles, ArrowRight } from "lucide-react"
+import { Spotlight } from "../ui/spotlight"
 
 export function HeroSection() {
   return (
+    <>
+     <Spotlight
+        className="-top-40 left-0 md:-top-20 md:left-60"
+        fill="white"
+      />
+    
+   
     <section
       className="flex flex-col items-center text-center relative mx-auto rounded-2xl overflow-hidden my-6 py-0 px-4
          w-full md:w-[1220px] min-h-[800px] md:px-0 bg-background"
     >
+     
       {/* SVG Background */}
       <div className="absolute inset-0 z-0 pointer-events-none">
         <svg
@@ -234,5 +243,6 @@ export function HeroSection() {
         </div>
       </div>
     </section>
+   </>
   )
 }
