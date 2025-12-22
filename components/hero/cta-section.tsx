@@ -110,7 +110,7 @@ export function CTASection() {
             Join thousands of creators and businesses already using Laftiva to scale their influence and grow their success.
           </p>
         </div>
-        <Link href="/auth/signup">
+        <Link href="/auth/login">
           <Button
             className="px-[30px] py-2 bg-primary text-primary-foreground text-base font-medium leading-6 rounded-[99px] shadow-[0px_0px_0px_4px_rgba(255,255,255,0.13)] hover:bg-primary/90 transition-all duration-200"
             size="lg"

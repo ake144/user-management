@@ -214,7 +214,7 @@ export function HeroSection() {
         </p>
 
         <div className="flex flex-col sm:flex-row gap-4 mt-8">
-          <Link href="/auth/signup">
+          <Link href="/auth/login">
             <Button className="bg-primary text-primary-foreground hover:bg-primary/90 px-8 py-6 rounded-full font-semibold text-lg shadow-lg shadow-primary/25 transition-all hover:scale-105">
               Start Earning Now
               <ArrowRight className="ml-2 h-5 w-5" />
