@@ -73,9 +73,9 @@ export default function LoginPage() {
             <div className="relative w-full max-w-xl">
                 {/* Logo */}
                 <div className="text-center mb-8">
-                    <Link href="/dashboard" className="inline-flex items-center gap-3 group">
+                    <Link href="/" className="inline-flex items-center gap-3 group">
 
-                        <span className="text-2xl font-bold bg-gradient-to-r from-primary to-purple-600 bg-clip-text text-transparent">
+                        <span className="text-2xl font-bold bg-linear-to-r from-primary to-purple-600 bg-clip-text text-transparent">
                             Esperanza Affiliate Program
                         </span>
                     </Link>

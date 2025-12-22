@@ -190,6 +190,15 @@ function SignupForm() {
             </div>
 
             <div className="relative w-full max-w-2xl">
+                <div className="text-center mb-8">
+                                    <Link href="/" className="inline-flex items-center gap-3 group">
+                
+                                        <span className="text-2xl font-bold bg-gradient-to-r from-primary to-purple-600 bg-clip-text text-transparent">
+                                            Esperanza Affiliate Program
+                                        </span>
+                                    </Link>
+                 </div>
+                            
                 <Card className="backdrop-blur-xl bg-card/80 border-border shadow-2xl">
                     <CardHeader className="text-center pb-4">
                         <h1 className="text-2xl font-bold text-foreground">Create your account</h1>
