@@ -220,9 +220,9 @@ export function HeroSection() {
               <ArrowRight className="ml-2 h-5 w-5" />
             </Button>
           </Link>
-          <Link href="#how-it-works">
+          <Link href="#whyus">
             <Button variant="outline" className="bg-background/50 backdrop-blur-sm px-8 py-6 rounded-full font-semibold text-lg hover:bg-accent">
-              How It Works
+              Why Esperanza
             </Button>
           </Link>
         </div>

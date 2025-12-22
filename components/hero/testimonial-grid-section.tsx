@@ -1,12 +1,14 @@
-import Image from "next/image"
+import { Users, TrendingUp, Zap, Award, Target, Sparkles, Rocket } from "lucide-react"
 
 type TestimonialCardType = "large-teal" | "large-light" | "small-dark"
+
+type IconName = "users" | "trending-up" | "zap" | "award" | "target" | "sparkles" | "rocket"
 
 type Testimonial = {
   quote: string
   name: string
   company: string
-  avatar?: string
+  icon: IconName
   type: TestimonialCardType
 }
 
@@ -15,67 +17,78 @@ type TestimonialCardProps = Testimonial
 const testimonials: Testimonial[] = [
   {
     quote:
-      "The real-time dashboard gives me complete visibility into my network's performance. I can track commissions and downline growth as it happens.",
-    name: "Annette Black",
-    company: "Elite Marketing",
-    avatar: "/images/avatars/annette-black.png",
+      "Laftiva's AI-powered insights transformed how I approach affiliate marketing. I've tripled my earnings in just 3 months by optimizing my strategy based on real-time analytics.",
+    name: "Sarah Johnson",
+    company: "Digital Marketer",
+    icon: "sparkles",
     type: "large-teal",
   },
   {
     quote:
-      "Integrating Esperanza into our workflow was seamless. The automated tracking saved us countless hours of manual work.",
-    name: "Dianne Russell",
-    company: "Growth Co.",
-    avatar: "/images/avatars/dianne-russell.png",
+      "The automated commission tracking is a lifesaver. No more spreadsheets – everything is calculated and displayed instantly.",
+    name: "Michael Chen",
+    company: "Tech Entrepreneur",
+    icon: "zap",
     type: "small-dark",
   },
   {
     quote:
-      "The referral tree feature is a game changer. I can visualize my entire organization and help my team succeed.",
-    name: "Cameron Williamson",
-    company: "Network Leaders",
-    avatar: "/images/avatars/cameron-williamson.png",
+      "Building my network has never been easier. The visual tree makes it simple to see growth opportunities and support my team.",
+    name: "Emma Rodriguez",
+    company: "Network Leader",
+    icon: "users",
     type: "small-dark",
   },
   {
     quote:
-      "Everything I need is in one place. From earnings reports to withdrawal management, Esperanza simplifies my business.",
-    name: "Robert Fox",
-    company: "Digital Ventures",
-    avatar: "/images/avatars/robert-fox.png",
+      "From zero to $10K monthly passive income! Laftiva's multi-tier rewards system is the real deal for serious affiliate marketers.",
+    name: "David Okonkwo",
+    company: "Affiliate Pro",
+    icon: "trending-up",
     type: "small-dark",
   },
   {
     quote:
-      "I started as a user and quickly upgraded to an affiliate. The potential for passive income here is unmatched.",
-    name: "Darlene Robertson",
-    company: "Lifestyle Inc.",
-    avatar: "/images/avatars/darlene-robertson.png",
+      "The AI recommendations helped me identify which products convert best. My conversion rate jumped from 2% to 8% in weeks.",
+    name: "Priya Sharma",
+    company: "Content Creator",
+    icon: "target",
     type: "small-dark",
   },
   {
     quote:
-      "Collaborating with my downline feels effortless now. We can share strategies and track progress together in real-time.",
-    name: "Cody Fisher",
-    company: "Team Alpha",
-    avatar: "/images/avatars/cody-fisher.png",
+      "Instant payouts mean I can reinvest in my marketing campaigns immediately. The global payment support is incredible.",
+    name: "Carlos Mendez",
+    company: "Growth Strategist",
+    icon: "rocket",
     type: "small-dark",
   },
   {
     quote:
-      "Scaling my business with Esperanza was incredibly simple. I went from a few referrals to a massive network without worrying about the technical details.",
-    name: "Albert Flores",
-    company: "Future Systems",
-    avatar: "/images/avatars/albert-flores.png",
+      "Scaling from a solo affiliate to a team of 50+ was seamless. Laftiva handles all the complexity – I just focus on growing my network and earning.",
+    name: "Lisa Tanaka",
+    company: "Affiliate Network Owner",
+    icon: "award",
     type: "large-light",
   },
 ]
 
-const TestimonialCard = ({ quote, name, company, avatar, type }: TestimonialCardProps) => {
+const iconMap = {
+  users: Users,
+  "trending-up": TrendingUp,
+  zap: Zap,
+  award: Award,
+  target: Target,
+  sparkles: Sparkles,
+  rocket: Rocket,
+}
+
+const TestimonialCard = ({ quote, name, company, icon, type }: TestimonialCardProps) => {
   const isLargeCard = type.startsWith("large")
   const avatarSize = isLargeCard ? 48 : 36
-  const avatarBorderRadius = isLargeCard ? "rounded-[41px]" : "rounded-[30.75px]"
   const padding = isLargeCard ? "p-6" : "p-[30px]"
+
+  const Icon = iconMap[icon]
 
   let cardClasses = `flex flex-col justify-between items-start overflow-hidden rounded-[10px] shadow-[0px_2px_4px_rgba(0,0,0,0.08)] relative ${padding}`
   let quoteClasses = ""
@@ -83,6 +96,8 @@ const TestimonialCard = ({ quote, name, company, avatar, type }: TestimonialCard
   let companyClasses = ""
   let backgroundElements = null
   let cardHeight = ""
+  let avatarBgClasses = ""
+  let iconColor = ""
   const cardWidth = "w-full md:w-[384px]"
 
   if (type === "large-teal") {
@@ -90,6 +105,8 @@ const TestimonialCard = ({ quote, name, company, avatar, type }: TestimonialCard
     quoteClasses += " text-primary-foreground text-2xl font-medium leading-8"
     nameClasses += " text-primary-foreground text-base font-normal leading-6"
     companyClasses += " text-primary-foreground/60 text-base font-normal leading-6"
+    avatarBgClasses = "bg-white/20 backdrop-blur-sm"
+    iconColor = "text-white"
     cardHeight = "h-[502px]"
     backgroundElements = (
       <div
@@ -102,6 +119,8 @@ const TestimonialCard = ({ quote, name, company, avatar, type }: TestimonialCard
     quoteClasses += " text-foreground text-2xl font-medium leading-8"
     nameClasses += " text-foreground text-base font-normal leading-6"
     companyClasses += " text-muted-foreground text-base font-normal leading-6"
+    avatarBgClasses = "bg-gradient-to-br from-primary/20 to-purple-500/20 backdrop-blur-sm"
+    iconColor = "text-primary"
     cardHeight = "h-[502px]"
     backgroundElements = (
       <div
@@ -114,6 +133,8 @@ const TestimonialCard = ({ quote, name, company, avatar, type }: TestimonialCard
     quoteClasses += " text-foreground/80 text-[17px] font-normal leading-6"
     nameClasses += " text-foreground text-sm font-normal leading-[22px]"
     companyClasses += " text-muted-foreground text-sm font-normal leading-[22px]"
+    avatarBgClasses = "bg-gradient-to-br from-primary/10 to-purple-500/10"
+    iconColor = "text-primary"
     cardHeight = "h-[244px]"
   }
 
@@ -122,14 +143,16 @@ const TestimonialCard = ({ quote, name, company, avatar, type }: TestimonialCard
       {backgroundElements}
       <div className={`relative z-10 font-normal break-words ${quoteClasses}`}>{quote}</div>
       <div className="relative z-10 flex justify-start items-center gap-3">
-        <Image
-          src={avatar || "/placeholder.svg"}
-          alt={`${name} avatar`}
-          width={avatarSize}
-          height={avatarSize}
-          className={`w-${avatarSize / 4} h-${avatarSize / 4} ${avatarBorderRadius}`}
-          style={{ border: "1px solid rgba(255, 255, 255, 0.08)" }}
-        />
+        <div
+          className={`flex items-center justify-center rounded-full ${avatarBgClasses}`}
+          style={{
+            width: `${avatarSize}px`,
+            height: `${avatarSize}px`,
+            border: "1px solid rgba(255, 255, 255, 0.08)"
+          }}
+        >
+          <Icon className={`${iconColor}`} size={isLargeCard ? 24 : 18} />
+        </div>
         <div className="flex flex-col justify-start items-start gap-0.5">
           <div className={nameClasses}>{name}</div>
           <div className={companyClasses}>{company}</div>
@@ -148,8 +171,8 @@ export function TestimonialGridSection() {
             Growth made effortless
           </h2>
           <p className="self-stretch text-center text-muted-foreground text-sm md:text-sm lg:text-base font-medium leading-[18.20px] md:leading-relaxed lg:leading-relaxed">
-            {"Hear how partners grow their networks, track earnings,"} <br />{" "}
-            {"and build wealth using Esperanza's powerful tools"}
+            {"Hear from affiliates who transformed their income with"} <br />{" "}
+            {"AI-powered insights, instant payouts, and powerful network tools"}
           </p>
         </div>
       </div>
