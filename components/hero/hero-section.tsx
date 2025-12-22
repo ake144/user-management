@@ -193,14 +193,15 @@ export function HeroSection() {
         </div>
 
         <h1 className="text-foreground text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight leading-tight max-w-4xl">
-          Turn Your Network Into <br />
+          Scale Your Influence. Multiply Opportunities.<br />
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-purple-600">
-            Passive Income
+             Build Success
           </span>
         </h1>
 
         <p className="text-muted-foreground text-lg md:text-xl font-medium leading-relaxed max-w-2xl mx-auto mt-6">
-          Join the world's most rewarding referral ecosystem. Build your downline, track real-time commissions, and scale your earnings with our multi-tier affiliate system.
+          {/* Join the world's most rewarding referral ecosystem. Build your downline, track real-time commissions, and scale your earnings with our multi-tier affiliate system. */}
+         Join a powerful digital platform built to help you scale your influence, multiply opportunities, and convert passion into measurable success. 
         </p>
 
         <div className="flex flex-col sm:flex-row gap-4 mt-8">
