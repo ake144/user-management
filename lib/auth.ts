@@ -24,6 +24,11 @@ export const auth = betterAuth({
         type: "string",
         required: false
       },
+      phone: {
+        type: "string",
+        required: false,
+        input: true
+      },
       referralCode: {
         type: "string",
         required: false,
@@ -33,6 +38,18 @@ export const auth = betterAuth({
         type: "string",
         required: false,
         input: true
+      },
+      country: {
+        type: "string",
+        required: false,
+        input: true,
+        defaultValue: "Ethiopia"
+      },
+      city: {
+        type: "string",
+        required: false,
+        input: true,
+        defaultValue: "Addis Ababa"
       }
     }
   },

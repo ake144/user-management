@@ -41,6 +41,8 @@ model User {
   address         String?
   referralCode    String?         @unique // Auto-generated on signup
   referredById    String?        // Self-referential for tree
+  country         String?        @default("Ethiopia")
+  city            String?        @default("Addis Ababa")
   isActive        Boolean        @default(true) // For deactivating users/leaving program
   role            UserRole       @default(AFFILIATE)
   totalEarnings   Float          @default(0)

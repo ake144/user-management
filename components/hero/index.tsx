@@ -4,6 +4,7 @@ import { DashboardPreview } from "./dashboard-preview"
 import { SocialProof } from "./social-proof"
 import { BentoSection } from "./bento-section"
 import { WhyChooseSection } from "./why-choose-section"
+import { StatsSection } from "./stats-section"
 import { LargeTestimonial } from "./large-testimonial"
 import { TestimonialGridSection } from "./testimonial-grid-section"
 import { FAQSection } from "./faq-section"
@@ -29,12 +30,13 @@ export default function LandingPage() {
         <AnimatedSection id="features-section" className="relative z-10 max-w-[1320px] mx-auto mt-16" delay={0.2}>
           <BentoSection />
         </AnimatedSection>
-        <AnimatedSection className="relative z-10 w-full mt-8 md:mt-16" delay={0.3}>
-          <WhyChooseSection />
+        
+        <AnimatedSection className="relative z-10 max-w-[1320px] mx-auto mt-8 md:mt-16" delay={0.35}>
+          <StatsSection />
         </AnimatedSection>
-        <AnimatedSection className="relative z-10 max-w-[1320px] mx-auto mt-8 md:mt-16" delay={0.2}>
+        {/* <AnimatedSection className="relative z-10 max-w-[1320px] mx-auto mt-8 md:mt-16" delay={0.2}>
           <LargeTestimonial />
-        </AnimatedSection>
+        </AnimatedSection> */}
         {/* <AnimatedSection
           id="pricing-section"
           className="relative z-10 max-w-[1320px] mx-auto mt-8 md:mt-16"

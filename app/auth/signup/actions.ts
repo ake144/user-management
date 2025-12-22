@@ -4,7 +4,13 @@ import prisma from "@/lib/prisma";
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 
-export async function updateUserReferral(referralCode: string, referredById?: string) {
+export async function completeUserProfile(data: {
+    referralCode: string;
+    referredById?: string;
+    phone?: string;
+    country?: string;
+    city?: string;
+}) {
     const session = await auth.api.getSession({
         headers: await headers()
     });
@@ -16,8 +22,11 @@ export async function updateUserReferral(referralCode: string, referredById?: st
     await prisma.user.update({
         where: { id: session.user.id },
         data: {
-            referralCode,
-            referredById
+            referralCode: data.referralCode,
+            referredById: data.referredById,
+            phone: data.phone,
+            country: data.country,
+            city: data.city
         }
     });
     

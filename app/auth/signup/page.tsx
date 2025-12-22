@@ -6,11 +6,39 @@ import { useRouter, useSearchParams } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
 import { Card, CardContent, CardHeader } from "@/components/ui/card"
 import { BookOpen, Mail, Lock, User, Phone, Eye, EyeOff, ArrowRight, CheckCircle, Gift } from "lucide-react"
 import { toast } from "sonner"
 import { signUp, signIn } from "@/lib/auth-client"
-import { getReferrerDetails, updateUserReferral } from "./actions"
+import { getReferrerDetails, completeUserProfile } from "./actions"
+
+const countries = [
+    { code: "ET", name: "Ethiopia" },
+    { code: "KE", name: "Kenya" },
+    { code: "NG", name: "Nigeria" },
+    { code: "ZA", name: "South Africa" },
+    { code: "GH", name: "Ghana" },
+    { code: "EG", name: "Egypt" },
+    { code: "TZ", name: "Tanzania" },
+    { code: "UG", name: "Uganda" },
+    { code: "RW", name: "Rwanda" },
+    { code: "US", name: "United States" },
+    { code: "GB", name: "United Kingdom" },
+    { code: "CA", name: "Canada" },
+    { code: "DE", name: "Germany" },
+    { code: "FR", name: "France" },
+    { code: "IN", name: "India" },
+    { code: "CN", name: "China" },
+    { code: "JP", name: "Japan" },
+    { code: "AE", name: "United Arab Emirates" },
+]
 
 function SignupForm() {
     const router = useRouter()
@@ -24,6 +52,9 @@ function SignupForm() {
         phone: "",
         password: "",
         confirmPassword: "",
+        country: "Ethiopia",
+        city: "Addis Ababa",
+        sponsorId: "",
     })
     const [showPassword, setShowPassword] = useState(false)
     const [showConfirmPassword, setShowConfirmPassword] = useState(false)
@@ -103,17 +134,26 @@ function SignupForm() {
         setErrors({})
 
         const newReferralCode = generateReferralCode(formData.name);
+        const finalReferrerId = formData.sponsorId || referrer?.id;
 
         await signUp.email({
             email: formData.email,
             password: formData.password,
-            name: formData.name
+            name: formData.name,
         }, {
             onSuccess: async () => {
                 try {
-                    await updateUserReferral(newReferralCode, referrer?.id);
+                    await completeUserProfile({
+                        referralCode: newReferralCode,
+                        referredById: finalReferrerId,
+                        phone: formData.phone,
+                        country: formData.country,
+                        city: formData.city
+                    });
                 } catch (e) {
-                    console.error("Failed to update referral info", e);
+                    console.error("Failed to update user profile", e);
+                    // Even if this fails, the user is created. 
+                    // We might want to show a warning or just proceed.
                 }
                 toast.success("Account created successfully!");
 
@@ -181,6 +221,21 @@ function SignupForm() {
                                 {errors.name && <p className="text-sm text-destructive">{errors.name}</p>}
                             </div>
 
+                            <div className="space-y-2">
+                                <Label htmlFor="sponsorId" className="text-foreground">Sponsor Id (optional)</Label>
+                                <div className="relative">
+                                    
+                                    <Input
+                                        id="sponsorId"
+                                        type="text"
+                                        placeholder=""
+                                        value={formData.sponsorId}
+                                        onChange={(e) => setFormData(prev => ({ ...prev, sponsorId: e.target.value }))}
+                                        className={`pl-10 h-12 bg-background border-input focus:border-primary ${errors.sponsorId ? "border-destructive" : ""}`}
+                                    />
+                                </div>
+                            </div>
+
                             {/* Email Field */}
                             <div className="space-y-2">
                                 <Label htmlFor="email" className="text-foreground">Email Address</Label>
@@ -213,6 +268,38 @@ function SignupForm() {
                                     />
                                 </div>
                                 {errors.phone && <p className="text-sm text-destructive">{errors.phone}</p>}
+                            </div>
+
+                            {/* Country and City Fields */}
+                            <div className="grid grid-cols-2 gap-4">
+                                <div className="space-y-2">
+                                    <Label htmlFor="country" className="text-foreground">Country</Label>
+                                    <Select
+                                        value={formData.country}
+                                        onValueChange={(value) => setFormData(prev => ({ ...prev, country: value }))}
+                                    >
+                                        <SelectTrigger className="h-12 bg-background border-input focus:border-primary">
+                                            <SelectValue placeholder="Select country" />
+                                        </SelectTrigger>
+                                        <SelectContent>
+                                            {countries.map((country) => (
+                                                <SelectItem key={country.code} value={country.name}>
+                                                    {country.name}
+                                                </SelectItem>
+                                            ))}
+                                        </SelectContent>
+                                    </Select>
+                                </div>
+                                <div className="space-y-2">
+                                    <Label htmlFor="city" className="text-foreground">City</Label>
+                                    <Input
+                                        id="city"
+                                        placeholder="City"
+                                        value={formData.city}
+                                        onChange={(e) => setFormData(prev => ({ ...prev, city: e.target.value }))}
+                                        className="h-12 bg-background border-input focus:border-primary"
+                                    />
+                                </div>
                             </div>
 
                             {/* Password Field */}
