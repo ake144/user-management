@@ -221,7 +221,7 @@ export function HeroSection() {
             </Button>
           </Link>
           <Link href="#whyus">
-            <Button variant="outline" className="bg-background/50 backdrop-blur-sm px-8 py-6 rounded-full font-semibold text-lg hover:bg-accent">
+            <Button variant="outline" className="bg-background/50 backdrop-blur-sm px-8 py-6 rounded-full font-semibold text-lg transition-all duration-300 hover:scale-105 hover:bg-background/80 hover:border-primary/50 hover:shadow-lg hover:shadow-primary/10 hover:text-primary">
               Why Esperanza
             </Button>
           </Link>
