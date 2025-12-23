@@ -45,7 +45,7 @@ const Node = ({ node, depth = 0 }: { node: TreeNode; depth?: number }) => {
             <div
                 className={cn(
                     "relative z-10 flex flex-col items-center gap-2 rounded-xl border bg-card p-3 shadow-sm transition-all hover:shadow-md hover:border-primary/50 w-[180px]",
-                    node.isActive ? "border-green-500/50" : "border-muted opacity-80",
+                    node.isActive ? "border-green-500/50" : "border-red-500/50 opacity-80",
                     "cursor-pointer"
                 )}
                 onClick={() => hasChildren && setIsExpanded(!isExpanded)}
@@ -117,7 +117,7 @@ const Node = ({ node, depth = 0 }: { node: TreeNode; depth?: number }) => {
                                 */}
 
                                 {/* Left Connector (connects to previous sibling) */}
-                                {index > 0 && (
+                                {index > 0 &&  (
                                     <div className="absolute -top-4 right-1/2 w-[calc(50%+12px)] h-px bg-border" />
                                 )}
                                 {/* Right Connector (connects to next sibling) */}

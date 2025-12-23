@@ -157,7 +157,7 @@ function SignupForm() {
                 }
                 toast.success("Account created successfully!");
 
-                router.push("/auth/verify")
+                router.push("/auth/login")
             },
             onError: (ctx: any) => {
                 setErrors({ submit: ctx.error.message || "Signup failed" })
