@@ -63,6 +63,65 @@ const MOCK_TREE: TreeNode = {
             totalEarnings: 0.00,
             isActive: false,
             children: []
+        },
+        {
+            id: "u4",
+            name: "Hannah Taylor",
+            totalEarnings: 620.00,
+            isActive: true,
+            children: [
+                {
+                    id: "u4-1",
+                    name: "Ian Martinez",
+                    totalEarnings: 180.00,
+                    isActive: true,
+                    children: []
+                },
+                {
+                    id: "u4-2",
+                    name: "Julia Anderson",
+                    totalEarnings: 95.00,
+                    isActive: true,
+                    children: []
+                }
+            ]
+        },
+        {
+            id: "u5",
+            name: "Kevin Thompson",
+            totalEarnings: 310.00,
+            isActive: true,
+            children: [
+                {
+                    id: "u5-1",
+                    name: "Laura Garcia",
+                    totalEarnings: 75.00,
+                    isActive: true,
+                    children: [
+                        {
+                            id: "u5-1-1",
+                            name: "Mike Rodriguez",
+                            totalEarnings: 30.00,
+                            isActive: true,
+                            children: []
+                        },
+                        {
+                            id: "u5-1-2",
+                            name: "Nina White",
+                            totalEarnings: 0.00,
+                            isActive: false,
+                            children: []
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            id: "u6",
+            name: "Oliver Harris",
+            totalEarnings: 145.00,
+            isActive: true,
+            children: []
         }
     ]
 };
@@ -150,9 +209,10 @@ export default async function TreePage() {
         redirect("/auth/login");
     }
 
-    const realTree = await getReferralTree(session.user.id);
-    const treeData = realTree || MOCK_TREE;
-    const isMock = !realTree;
+    // const realTree = await getReferralTree(session.user.id);
+    // const treeData = realTree || MOCK_TREE;
+    const treeData = MOCK_TREE;
+    const isMock = true;
 
     return (
         <div className="flex flex-col gap-8 h-[calc(100vh-8rem)]">
