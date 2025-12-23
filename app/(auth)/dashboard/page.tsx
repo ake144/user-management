@@ -194,9 +194,12 @@ export default async function DashboardPage() {
               className="bg-background/50 border rounded-md p-3 font-mono text-center text-sm sm:text-lg tracking-widest break-all"
               aria-label="Your referral link"
             >
-              {`${(process.env.NEXT_PUBLIC_BASE_URL ?? "").replace(/\/$/, "")}?ref=${encodeURIComponent(
+              {/* {`${(process.env.NEXT_PUBLIC_BASE_URL ?? "").replace(/\/$/, "")}?ref=${encodeURIComponent(
               user.referralCode ?? "GENERATE-CODE"
-              )}`}
+              )}`} */}
+              {encodeURIComponent(
+              user.referralCode ?? "GENERATE-CODE"
+              )}
             </div>
             <p className="text-xs text-muted-foreground mt-2 text-center">Share this code to grow your empire.</p>
           </div>

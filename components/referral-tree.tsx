@@ -44,7 +44,7 @@ const Node = ({ node, depth = 0 }: { node: TreeNode; depth?: number }) => {
             {/* Node Card */}
             <div
                 className={cn(
-                    "relative z-10 flex flex-col items-center gap-2 rounded-xl border bg-card p-3 shadow-sm transition-all hover:shadow-md hover:border-primary/50 w-[180px]",
+                    "relative z-10 flex flex-col items-center gap-2 rounded-xl border bg-card p-3 shadow-sm transition-all hover:shadow-md hover:border-primary/50 w-30 ",
                     node.isActive ? "border-green-500/50" : "border-red-500/50 opacity-80",
                     "cursor-pointer"
                 )}
@@ -205,7 +205,7 @@ export function ReferralTree({ data }: { data?: TreeNode }) {
     const treeData = data || mockData;
 
     return (
-        <div className="p-12 overflow-auto min-h-175 w-full bg-slate-50/50 dark:bg-slate-950/50 rounded-xl flex justify-center">
+        <div className="p-12 overflow-auto min-h-auto w-full bg-slate-50/50 dark:bg-slate-950/50 rounded-xl flex justify-center">
             <Node node={treeData} />
         </div>
     );

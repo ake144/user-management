@@ -6,6 +6,7 @@ import { ReferralTree } from "@/components/referral-tree"
 import { Sparkles, ArrowRight } from "lucide-react"
 import { Spotlight } from "../ui/spotlight"
 import { HyperText } from "../ui/hyper-text"
+import Image from "next/image"
 
 export function HeroSection() {
   return (
@@ -235,7 +236,7 @@ export function HeroSection() {
         </div>
 
         {/* Visual Element: Referral Tree embedded */}
-        <div className="mt-16 w-full max-w-5xl relative">
+        <div className="mt-16 w-full max-w-6xl relative">
           <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent z-20 h-full w-full pointer-events-none" />
           <div className="relative bg-card/30 backdrop-blur-sm border rounded-3xl overflow-hidden shadow-2xl p-8 transform perspective-1000 rotate-x-12 scale-95 opacity-90 hover:opacity-100 hover:scale-100 transition-all duration-700">
             <div className="absolute top-4 left-6 flex gap-2">
@@ -244,7 +245,16 @@ export function HeroSection() {
               <div className="w-3 h-3 rounded-full bg-green-500/50" />
             </div>
             <div className="mt-4">
-              <ReferralTree />
+              <Image
+               src='/images/dashboard.png'
+                alt="Dashboard Preview"
+                width={1300}
+                height={700}
+                className="rounded-xl border border-border shadow-md"
+              />
+            
+          
+              {/* <ReferralTree /> */}
             </div>
           </div>
         </div>
