@@ -1,99 +1,61 @@
-import { Lightbulb, Rocket, TrendingUp } from "lucide-react"
-import Image from "next/image"
-
-type FeatureCardProps = {
-    title: string
-    description: string
-    icon: React.ElementType
-    imageSrc?: string
-    className?: string
-}
-
-const FeatureCard = ({ title, description, icon: Icon, imageSrc, className = "" }: FeatureCardProps) => (
-    <div className={`group bg-zinc-900/50 backdrop-blur-sm border border-zinc-800 rounded-3xl p-8 hover:border-primary/50 transition-all duration-300 hover:shadow-xl hover:shadow-primary/10 ${className}`}>
-        <div className="flex flex-col gap-6">
-            {/* Icon */}
-            <div className="w-14 h-14 bg-gradient-to-br from-primary/20 to-primary/5 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                <Icon className="w-7 h-7 text-primary" />
-            </div>
-
-            {/* Image (if provided) */}
-            {imageSrc && (
-                <div className="relative w-full h-48 rounded-2xl overflow-hidden bg-zinc-800/50">
-                    <Image
-                        src={imageSrc}
-                        alt={title}
-                        fill
-                        className="object-cover group-hover:scale-105 transition-transform duration-500"
-                    />
-                </div>
-            )}
-
-            {/* Content */}
-            <div className="space-y-3">
-                <h3 className="text-foreground text-2xl font-bold leading-tight">
-                    {title}
-                </h3>
-                <p className="text-muted-foreground text-base leading-relaxed">
-                    {description}
-                </p>
-            </div>
-        </div>
-    </div>
-)
+import React from "react"
 
 export function WhyChooseSection() {
-    const features = [
-        {
-            title: "Learn with AI",
-            description:
-                "Laftiva equips you with AI-powered tools and insights to work smarter, create faster, and stay relevant in a rapidly changing digital world.",
-            icon: Lightbulb,
-            imageSrc: "/images/learn-ai.jpg", // You'll need to add this image
-        },
-        {
-            title: "Create & Share Value",
-            description:
-                "Turn your creativity, influence, and knowledge into real digital value. Share trusted products, content, and opportunities through Laftiva's social marketing ecosystem.",
-            icon: Rocket,
-            imageSrc: "/images/create-value.jpg", // You'll need to add this image
-        },
-        {
-            title: "Earn, Scale & Evolve",
-            description:
-                "Get rewarded for impact. Track performance, grow globally, and continuously adapt as AI reshapes how people connect, market, and earn.",
-            icon: TrendingUp,
-            imageSrc: "/images/earn-scale.svg",
-        },
-    ]
-
     return (
-        <section id="whyus" className="w-full px-5 py-16 md:py-24 bg-zinc-950 relative overflow-hidden">
-            {/* Decorative background gradients */}
-            <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-primary/5 rounded-full blur-[120px] -z-10" />
-            <div className="absolute bottom-0 right-1/4 w-[400px] h-[400px] bg-purple-500/5 rounded-full blur-[100px] -z-10" />
+        <section id="whyus" className="w-full py-24  text-white relative overflow-hidden">
+            <div className="max-w-6xl mx-auto px-4 flex flex-col items-center text-center">
+                
+                <h2 className="text-4xl md:text-5xl font-medium mb-20 tracking-tight text-white">
+                    You&apos;re safe to grow with us
+                </h2>
 
-            <div className="max-w-[1200px] mx-auto">
-                {/* Header */}
-                <div className="text-center mb-16 space-y-4">
-                    <h2 className="text-primary text-5xl md:text-6xl font-bold leading-tight tracking-tight">
-                        Why Choose Laftiva
-                    </h2>
-                    <p className="text-muted-foreground text-lg md:text-xl font-medium max-w-2xl mx-auto">
-                        Powerful features designed to help you succeed
-                    </p>
+                {/* Central Visual - Abstract 3D Ring Representation */}
+                <div className="relative w-80 h-80 mb-24 perspective-1000">
+                    <div className="absolute inset-0 bg-zinc-500/5 blur-[100px] rounded-full" />
+                    
+                    {/* Rings Container */}
+                    <div className="relative w-full h-full flex items-center justify-center animate-slow-spin">
+                        {/* Outer Ring */}
+                        <div className="absolute w-64 h-64 rounded-full border-[24px] border-zinc-800 shadow-[0_0_30px_rgba(0,0,0,0.5)] transform rotate-x-45 rotate-y-12 bg-gradient-to-b from-zinc-700 to-zinc-900" 
+                             style={{ transformStyle: 'preserve-3d', transform: 'rotateX(60deg) rotateY(15deg)' }}>
+                             <div className="absolute inset-0 rounded-full border-t border-white/10"></div>
+                        </div>
+                        
+                        {/* Inner Interlocking Ring */}
+                        <div className="absolute w-56 h-56 rounded-full border-[24px] border-zinc-700 shadow-[0_0_30px_rgba(0,0,0,0.5)] transform"
+                             style={{ transformStyle: 'preserve-3d', transform: 'rotateX(-45deg) rotateY(30deg)' }}>
+                             <div className="absolute inset-0 rounded-full border-t border-white/10"></div>
+                        </div>
+
+                        {/* Center Glow */}
+                        <div className="absolute w-32 h-32 bg-zinc-500/10 blur-2xl rounded-full" />
+                    </div>
                 </div>
 
-                {/* Feature Cards Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
-                    {features.map((feature, index) => (
-                        <FeatureCard
-                            key={feature.title}
-                            {...feature}
-                            className={index === 2 ? "md:col-span-1" : ""}
-                        />
-                    ))}
+                {/* Three Columns */}
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-12 w-full max-w-9xl px-4">
+                    <div className="flex flex-col space-y-4">
+                        <h3 className="text-3xl  font-bold text-zinc-100">Learn with AI</h3>
+                        <p className="text-zinc-500 text-lg leading-relaxed max-w-full">
+                            Esperanza equips you with AI-powered tools and insights to work smarter, create faster, and stay relevant.
+                        </p>
+                    </div>
+                    
+                    <div className="flex flex-col space-y-4">
+                        <h3 className="text-3xl  font-bold text-zinc-100">Create & Share Value</h3>
+                        <p className="text-zinc-500 text-lg leading-relaxed ">
+                            Turn your creativity, influence, and knowledge into real digital value.
+                        </p>
+                    </div>
+                    
+                    <div className="flex flex-col space-y-4">
+                        <h3 className="text-3xl  font-bold text-zinc-100">Earn, Scale & Evolve</h3>
+                        <p className="text-zinc-500 text-lg leading-relaxed ">
+                           Get rewarded for impact. Track performance, grow globally, and continuously adapt
+                        </p>
+                    </div>
                 </div>
+
             </div>
         </section>
     )

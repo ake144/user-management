@@ -107,7 +107,7 @@ export function CTASection() {
             Start Earning Income Today
           </h2>
           <p className="text-muted-foreground text-sm md:text-base font-medium leading-[18.20px] md:leading-relaxed break-words max-w-2xl">
-            Join thousands of creators and businesses already using Laftiva to scale their influence and grow their success.
+            Join thousands of creators and businesses already using Esperanza to scale their influence and grow their success.
           </p>
         </div>
         <Link href="/auth/login">

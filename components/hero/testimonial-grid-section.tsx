@@ -17,7 +17,7 @@ type TestimonialCardProps = Testimonial
 const testimonials: Testimonial[] = [
   {
     quote:
-      "Laftiva's AI-powered insights transformed how I approach affiliate marketing. I've tripled my earnings in just 3 months by optimizing my strategy based on real-time analytics.",
+      "Esperanza's AI-powered insights transformed how I approach affiliate marketing. I've tripled my earnings in just 3 months by optimizing my strategy based on real-time analytics.",
     name: "Sarah Johnson",
     company: "Digital Marketer",
     icon: "sparkles",
@@ -41,7 +41,7 @@ const testimonials: Testimonial[] = [
   },
   {
     quote:
-      "From zero to $10K monthly passive income! Laftiva's multi-tier rewards system is the real deal for serious affiliate marketers.",
+      "From zero to $10K monthly passive income! Esperanza's multi-tier rewards system is the real deal for serious affiliate marketers.",
     name: "David Okonkwo",
     company: "Affiliate Pro",
     icon: "trending-up",
@@ -65,7 +65,7 @@ const testimonials: Testimonial[] = [
   },
   {
     quote:
-      "Scaling from a solo affiliate to a team of 50+ was seamless. Laftiva handles all the complexity – I just focus on growing my network and earning.",
+      "Scaling from a solo affiliate to a team of 50+ was seamless. Esperanza handles all the complexity – I just focus on growing my network and earning.",
     name: "Lisa Tanaka",
     company: "Affiliate Network Owner",
     icon: "award",

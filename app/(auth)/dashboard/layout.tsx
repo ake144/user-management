@@ -149,7 +149,11 @@ export default function DashboardLayout({
                 )}
             >
                 <div className="flex h-16 items-center justify-between px-6 border-b">
+                    <Link href='/'>
+                   
                     <span className="text-xl font-bold tracking-tight">Esperanza</span>
+                     </Link>
+                     
                     <button
                         onClick={() => setIsSidebarOpen(false)}
                         className="lg:hidden"

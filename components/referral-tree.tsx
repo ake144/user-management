@@ -97,12 +97,6 @@ const Node = ({ node, depth = 0 }: { node: TreeNode; depth?: number }) => {
 
                     {/* Horizontal Bar for Children */}
                     <div className="relative flex gap-6 pt-4">
-                        {/* Top Horizontal Connector Line */}
-                        {/* We need to draw a line that spans from the first child to the last child (or the "More" button) */}
-                        {visibleChildren.length > 1 && (
-                            <div className="absolute top-0 left-0 right-0 h-px bg-border w-full" />
-                        )}
-
                         {visibleChildren.map((child, index) => (
                             <div key={child.id} className="relative flex flex-col items-center">
                                 {/* Vertical line up to the horizontal bar */}
@@ -211,7 +205,7 @@ export function ReferralTree({ data }: { data?: TreeNode }) {
     const treeData = data || mockData;
 
     return (
-        <div className="p-12 overflow-auto min-h-[600px] w-full bg-slate-50/50 dark:bg-slate-950/50 rounded-xl flex justify-center">
+        <div className="p-12 overflow-auto min-h-175 w-full bg-slate-50/50 dark:bg-slate-950/50 rounded-xl flex justify-center">
             <Node node={treeData} />
         </div>
     );
