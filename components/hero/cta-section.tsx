@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
+import { LampContainer } from "../ui/lamp"
 
 export function CTASection() {
   return (
@@ -101,6 +102,8 @@ export function CTASection() {
           </defs>
         </svg>
       </div>
+      <LampContainer>
+        
       <div className="relative z-10 flex flex-col justify-start items-center gap-9 max-w-4xl mx-auto">
         <div className="flex flex-col justify-start items-center gap-4 text-center">
           <h2 className="text-foreground text-4xl md:text-5xl lg:text-[68px] font-semibold leading-tight md:leading-tight lg:leading-[76px] break-words">
@@ -119,6 +122,8 @@ export function CTASection() {
           </Button>
         </Link>
       </div>
+      </LampContainer>
+
     </section>
   )
 }
