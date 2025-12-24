@@ -200,7 +200,7 @@ export function HeroSection() {
       <div className="relative z-10 flex flex-col items-center mt-24 md:mt-32 px-4 w-full">
         <div className="inline-flex items-center rounded-full border px-3 py-1 text-sm font-medium bg-secondary/50 backdrop-blur-sm mb-6">
           <Sparkles className="mr-2 h-3.5 w-3.5 text-primary" />
-          <span className="text-muted-foreground">The #1 Affiliate Network Platform</span>
+          <span className="text-muted-foreground">The #1 Affiliate Platform</span>
         </div>
 
         <h1 className="text-foreground text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight leading-tight max-w-4xl">
@@ -216,23 +216,22 @@ export function HeroSection() {
         </p>
 
         <div className="flex flex-col sm:flex-row gap-4 mt-8">
-          <Link href="/auth/login">
-            <Button className="bg-primary cursor-pointer text-primary-foreground hover:bg-primary/90 px-8 py-6 rounded-full font-semibold text-lg shadow-lg shadow-primary/25 transition-all hover:scale-105">
-              <HyperText className="text-sm font-semibold">
+          <Button asChild className="bg-primary cursor-pointer text-primary-foreground hover:bg-primary/90 px-8 py-6 rounded-full font-semibold text-lg shadow-lg shadow-primary/25 transition-all hover:scale-105">
+            <Link href="/auth/login">
+              <HyperText className="text-sm font-semibold" as="span">
                    Start Earning Now
               </HyperText>
              
               <ArrowRight className="ml-2 h-5 w-5" />
-            </Button>
-          </Link>
-          <Link href="#whyus">
-            <Button variant="outline" className="bg-background/50 cursor-pointer backdrop-blur-sm px-8 py-6 rounded-full font-semibold text-lg transition-all duration-300 hover:scale-105 hover:bg-background/80 hover:border-primary/50 hover:shadow-lg hover:shadow-primary/10 hover:text-primary">
-              
-              <HyperText className="text-md">
+            </Link>
+          </Button>
+          <Button variant="outline" className="bg-background/50 cursor-pointer backdrop-blur-sm px-8 py-6 rounded-full font-semibold text-lg transition-all duration-300 hover:scale-105 hover:bg-background/80 hover:border-primary/50 hover:shadow-lg hover:shadow-primary/10 hover:text-primary">
+            <Link href="#whyus">
+              {/* <HyperText className="text-md" as="span"> */}
                 Why Esperanza
-              </HyperText>
-            </Button>
-          </Link>
+              {/* </HyperText> */}
+            </Link>
+          </Button>
         </div>
 
         {/* Visual Element: Referral Tree embedded */}
@@ -246,7 +245,7 @@ export function HeroSection() {
             </div>
             <div className="mt-4">
               <Image
-               src='/images/dashboard.png'
+               src='/dash.png'
                 alt="Dashboard Preview"
                 width={1300}
                 height={700}
