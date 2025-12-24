@@ -7,6 +7,7 @@ import GlobalReachIllustration from "./bento/global-reach-illustration"
 import SecurityIllustration from "./bento/security-illustration"
 import APIIllustration from "./bento/api-illustration"
 import MarketingIllustration from "./bento/marketing-illustration"
+import { CardContainer } from "../ui/3d-card"
 
 type BentoCardProps = {
   title: string
@@ -17,7 +18,10 @@ type BentoCardProps = {
 }
 
 const BentoCard: FC<BentoCardProps> = ({ title, description, icon: Icon, className, component: Component }) => (
-  <div className={`overflow-hidden rounded-2xl border border-white/20 flex flex-col justify-start items-start relative ${className}`}>
+  <CardContainer className={`overflow-hidden inter-var rounded-2xl border border-white/20 flex flex-col justify-start items-start relative ${className}`}>
+    
+
+  <div >
     {/* Background with blur effect */}
     <div
       className="absolute inset-0 rounded-2xl"
@@ -48,17 +52,12 @@ const BentoCard: FC<BentoCardProps> = ({ title, description, icon: Icon, classNa
       </div>
     ) : null}
   </div>
+</CardContainer>
 )
 
 export function BentoSection() {
   const cards = [
-    {
-      title: "Real-Time Analytics",
-      description: "Track every click, sign-up, and commission as it happens. Deep insights into your network's performance.",
-      icon: TrendingUp,
-      component: AnalyticsIllustration,
-      className: "md:col-span-2",
-    },
+   
     {
       title: "Multi-Tier Rewards",
       description: "Earn from your direct referrals and their referrals. Build a deep, profitable network.",
@@ -90,6 +89,13 @@ export function BentoSection() {
       description: "Your data and earnings are protected by enterprise-level encryption and fraud protection.",
       icon: ShieldCheck,
       component: SecurityIllustration,
+    },
+     {
+      title: "Real-Time Analytics",
+      description: "Track every click, sign-up, and commission as it happens. Deep insights into your network's performance.",
+      icon: TrendingUp,
+      component: AnalyticsIllustration,
+      className: "md:col-span-2",
     },
     // {
     //   title: "API & Webhooks",

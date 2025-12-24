@@ -27,9 +27,6 @@ export default function LandingPage() {
         {/* <AnimatedSection className="relative z-10 max-w-[1320px] mx-auto px-6 mt-[4px] md:mt-[100px]" delay={0.1}>
           <SocialProof />
         </AnimatedSection> */}
-        <AnimatedSection id="features-section" className="relative z-10 max-w-[1320px] mx-auto mt-16" delay={0.2}>
-          <BentoSection />
-        </AnimatedSection>
         
         <AnimatedSection className="relative z-10 max-w-[1320px] mx-auto mt-8 md:mt-16" delay={0.35}>
           <StatsSection />
@@ -43,7 +40,11 @@ export default function LandingPage() {
           delay={0.2}
         >
           <WhyChooseSection />
+        </AnimatedSection>y
+        <AnimatedSection id="features-section" className="relative z-10 max-w-[1320px] mx-auto mt-16" delay={0.2}>
+          <BentoSection />
         </AnimatedSection>
+        
         <AnimatedSection
           id="testimonials-section"
           className="relative z-10 max-w-[1320px] mx-auto mt-8 md:mt-16"
