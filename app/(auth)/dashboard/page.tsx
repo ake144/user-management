@@ -128,12 +128,23 @@ export default async function DashboardPage() {
       {/* Header */}
       <div className="flex flex-col gap-2">
         <div className="flex items-center gap-3">
-          <h1 className="text-3xl font-bold tracking-tight">Dashboard</h1>
-          {isDemoMode && (
+          <div className="flex justify-between w-full">
+          <h1 className="text-3xl font-bold tracking-tight">Dashboard
+
+             {isDemoMode && (
             <span className="px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider bg-primary/10 text-primary border border-primary/20 rounded-full">
               Demo Mode
             </span>
           )}
+          </h1>
+         <p className="text-sm font-bold text-green-500 rounded-2xl">
+            Level 1
+         </p>
+
+          
+        
+           
+          </div>
         </div>
         <p className="text-muted-foreground">
           Welcome back, {user.firstName || user.name}. Here's what's happening with your affiliate network.
@@ -277,7 +288,7 @@ export default async function DashboardPage() {
           )}
         </div>
       </div>
-      
+
     </div>
   );
 }
