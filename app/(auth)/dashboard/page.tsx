@@ -12,6 +12,9 @@ import {
   Network
 } from "lucide-react";
 import { DashboardCharts } from "@/components/dashboard-charts"; // Client component for Recharts
+import { MODULES } from "@/lib/modules";
+import { Badge } from "@/components/ui/badge";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 async function getUserData(userId: string) {
   const user = await prisma.user.findUnique({
@@ -77,6 +80,32 @@ export default async function DashboardPage() {
   const displayReferrals = isDemoMode ? 12 : user._count.referrals;
   const displayTotalEarned = isDemoMode ? 2450.00 : user.totalEarnings;
   const displayTransactions = isDemoMode ? mockTransactions : user.transactions;
+
+  // Calculate active modules
+  const activeModulesMap = new Map<string, number>();
+  
+  if (isDemoMode) {
+    // Mock active modules for demo
+    activeModulesMap.set("e-learning", 1250.00);
+    activeModulesMap.set("e-commerce", 850.00);
+    activeModulesMap.set("video-generator", 350.00);
+  } else {
+    user.transactions.forEach(t => {
+      // Assuming referenceId stores the module key for commission transactions
+      if (t.amount > 0 && t.referenceId && MODULES[t.referenceId]) {
+        const current = activeModulesMap.get(t.referenceId) || 0;
+        activeModulesMap.set(t.referenceId, current + t.amount);
+      }
+    });
+  }
+
+  const activeModules = Array.from(activeModulesMap.entries())
+    .map(([id, amount]) => ({
+      id,
+      ...MODULES[id],
+      earned: amount
+    }))
+    .sort((a, b) => b.earned - a.earned);
 
   // Format currency
   const formatCurrency = (amount: number) => {
@@ -144,6 +173,8 @@ export default async function DashboardPage() {
         </div>
       </div>
 
+      
+
       {/* Main Content Area */}
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-7">
 
@@ -205,6 +236,48 @@ export default async function DashboardPage() {
           </div>
         </div>
       </div>
+
+      {/* Active Modules */}
+      <div className="flex flex-col gap-4">
+        <h2 className="text-xl font-semibold tracking-tight">Active Modules</h2>
+        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+          {activeModules.length > 0 ? (
+            activeModules.map((module) => (
+              <Card key={module.id} className="overflow-hidden">
+                <div className={`h-2 w-full bg-gradient-to-r ${module.gradient}`} />
+                <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                  <CardTitle className="text-sm font-medium">
+                    {module.title}
+                  </CardTitle>
+                  <module.icon className={`h-4 w-4 ${module.color}`} />
+                </CardHeader>
+                <CardContent>
+                  <div className="text-2xl font-bold">{formatCurrency(module.earned)}</div>
+                  <p className="text-xs text-muted-foreground mt-1">
+                    Total Earnings
+                  </p>
+                  <div className="mt-4 flex items-center gap-2">
+                    <Badge variant="secondary" className="text-xs">
+                      {module.commission} Commission
+                    </Badge>
+                    <Link href={`/dashboard/modules/${module.id}`} className="text-xs text-primary hover:underline ml-auto flex items-center gap-1">
+                      View Details <ArrowRight className="h-3 w-3" />
+                    </Link>
+                  </div>
+                </CardContent>
+              </Card>
+            ))
+          ) : (
+            <div className="col-span-full p-8 text-center border rounded-xl bg-muted/20">
+              <p className="text-muted-foreground">No active modules yet. Start promoting to earn!</p>
+              <Link href="/dashboard/modules" className="text-primary hover:underline mt-2 inline-block">
+                Browse Modules
+              </Link>
+            </div>
+          )}
+        </div>
+      </div>
+      
     </div>
   );
 }

@@ -9,16 +9,12 @@ import {
     TableHead,
     TableHeader,
     TableRow
-} from "@/components/ui/table"; // Assuming shadcn/ui table exists or I'll use standard HTML/Tailwind
-import { Badge } from "@/components/ui/badge"; // Assuming shadcn/ui badge exists
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"; // Assuming shadcn/ui card exists
-import { DollarSign, ArrowUpRight, ArrowDownLeft } from "lucide-react";
-
-// Fallback UI components if shadcn is not fully installed
-// I'll use standard Tailwind for now to be safe and avoid "module not found" errors if components aren't there.
-// If the user has shadcn, I could use it, but standard Tailwind is safer for a "create" task without checking every component.
-// Actually, I'll check if components/ui exists. The previous `list_dir` showed `components/ui` has 6 children.
-// I'll assume standard Tailwind for the table structure to be robust.
+} from "@/components/ui/table";
+import { Badge } from "@/components/ui/badge";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { DollarSign, ArrowUpRight, ArrowDownLeft, TrendingUp } from "lucide-react";
+import { MODULES } from "@/lib/modules";
+import { ModuleHistoryChart } from "@/components/module-history-chart";
 
 async function getUserTransactions(userId: string) {
     const user = await prisma.user.findUnique({
@@ -32,7 +28,7 @@ async function getUserTransactions(userId: string) {
     return user;
 }
 
-// Mock Data
+// Mock Data with referenceId for modules
 const MOCK_TRANSACTIONS = [
     {
         id: "tx_mock_1",
@@ -40,7 +36,8 @@ const MOCK_TRANSACTIONS = [
         type: "REFERRAL_COMMISSION",
         amount: 150.00,
         description: "Commission from User #8821",
-        status: "COMPLETED"
+        status: "COMPLETED",
+        referenceId: "e-learning"
     },
     {
         id: "tx_mock_2",
@@ -48,7 +45,8 @@ const MOCK_TRANSACTIONS = [
         type: "DOWNLINE_EARNING",
         amount: 45.50,
         description: "Level 2 earning from User #9912",
-        status: "COMPLETED"
+        status: "COMPLETED",
+        referenceId: "e-commerce"
     },
     {
         id: "tx_mock_3",
@@ -56,7 +54,8 @@ const MOCK_TRANSACTIONS = [
         type: "WITHDRAWAL",
         amount: -500.00,
         description: "Withdrawal to PayPal",
-        status: "COMPLETED"
+        status: "COMPLETED",
+        referenceId: null
     },
     {
         id: "tx_mock_4",
@@ -64,9 +63,41 @@ const MOCK_TRANSACTIONS = [
         type: "REFERRAL_COMMISSION",
         amount: 200.00,
         description: "Commission from User #7731",
-        status: "COMPLETED"
+        status: "COMPLETED",
+        referenceId: "video-generator"
+    },
+    {
+        id: "tx_mock_5",
+        createdAt: new Date(Date.now() - 1000 * 60 * 60 * 24 * 10), // 10 days ago
+        type: "REFERRAL_COMMISSION",
+        amount: 120.00,
+        description: "Commission from User #5521",
+        status: "COMPLETED",
+        referenceId: "e-learning"
+    },
+    {
+        id: "tx_mock_6",
+        createdAt: new Date(Date.now() - 1000 * 60 * 60 * 24 * 12), // 12 days ago
+        type: "REFERRAL_COMMISSION",
+        amount: 300.00,
+        description: "Commission from User #1122",
+        status: "COMPLETED",
+        referenceId: "e-commerce"
     },
 ];
+
+const COLOR_MAP: Record<string, string> = {
+    "text-blue-500": "#3b82f6",
+    "text-purple-500": "#a855f7",
+    "text-orange-500": "#f97316",
+    "text-orange-600": "#ea580c",
+    "text-red-500": "#ef4444",
+    "text-green-600": "#16a34a",
+    "text-blue-600": "#2563eb",
+    "text-purple-600": "#9333ea",
+    "text-cyan-500": "#06b6d4",
+    "text-indigo-600": "#4f46e5",
+};
 
 export default async function HistoryPage() {
     const session = await auth.api.getSession({
@@ -90,12 +121,11 @@ export default async function HistoryPage() {
 
     const isMock = userData.transactions.length === 0;
 
-    // Calculate totals (using mock data if active)
+    // Calculate totals
     const totalEarnings = transactions
         .filter(t => t.amount > 0)
         .reduce((sum, t) => sum + t.amount, 0);
 
-    // Use real balance if real data, otherwise calculate from mock
     const currentBalance = isMock
         ? transactions.reduce((sum, t) => sum + t.amount, 0)
         : userData.currentBalance;
@@ -114,6 +144,62 @@ export default async function HistoryPage() {
             day: 'numeric',
         });
     };
+
+    // Prepare Chart Data (Cumulative Growth per Module)
+    const sortedTransactions = [...transactions].sort((a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime());
+    
+    const activeModuleIds = Array.from(new Set(sortedTransactions
+        .filter(t => t.amount > 0 && t.referenceId && MODULES[t.referenceId])
+        .map(t => t.referenceId!)
+    ));
+
+    const chartDataMap = new Map<string, { date: string; [key: string]: any }>();
+    
+    // Create a timeline of dates
+    sortedTransactions.forEach(t => {
+        if (t.amount <= 0) return;
+        const date = new Date(t.createdAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+        if (!chartDataMap.has(date)) {
+            chartDataMap.set(date, { date });
+        }
+        const entry = chartDataMap.get(date)!;
+        const moduleId = t.referenceId || 'other';
+        entry[moduleId] = (entry[moduleId] || 0) + t.amount;
+    });
+
+    const dailyData = Array.from(chartDataMap.values());
+    
+    // Calculate cumulative data
+    let cumulativeData: any[] = [];
+    let runningTotals: Record<string, number> = {};
+    activeModuleIds.forEach(id => runningTotals[id] = 0);
+
+    dailyData.forEach(day => {
+        const newEntry = { ...day };
+        activeModuleIds.forEach(id => {
+            runningTotals[id] += (day[id] || 0);
+            newEntry[id] = runningTotals[id];
+        });
+        cumulativeData.push(newEntry);
+    });
+
+    const activeModulesConfig = activeModuleIds.map(id => ({
+        id,
+        title: MODULES[id]?.title || id,
+        color: COLOR_MAP[MODULES[id]?.color] || "#888888"
+    }));
+
+    // Calculate per-module totals for the breakdown list
+    const moduleTotals = activeModuleIds.map(id => {
+        const total = transactions
+            .filter(t => t.referenceId === id && t.amount > 0)
+            .reduce((sum, t) => sum + t.amount, 0);
+        return {
+            id,
+            ...MODULES[id],
+            total
+        };
+    }).sort((a, b) => b.total - a.total);
 
     return (
         <div className="flex flex-col gap-8">
@@ -142,6 +228,42 @@ export default async function HistoryPage() {
                 </div>
             </div>
 
+            {/* Growth Chart */}
+            {activeModulesConfig.length > 0 && (
+                <div className="rounded-xl border bg-card text-card-foreground shadow-sm p-6">
+                    <div className="flex flex-col gap-1 mb-6">
+                        <h3 className="font-semibold leading-none tracking-tight">Earnings Growth by Module</h3>
+                        <p className="text-sm text-muted-foreground">
+                            Cumulative earnings over time for your active modules.
+                        </p>
+                    </div>
+                    <ModuleHistoryChart data={cumulativeData} modules={activeModulesConfig} />
+                </div>
+            )}
+
+            {/* Module Breakdown */}
+            {moduleTotals.length > 0 && (
+                <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+                    {moduleTotals.map((module) => (
+                        <Card key={module.id} className="overflow-hidden">
+                            <div className={`h-1 w-full bg-gradient-to-r ${module.gradient}`} />
+                            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                                <CardTitle className="text-sm font-medium truncate pr-2">
+                                    {module.title}
+                                </CardTitle>
+                                <module.icon className={`h-4 w-4 ${module.color}`} />
+                            </CardHeader>
+                            <CardContent>
+                                <div className="text-2xl font-bold">{formatCurrency(module.total)}</div>
+                                <p className="text-xs text-muted-foreground mt-1">
+                                    Lifetime Earnings
+                                </p>
+                            </CardContent>
+                        </Card>
+                    ))}
+                </div>
+            )}
+
             {/* Transactions Table */}
             <div className="rounded-xl border bg-card text-card-foreground shadow-sm overflow-hidden">
                 <div className="p-6 border-b bg-muted/20">
@@ -158,6 +280,7 @@ export default async function HistoryPage() {
                             <tr className="border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted">
                                 <th className="h-12 px-4 text-left align-middle font-medium text-muted-foreground">Date</th>
                                 <th className="h-12 px-4 text-left align-middle font-medium text-muted-foreground">Type</th>
+                                <th className="h-12 px-4 text-left align-middle font-medium text-muted-foreground">Module</th>
                                 <th className="h-12 px-4 text-left align-middle font-medium text-muted-foreground">Description</th>
                                 <th className="h-12 px-4 text-right align-middle font-medium text-muted-foreground">Amount</th>
                             </tr>
@@ -176,6 +299,15 @@ export default async function HistoryPage() {
                                             }`}>
                                             {tx.type.replace(/_/g, ' ')}
                                         </span>
+                                    </td>
+                                    <td className="p-4 align-middle">
+                                        {tx.referenceId && MODULES[tx.referenceId] ? (
+                                            <Badge variant="outline" className="text-xs font-normal">
+                                                {MODULES[tx.referenceId].title}
+                                            </Badge>
+                                        ) : (
+                                            <span className="text-muted-foreground">-</span>
+                                        )}
                                     </td>
                                     <td className="p-4 align-middle">{tx.description || '-'}</td>
                                     <td className={`p-4 align-middle text-right font-medium ${tx.amount > 0 ? 'text-green-600' : 'text-red-600'
