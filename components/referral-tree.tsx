@@ -44,8 +44,8 @@ const Node = ({ node, depth = 0 }: { node: TreeNode; depth?: number }) => {
             {/* Node Card */}
             <div
                 className={cn(
-                    "relative z-10 flex flex-col items-center gap-2 rounded-xl border bg-card p-3 shadow-sm transition-all hover:shadow-md hover:border-primary/50 w-30 ",
-                    node.isActive ? "border-green-500/50" : "border-red-500/50 opacity-80",
+                    "relative z-10 flex flex-col items-center gap-2 rounded-xl border bg-card p-3 shadow-sm transition-all hover:shadow-md hover:border-primary/50 w-36 min-h-[140px] justify-between",
+                    node.isActive ? "border-green-500/50" : "border-red-500 bg-red-50 dark:bg-red-950/20",
                     "cursor-pointer"
                 )}
                 onClick={() => hasChildren && setIsExpanded(!isExpanded)}
@@ -55,7 +55,7 @@ const Node = ({ node, depth = 0 }: { node: TreeNode; depth?: number }) => {
                     "h-10 w-10 rounded-full flex items-center justify-center border-2",
                     node.isActive
                         ? "bg-background border-green-500 text-green-600"
-                        : "bg-muted border-muted-foreground/20 text-muted-foreground"
+                        : "bg-red-100 border-red-200 text-red-500"
                 )}>
                     <User className="h-5 w-5" />
                 </div>
@@ -78,7 +78,7 @@ const Node = ({ node, depth = 0 }: { node: TreeNode; depth?: number }) => {
                 {/* Status Dot */}
                 <div className={cn(
                     "absolute top-2 right-2 h-2 w-2 rounded-full",
-                    node.isActive ? "bg-green-500" : "bg-gray-300"
+                    node.isActive ? "bg-green-500" : "bg-red-500"
                 )} />
 
                 {/* Expand/Collapse Indicator */}
@@ -132,7 +132,7 @@ const Node = ({ node, depth = 0 }: { node: TreeNode; depth?: number }) => {
 
                                 <button
                                     onClick={handleShowMore}
-                                    className="flex flex-col items-center justify-center gap-1 rounded-xl border border-dashed border-primary/50 bg-primary/5 p-3 shadow-sm hover:bg-primary/10 w-[100px] h-[100px] transition-colors"
+                                    className="flex flex-col items-center justify-center gap-1 rounded-xl border border-dashed border-primary/50 bg-primary/5 p-3 shadow-sm hover:bg-primary/10 w-36 h-[140px] transition-colors"
                                 >
                                     <div className="h-8 w-8 rounded-full bg-primary/10 flex items-center justify-center text-primary">
                                         <MoreHorizontal className="h-4 w-4" />
