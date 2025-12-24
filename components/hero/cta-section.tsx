@@ -5,7 +5,7 @@ import { LampContainer } from "../ui/lamp"
 export function CTASection() {
   return (
     <section className="w-full pt-20 md:pt-60 lg:pt-60 pb-10 md:pb-20 px-5 relative flex flex-col justify-center items-center overflow-visible">
-      <div className="absolute inset-0 top-[-90px]">
+      {/* <div className="absolute inset-0 top-[-90px]">
         <svg
           className="w-full h-full"
           viewBox="0 0 1388 825"
@@ -101,9 +101,9 @@ export function CTASection() {
             </linearGradient>
           </defs>
         </svg>
-      </div>
+      </div> */}
       <LampContainer>
-        
+
       <div className="relative z-10 flex flex-col justify-start items-center gap-9 max-w-4xl mx-auto">
         <div className="flex flex-col justify-start items-center gap-4 text-center">
           <h2 className="text-foreground text-4xl md:text-5xl lg:text-[68px] font-semibold leading-tight md:leading-tight lg:leading-[76px] break-words">
