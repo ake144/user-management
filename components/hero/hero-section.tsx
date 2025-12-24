@@ -19,7 +19,7 @@ export function HeroSection() {
    
     <section
       className="flex flex-col items-center text-center relative mx-auto rounded-2xl overflow-hidden my-6 py-0 px-4
-         w-full md:w-[1220px] min-h-[800px] md:px-0 bg-background"
+         w-full md:w-305 md:min-h-200 min-h-50 md:px-0 bg-background"
     >
      
       {/* SVG Background */}
