@@ -6,14 +6,14 @@ const adapter = new PrismaPg({
 });
 
 const globalForPrisma = global as unknown as {
-  prisma: PrismaClient;
+  prisma_new: PrismaClient;
 };
 
 const prisma =
-  globalForPrisma.prisma || new PrismaClient({
+  globalForPrisma.prisma_new || new PrismaClient({
     adapter,
   });
 
-if (process.env.NODE_ENV !== "production") globalForPrisma.prisma = prisma;
+if (process.env.NODE_ENV !== "production") globalForPrisma.prisma_new = prisma;
 
 export default prisma;

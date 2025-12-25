@@ -15,28 +15,39 @@ export interface TreeNode {
     totalEarnings: number;
     isActive: boolean;
     children?: TreeNode[];
-    level?: number;
-    tier?: string;
+    level?: number;        // Actual level from database
+    tier?: string;         // Optional tier/rank
+    childCount?: number;   // Direct children count
 }
 
-const Node = ({ node, depth = 0 }: { node: TreeNode; depth?: number }) => {
+const Node = ({ node, depth = 0, maxDepth = 8 }: { node: TreeNode; depth?: number; maxDepth?: number }) => {
     const [isExpanded, setIsExpanded] = useState(true);
-    const [visibleCount, setVisibleCount] = useState(3); // Initial number of children to show
+    const [visibleCount, setVisibleCount] = useState(10); // Initial number of children to show
 
     const hasChildren = node.children && node.children.length > 0;
     const children = node.children || [];
     const visibleChildren = children.slice(0, visibleCount);
     const remainingCount = children.length - visibleCount;
 
-    // Determine tier color/icon
+    // Use actual level from database if available, otherwise use depth
+    const displayLevel = node.level !== undefined ? node.level : depth;
+
+    // Determine tier color/icon based on level
     const getTierIcon = () => {
-        if (node.totalEarnings > 10000) return <Award className="h-3 w-3 text-purple-500" />;
-        if (node.totalEarnings > 5000) return <Shield className="h-3 w-3 text-blue-500" />;
-        return <Zap className="h-3 w-3 text-yellow-500" />;
+        // Higher levels (deeper in tree) get different colors
+        if (displayLevel >= 6) return <Award className="h-3 w-3 text-purple-500" />;
+        if (displayLevel >= 4) return <Shield className="h-3 w-3 text-blue-500" />;
+        if (displayLevel >= 2) return <Zap className="h-3 w-3 text-yellow-500" />;
+        return <Zap className="h-3 w-3 text-green-500" />;
+    };
+
+    const getTierLabel = () => {
+        if (displayLevel === 0) return "Root";
+        return `L${displayLevel}`;
     };
 
     const handleShowMore = () => {
-        setVisibleCount(prev => prev + 5); // Show 5 more at a time
+        setVisibleCount(prev => prev + 10); // Show 10 more at a time
     };
 
     return (
@@ -44,7 +55,7 @@ const Node = ({ node, depth = 0 }: { node: TreeNode; depth?: number }) => {
             {/* Node Card */}
             <div
                 className={cn(
-                    "relative z-10 flex flex-col items-center gap-2 rounded-xl border bg-card p-3 shadow-sm transition-all hover:shadow-md hover:border-primary/50 w-36 min-h-[140px] justify-between",
+                    "relative z-10 flex flex-col items-center gap-2 rounded-xl border bg-card p-3 shadow-sm transition-all hover:shadow-md hover:border-primary/50 w-40 min-h-[150px] justify-between",
                     node.isActive ? "border-green-500/50" : "border-red-500 bg-red-50 dark:bg-red-950/20",
                     "cursor-pointer"
                 )}
@@ -52,7 +63,7 @@ const Node = ({ node, depth = 0 }: { node: TreeNode; depth?: number }) => {
             >
                 {/* Avatar */}
                 <div className={cn(
-                    "h-10 w-10 rounded-full flex items-center justify-center border-2",
+                    "h-11 w-11 rounded-full flex items-center justify-center border-2",
                     node.isActive
                         ? "bg-background border-green-500 text-green-600"
                         : "bg-red-100 border-red-200 text-red-500"
@@ -61,16 +72,21 @@ const Node = ({ node, depth = 0 }: { node: TreeNode; depth?: number }) => {
                 </div>
 
                 {/* Info */}
-                <div className="flex flex-col items-center text-center w-full">
-                    <span className="text-sm font-bold truncate w-full">{node.name}</span>
+                <div className="flex flex-col items-center text-center w-full gap-0.5">
+                    <span className="text-sm font-bold truncate w-full px-1">{node.name}</span>
                     <div className="flex items-center gap-1 text-xs text-muted-foreground font-mono">
                         <DollarSign className="h-3 w-3" />
                         {new Intl.NumberFormat('en-US', { notation: "compact", maximumFractionDigits: 1 }).format(node.totalEarnings)}
                     </div>
                     {node.isActive && (
-                        <div className="mt-1 flex items-center gap-1 px-1.5 py-0.5 rounded-full bg-accent text-[10px] font-medium">
+                        <div className="mt-1 flex items-center gap-1 px-2 py-0.5 rounded-full bg-accent text-[10px] font-medium">
                             {getTierIcon()}
-                            <span>Lvl {depth + 1}</span>
+                            <span>{getTierLabel()}</span>
+                        </div>
+                    )}
+                    {node.childCount !== undefined && node.childCount > 0 && (
+                        <div className="mt-0.5 text-[9px] text-muted-foreground">
+                            {node.childCount} direct referral{node.childCount > 1 ? 's' : ''}
                         </div>
                     )}
                 </div>
@@ -102,16 +118,8 @@ const Node = ({ node, depth = 0 }: { node: TreeNode; depth?: number }) => {
                                 {/* Vertical line up to the horizontal bar */}
                                 <div className="absolute -top-4 left-1/2 -translate-x-1/2 h-4 w-px bg-border" />
 
-                                {/* Horizontal Line Logic for First/Last Child */}
-                                {/* The main horizontal bar (absolute top-0) covers the span. 
-                                    We need to mask the parts outside the first and last child's center.
-                                    Actually, a simpler way for the horizontal connector:
-                                    Use a pseudo-element or a div on the wrapper that has a top border.
-                                    But since we are mapping, we can just draw lines.
-                                */}
-
                                 {/* Left Connector (connects to previous sibling) */}
-                                {index > 0 &&  (
+                                {index > 0 && (
                                     <div className="absolute -top-4 right-1/2 w-[calc(50%+12px)] h-px bg-border" />
                                 )}
                                 {/* Right Connector (connects to next sibling) */}
@@ -119,7 +127,7 @@ const Node = ({ node, depth = 0 }: { node: TreeNode; depth?: number }) => {
                                     <div className="absolute -top-4 left-1/2 w-[calc(50%+12px)] h-px bg-border" />
                                 )}
 
-                                <Node node={child} depth={depth + 1} />
+                                <Node node={child} depth={depth + 1} maxDepth={maxDepth} />
                             </div>
                         ))}
 
@@ -132,7 +140,7 @@ const Node = ({ node, depth = 0 }: { node: TreeNode; depth?: number }) => {
 
                                 <button
                                     onClick={handleShowMore}
-                                    className="flex flex-col items-center justify-center gap-1 rounded-xl border border-dashed border-primary/50 bg-primary/5 p-3 shadow-sm hover:bg-primary/10 w-36 h-[140px] transition-colors"
+                                    className="flex flex-col items-center justify-center gap-1 rounded-xl border border-dashed border-primary/50 bg-primary/5 p-3 shadow-sm hover:bg-primary/10 w-40 h-[150px] transition-colors"
                                 >
                                     <div className="h-8 w-8 rounded-full bg-primary/10 flex items-center justify-center text-primary">
                                         <MoreHorizontal className="h-4 w-4" />
@@ -201,12 +209,12 @@ const mockData: TreeNode = {
     ]
 };
 
-export function ReferralTree({ data }: { data?: TreeNode }) {
+export function ReferralTree({ data, maxDepth = 8 }: { data?: TreeNode; maxDepth?: number }) {
     const treeData = data || mockData;
 
     return (
         <div className="p-12 overflow-auto min-h-auto w-full bg-slate-50/50 dark:bg-slate-950/50 rounded-xl flex justify-center">
-            <Node node={treeData} />
+            <Node node={treeData} maxDepth={maxDepth} />
         </div>
     );
 }

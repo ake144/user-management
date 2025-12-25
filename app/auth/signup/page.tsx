@@ -7,11 +7,11 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
+    Select,
+    SelectContent,
+    SelectItem,
+    SelectTrigger,
+    SelectValue,
 } from "@/components/ui/select"
 import { Card, CardContent, CardHeader } from "@/components/ui/card"
 import { BookOpen, Mail, Lock, User, Phone, Eye, EyeOff, ArrowRight, CheckCircle, Gift } from "lucide-react"
@@ -191,14 +191,14 @@ function SignupForm() {
 
             <div className="relative w-full max-w-2xl">
                 <div className="text-center mb-8">
-                                    <Link href="/" className="inline-flex items-center gap-3 group">
-                
-                                        <span className="text-2xl font-bold bg-gradient-to-r from-primary to-purple-600 bg-clip-text text-transparent">
-                                            Esperanza Affiliate Program
-                                        </span>
-                                    </Link>
-                 </div>
-                            
+                    <Link href="/" className="inline-flex items-center gap-3 group">
+
+                        <span className="text-2xl font-bold bg-gradient-to-r from-primary to-purple-600 bg-clip-text text-transparent">
+                            Esperanza Affiliate Program
+                        </span>
+                    </Link>
+                </div>
+
                 <Card className="backdrop-blur-xl bg-card/80 border-border shadow-2xl">
                     <CardHeader className="text-center pb-4">
                         <h1 className="text-2xl font-bold text-foreground">Create your account</h1>
@@ -233,7 +233,7 @@ function SignupForm() {
                             <div className="space-y-2">
                                 <Label htmlFor="sponsorId" className="text-foreground">Sponsor Id (optional)</Label>
                                 <div className="relative">
-                                    
+
                                     <Input
                                         id="sponsorId"
                                         type="text"
@@ -419,18 +419,18 @@ function SignupForm() {
                                 )}
                             </Button>
 
-                            {/* Divider */}
-                            <div className="relative my-6">
+                            {/* Divider - Commented out for now */}
+                            {/* <div className="relative my-6">
                                 <div className="absolute inset-0 flex items-center">
                                     <div className="w-full border-t border-border" />
                                 </div>
                                 <div className="relative flex justify-center text-sm">
                                     <span className="px-4 bg-card text-muted-foreground">Or sign up with</span>
                                 </div>
-                            </div>
+                            </div> */}
 
-                            {/* Social Login Buttons */}
-                            <div className="grid grid-cols-2 gap-3">
+                            {/* Social Login Buttons - Commented out for now */}
+                            {/* <div className="grid grid-cols-2 gap-3">
                                 <Button
                                     type="button"
                                     variant="outline"
@@ -468,7 +468,7 @@ function SignupForm() {
                                     </svg>
                                     GitHub
                                 </Button>
-                            </div>
+                            </div> */}
                         </form>
 
                         {/* Login Link */}

@@ -47,11 +47,23 @@ model User {
   role            UserRole       @default(AFFILIATE)
   totalEarnings   Float          @default(0)
   currentBalance  Float          @default(0)
+  
+  // Level-based referral tree fields
+  level           Int            @default(0)     // Referral level in the tree (0 = root/no referrer)
+  parentPath      String?                        // Materialized path for efficient queries (e.g., "0.5.23")
+  childCount      Int            @default(0)     // Direct children count for quick stats
+  descendantCount Int            @default(0)     // Total descendants (all levels below)
+  
+  // Commission tracking (for microservice integration)
+  lifetimeCommission Float       @default(0)    // Total commission earned from downline
+  pendingCommission  Float       @default(0)    // Commission pending processing
+  lastSaleAt         DateTime?                  // Track when last sale was made by downline
+  
   createdAt       DateTime       @default(now())
   updatedAt       DateTime       @updatedAt
 
   // Self-referential relations
-  referredBy      User?          @relation("ReferralTree", fields: [referredById], references: [id])
+  referredBy      User?          @relation("ReferralTree", fields: [referredById], references: [id], onDelete: SetNull)
   referrals       User[]         @relation("ReferralTree") // Direct children
 
   // Earnings history
@@ -61,8 +73,10 @@ model User {
   accounts        Account[]
   sessions        Session[]
 
-
-
+  @@index([referredById])
+  @@index([level])
+  @@index([parentPath])
+  @@index([referralCode])
   @@map("users")
 }
 
