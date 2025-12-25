@@ -138,7 +138,7 @@ export default async function DashboardPage() {
           )}
           </h1>
          <p className="text-sm font-bold text-green-500 rounded-2xl">
-            Level 1
+            {user.level !== undefined ? `Level ${user.level} Affiliate` : "Affiliate"}
          </p>
 
           
