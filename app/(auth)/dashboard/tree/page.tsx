@@ -215,7 +215,7 @@ export default async function TreePage() {
     const isMock = true;
 
     return (
-        <div className="flex flex-col gap-8 h-[calc(100vh-8rem)]">
+        <div className="flex flex-col gap-8 h-[calc(110vh-8rem)]">
             <div className="flex flex-col gap-2">
                 <h1 className="text-3xl font-bold tracking-tight">Referral Network</h1>
                 <p className="text-muted-foreground">

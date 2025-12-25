@@ -40,7 +40,7 @@ export default function LandingPage() {
           delay={0.2}
         >
           <WhyChooseSection />
-        </AnimatedSection>y
+        </AnimatedSection>
         <AnimatedSection id="features-section" className="relative z-10 max-w-[1320px] mx-auto mt-16" delay={0.2}>
           <BentoSection />
         </AnimatedSection>
