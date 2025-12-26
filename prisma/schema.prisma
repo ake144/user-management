@@ -1,9 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client"
   output   = "../app/generated/prisma"
@@ -13,6 +7,128 @@ datasource db {
   provider = "postgresql"
 }
 
+model User {
+  id                 String        @id @default(cuid())
+  firstName          String?
+  lastName           String?
+  email              String        @unique
+  password           String?
+  phone              String?
+  address            String?
+  referralCode       String?       @unique
+  referredById       String?
+  isActive           Boolean       @default(true)
+  role               UserRole      @default(AFFILIATE)
+  totalEarnings      Float         @default(0)
+  currentBalance     Float         @default(0)
+  createdAt          DateTime      @default(now())
+  updatedAt          DateTime      @updatedAt
+  city               String?       @default("Addis Ababa")
+  country            String?       @default("Ethiopia")
+  emailVerified      Boolean       @default(false)
+  image              String?
+  name               String
+  childCount         Int           @default(0)
+  descendantCount    Int           @default(0)
+  lastSaleAt         DateTime?
+  level              Int           @default(0)
+  lifetimeCommission Float         @default(0)
+  parentPath         String?
+  pendingCommission  Float         @default(0)
+  accounts           Account[]
+  sessions           Session[]
+  transactions       Transaction[]
+  withdrawals        Withdrawal[]
+  referredBy         User?         @relation("ReferralTree", fields: [referredById], references: [id])
+  referrals          User[]        @relation("ReferralTree")
+
+  @@index([referredById])
+  @@index([level])
+  @@index([parentPath])
+  @@index([referralCode])
+  @@map("users")
+}
+
+model Transaction {
+  id          String          @id @default(cuid())
+  userId      String
+  amount      Float
+  type        TransactionType
+  description String?
+  referenceId String?
+  createdAt   DateTime        @default(now())
+  user        User            @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("transactions")
+}
+
+model Account {
+  id                    String    @id @default(cuid())
+  userId                String
+  providerId            String
+  accountId             String
+  scope                 String?
+  password              String?
+  createdAt             DateTime  @default(now())
+  updatedAt             DateTime  @updatedAt
+  accessToken           String?
+  accessTokenExpiresAt  DateTime?
+  idToken               String?
+  refreshToken          String?
+  refreshTokenExpiresAt DateTime?
+  sessionState          String?
+  user                  User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("account")
+}
+
+model Session {
+  id        String   @id @default(cuid())
+  userId    String
+  expiresAt DateTime
+  token     String   @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  ipAddress String?
+  userAgent String?
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("session")
+}
+
+model Verification {
+  id         String    @id @default(cuid())
+  createdAt  DateTime? @default(now())
+  updatedAt  DateTime? @updatedAt
+  value      String
+  identifier String
+  expiresAt  DateTime
+
+  @@map("verification")
+}
+
+model Withdrawal {
+  id              String           @id @default(cuid())
+  userId          String
+  amount          Float
+  method          String
+  details         Json?
+  status          WithdrawalStatus @default(PENDING)
+  rejectionReason String?
+  referenceId     String?
+  createdAt       DateTime         @default(now())
+  processedAt     DateTime?
+  user            User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("withdrawals")
+}
+
+enum WithdrawalStatus {
+  PENDING
+  APPROVED
+  REJECTED
+  PROCESSED
+}
 
 enum UserRole {
   ADMIN
@@ -27,120 +143,3 @@ enum TransactionType {
   DEPOSIT
   ADJUSTMENT
 }
-
-model User {
-  id              String         @id @default(cuid())
-  name            String
-  firstName       String?
-  lastName        String?
-  email           String         @unique
-  emailVerified   Boolean        @default(false)
-  image           String?
-  password        String?         // Hashed via auth logic
-  phone           String?
-  address         String?
-  referralCode    String?         @unique // Auto-generated on signup
-  referredById    String?        // Self-referential for tree
-  country         String?        @default("Ethiopia")
-  city            String?        @default("Addis Ababa")
-  isActive        Boolean        @default(true) // For deactivating users/leaving program
-  role            UserRole       @default(AFFILIATE)
-  totalEarnings   Float          @default(0)
-  currentBalance  Float          @default(0)
-  
-  // Level-based referral tree fields
-  level           Int            @default(0)     // Referral level in the tree (0 = root/no referrer)
-  parentPath      String?                        // Materialized path for efficient queries (e.g., "0.5.23")
-  childCount      Int            @default(0)     // Direct children count for quick stats
-  descendantCount Int            @default(0)     // Total descendants (all levels below)
-  
-  // Commission tracking (for microservice integration)
-  lifetimeCommission Float       @default(0)    // Total commission earned from downline
-  pendingCommission  Float       @default(0)    // Commission pending processing
-  lastSaleAt         DateTime?                  // Track when last sale was made by downline
-  
-  createdAt       DateTime       @default(now())
-  updatedAt       DateTime       @updatedAt
-
-  // Self-referential relations
-  referredBy      User?          @relation("ReferralTree", fields: [referredById], references: [id], onDelete: SetNull)
-  referrals       User[]         @relation("ReferralTree") // Direct children
-
-  // Earnings history
-  transactions    Transaction[]
-
-  // NextAuth
-  accounts        Account[]
-  sessions        Session[]
-
-  @@index([referredById])
-  @@index([level])
-  @@index([parentPath])
-  @@index([referralCode])
-  @@map("users")
-}
-
-model Transaction {
-  id          String         @id @default(cuid())
-  userId      String
-  amount      Float
-  type        TransactionType
-  description String?
-  referenceId String?        // Link to sale/product
-  createdAt   DateTime       @default(now())
-
-  user        User           @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  @@map("transactions")
-}
-
-// NextAuth models
-model Account {
-  id                    String    @id @default(cuid())
-  userId                String
-  accountId             String
-  providerId            String
-  accessToken           String?   @db.Text
-  refreshToken          String?   @db.Text
-  accessTokenExpiresAt  DateTime?
-  refreshTokenExpiresAt DateTime?
-  scope                 String?
-  password              String?
-  createdAt             DateTime  @default(now())
-  updatedAt             DateTime  @updatedAt
-  idToken               String?   @db.Text
-  sessionState          String?
-
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  @@map("account")
-}
-
-model Session {
-  id           String   @id @default(cuid())
-  userId       String
-  expiresAt    DateTime
-  token        String      @unique
-  ipAddress    String?
-  userAgent    String?
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
-  
-  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  @@map("session")
-}
-
-
-model Verification {
-  id        String   @id @default(cuid())
-  createdAt DateTime? @default(now())
-  updatedAt DateTime? @updatedAt
-  value     String   
-  identifier String
-  expiresAt    DateTime
-
-
-  @@map("verification")
-}
-
