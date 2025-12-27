@@ -134,7 +134,7 @@ function SignupForm() {
         setErrors({})
 
         const newReferralCode = generateReferralCode(formData.name);
-        const finalReferrerId = formData.sponsorId || referrer?.id;
+        const finalReferrerId = referrer?.id || process.env.NEXT_PUBLIC_DEFAULT_REFERRER_ID || undefined;
 
         await signUp.email({
             email: formData.email,
@@ -230,20 +230,21 @@ function SignupForm() {
                                 {errors.name && <p className="text-sm text-destructive">{errors.name}</p>}
                             </div>
 
-                            <div className="space-y-2">
+                            {/* <div className="space-y-2">
                                 <Label htmlFor="sponsorId" className="text-foreground">Sponsor Id (optional)</Label>
                                 <div className="relative">
 
                                     <Input
                                         id="sponsorId"
                                         type="text"
+                                        disabled={!!referrer}
                                         placeholder=""
-                                        value={formData.sponsorId}
+                                        value={referrer ? referrer.id : formData.sponsorId}
                                         onChange={(e) => setFormData(prev => ({ ...prev, sponsorId: e.target.value }))}
                                         className={`pl-10 h-12 bg-background border-input focus:border-primary ${errors.sponsorId ? "border-destructive" : ""}`}
                                     />
                                 </div>
-                            </div>
+                            </div> */}
 
                             {/* Email Field */}
                             <div className="space-y-2">
