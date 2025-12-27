@@ -7,6 +7,7 @@ import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/co
 import { Menu } from "lucide-react"
 import Link from "next/link" // Import Link for client-side navigation
 import { HyperText } from "../ui/hyper-text"
+import { ShimmerButton } from "../ui/shimmer-button"
 
 export function Header() {
   const navItems = [
@@ -46,11 +47,13 @@ export function Header() {
         </div>
         <div className="flex items-center gap-4">
           <Link href="/auth/login"  rel="noopener noreferrer" className="hidden md:block">
-            <Button className="bg-secondary cursor-pointer text-secondary-foreground hover:bg-secondary/90 px-6 py-2 rounded-full font-medium shadow-sm">
-             <HyperText className="text-md">
+            <ShimmerButton>Try for Free</ShimmerButton>
+            {/* <Button className="bg-secondary cursor-pointer text-secondary-foreground hover:bg-secondary/90 px-6 py-2 rounded-full font-medium shadow-sm"> */}
+             {/* <HyperText className="text-md">
               Try for Free
-              </HyperText>  
-            </Button>
+              </HyperText>   */}
+              {/* Try for Free
+            </Button> */}
           </Link>
           <Sheet>
             <SheetTrigger asChild className="md:hidden">

@@ -218,19 +218,19 @@ export function HeroSection() {
         <div className="flex flex-col sm:flex-row gap-4 mt-8">
           <Button asChild className="bg-primary cursor-pointer text-primary-foreground hover:bg-primary/90 px-8 py-6 rounded-full font-semibold text-lg shadow-lg shadow-primary/25 transition-all hover:scale-105">
             <Link href="/auth/login">
-              <HyperText className="text-sm font-semibold" as="span">
+              {/* <HyperText className="text-sm font-semibold" as="span">
                    Start Earning Now
-              </HyperText>
-             
+              </HyperText> */}
+              Start Earning Now
               <ArrowRight className="ml-2 h-5 w-5" />
             </Link>
           </Button>
           <Button variant="outline" className="bg-background/50 cursor-pointer backdrop-blur-sm px-8 py-6 rounded-full font-semibold text-lg transition-all duration-300 hover:scale-105 hover:bg-background/80 hover:border-primary/50 hover:shadow-lg hover:shadow-primary/10 hover:text-primary">
-            <Link href="#whyus">
+            <a href="#whyus">
               {/* <HyperText className="text-md" as="span"> */}
                 Why Esperanza
               {/* </HyperText> */}
-            </Link>
+            </a>
           </Button>
         </div>
 
