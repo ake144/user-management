@@ -2,14 +2,6 @@
   "name": "Esperanza",
   "version": "0.1.0",
   "private": true,
-  "pnpm": {
-    "peerDependencyRules": {
-      "allowedVersions": {
-        "better-auth>prisma": "*",
-        "better-auth>@prisma/client": "*"
-      }
-    }
-  },
   "scripts": {
     "dev": "next dev",
     "build": "prisma generate && next build",
