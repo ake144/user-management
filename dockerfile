@@ -38,7 +38,9 @@ ENV NODE_ENV production
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
 
-COPY --from=builder /app/public ./public
+COPY --from=builder /app/public ./public 
+COPY --from=builder /app/node_modules ./node_modules
+
 
 # Set the correct permission for prerender cache
 RUN mkdir .next
@@ -50,7 +52,8 @@ COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 
 COPY --from=builder --chown=nextjs:nodejs /app/prisma ./prisma 
-
+USER root
+RUN npm ci --production
 USER nextjs
 
 EXPOSE 3000
