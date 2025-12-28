@@ -68,6 +68,7 @@ jobs:
           username: ${{ secrets.VPS_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
+            echo ${{ secrets.GHCR_TOKEN }} | docker login ghcr.io -u ake144 --password-stdin
             cd /app
             docker compose pull
             docker compose up -d
