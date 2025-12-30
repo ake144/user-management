@@ -67,6 +67,9 @@ export const auth = betterAuth({
     'http://localhost:3000', 
     'http://localhost:3000/api',
     'https://user-management-nine-sooty.vercel.app',
+    "https://esperanza.et",
+    "www.esperanza.et",
+    "https://esperanza.et/api",
     process.env.NEXT_PUBLIC_APP_URL || ""
   ].filter(Boolean),
 })

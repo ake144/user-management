@@ -61,7 +61,7 @@ export default async function ModulePage({ params }: { params: Promise<{ id: str
 
     // const referralLink = `http://localhost:3000/${id}?ref=${(session.user as any).referralCode ?? session.user.id}`;
 
-    const referralLink = `${process.env.NEXT_PUBLIC_BASE_URL}?ref=${(session.user as any).referralCode ?? session.user.id}`;
+    const referralLink = `${process.env.NEXT_PUBLIC_BASE_URL || "https://esperanza.et"}/${id}?ref=${(session.user as any).referralCode ?? session.user.id}`;
     const Icon = moduleData.icon;
 
     return (
