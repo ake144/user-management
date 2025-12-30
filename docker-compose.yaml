@@ -4,22 +4,22 @@ services:
   web:
     image: ghcr.io/ake144/user-management:latest
     container_name: nextjs_app
-    environment:
-      - DATABASE_URL=postgresql://myuser:your_secure_password@db:5432/myapp
-      - NODE_ENV=production
-      - BETTER_AUTH_URL=https://esperanza.et
-      - BETTER_AUTH_SECRET=b505e0a8e275264a722ade888635fe876c65598e1260180cd5c3afe23898b287
-      - NEXT_PUBLIC_APP_URL=https://esperanza.et
-      - NEXTAUTH_URL=https://esperanza.et
-      - NEXT_PUBLIC_BASE_URL=https://esperanza.et
+    # environment:
+    #   - DATABASE_URL=postgresql://myuser:your_secure_password@db:5432/myapp
+    #   - NODE_ENV=production
+    #   - BETTER_AUTH_URL=https://esperanza.et
+    #   - BETTER_AUTH_SECRET=b505e0a8e275264a722ade888635fe876c65598e1260180cd5c3afe23898b287
+    #   - NEXT_PUBLIC_APP_URL=https://esperanza.et
+    #   - NEXTAUTH_URL=https://esperanza.et
+    #   - NEXT_PUBLIC_BASE_URL=https://esperanza.et
 
-      - WEBHOOK_SECRET=
-      - ROOT_USER_ID=
-      - NEXT_PUBLIC_DEFAULT_REFERRER_ID=
+    #   - WEBHOOK_SECRET=
+    #   - ROOT_USER_ID=
+    #   - NEXT_PUBLIC_DEFAULT_REFERRER_ID=
 
 
-    # env_file:
-    #   - .env
+    env_file:
+      - .env
     depends_on:
       - db
     ports:
