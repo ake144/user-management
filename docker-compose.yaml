@@ -4,8 +4,8 @@ services:
   web:
     image: ghcr.io/ake144/user-management:latest
     container_name: nextjs_app
-    # environment:
-    #   - DATABASE_URL=postgresql://myuser:your_secure_password@db:5432/myapp
+    environment:
+      - DATABASE_URL=postgresql://myuser:your_secure_password@db:5432/myapp
     #   - NODE_ENV=production
     #   - BETTER_AUTH_URL=https://esperanza.et
     #   - BETTER_AUTH_SECRET=b505e0a8e275264a722ade888635fe876c65598e1260180cd5c3afe23898b287
