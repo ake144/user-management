@@ -43,6 +43,9 @@ COPY --from=builder /app/node_modules ./node_modules
 
 COPY --from=builder /app/package.json ./package.json
 
+# NEW: Copy Prisma config (at root) for CLI commands in prod
+COPY --from=builder --chown=nextjs:nodejs /app/prisma.config.ts ./
+
 # Set the correct permission for prerender cache
 RUN mkdir .next
 RUN chown nextjs:nodejs .next
