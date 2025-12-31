@@ -11,71 +11,65 @@ export function FooterSection() {
           <div className="text-center text-foreground text-xl font-semibold leading-4">Esperanza</div>
         </div>
         <p className="text-foreground/90 text-sm font-medium leading-[18px] text-left">Scale Your Influence. Multiply Opportunities. Build Success.</p>
-        <div className="flex justify-start items-start gap-3">
-          <a href="#" aria-label="Twitter" className="w-4 h-4 flex items-center justify-center">
-            <Twitter className="w-full h-full text-muted-foreground" />
+        <div className="flex justify-start items-start gap-4">
+          <a href="https://twitter.com/Esperanza" target="_blank" rel="noopener noreferrer" aria-label="Twitter" className="flex items-center justify-center transition-colors hover:text-primary">
+            <Twitter className="w-5 h-5 text-muted-foreground hover:text-primary transition-colors" />
           </a>
-          <a href="#" aria-label="GitHub" className="w-4 h-4 flex items-center justify-center">
-            <Github className="w-full h-full text-muted-foreground" />
+          <a href="https://github.com/Esperanza" target="_blank" rel="noopener noreferrer" aria-label="GitHub" className="flex items-center justify-center transition-colors hover:text-primary">
+            <Github className="w-5 h-5 text-muted-foreground hover:text-primary transition-colors" />
           </a>
-          <a href="#" aria-label="LinkedIn" className="w-4 h-4 flex items-center justify-center">
-            <Linkedin className="w-full h-full text-muted-foreground" />
+          <a href="https://linkedin.com/company/Esperanza" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="flex items-center justify-center transition-colors hover:text-primary">
+            <Linkedin className="w-5 h-5 text-muted-foreground hover:text-primary transition-colors" />
           </a>
         </div>
       </div>
       {/* Right Section: Product, Company, Resources */}
       <div className="grid grid-cols-2 md:grid-cols-3 gap-8 md:gap-12 p-4 md:p-8 w-full md:w-auto">
         <div className="flex flex-col justify-start items-start gap-3">
-          <h3 className="font-bold text-sm  leading-5  text-primary">Information</h3>
+          <h3 className="font-bold text-sm leading-5 text-primary">Company</h3>
           <div className="flex flex-col justify-end items-start gap-2">
-            <a href="#" className="text-foreground text-sm font-normal leading-5 hover:underline">
-              Support us
-            </a>
-            <a href="#" className="text-foreground text-sm font-normal leading-5 hover:underline">
-              Terms & Conditions
-            </a>
-            <a href="#" className="text-foreground text-sm font-normal leading-5 hover:underline">
+            <a href="/about" className="text-muted-foreground text-sm font-normal leading-5 hover:text-foreground transition-colors">
               About us
             </a>
-            <a href="#" className="text-foreground text-sm font-normal leading-5 hover:underline">
+            <a href="/terms" className="text-muted-foreground text-sm font-normal leading-5 hover:text-foreground transition-colors">
+              Terms & Conditions
+            </a>
+            <a href="/privacy" className="text-muted-foreground text-sm font-normal leading-5 hover:text-foreground transition-colors">
               Privacy Policy
             </a>
-            {/* <a href="#" className="text-foreground text-sm font-normal leading-5 hover:underline">
-              Multi-Agent Coding
-            </a> */}
+            <a href="/support" className="text-muted-foreground text-sm font-normal leading-5 hover:text-foreground transition-colors">
+              Support us
+            </a>
           </div>
         </div>
         <div className="flex flex-col justify-start items-start gap-3">
-          <h3 className="font-bold text-sm  leading-5  text-primary">Use Cases</h3>
+          <h3 className="font-bold text-sm leading-5 text-primary">Use Cases</h3>
           <div className="flex flex-col justify-center items-start gap-2">
-            <a href="#" className="text-foreground text-sm font-normal leading-5 hover:underline">
+            <a href="/use-cases/ecommerce" className="text-muted-foreground text-sm font-normal leading-5 hover:text-foreground transition-colors">
              Drive E-commerce Sales
             </a>
-            <a href="#" className="text-foreground text-sm font-normal leading-5 hover:underline">
+            <a href="/use-cases/affiliate" className="text-muted-foreground text-sm font-normal leading-5 hover:text-foreground transition-colors">
               Run Affiliate Programs
             </a>
-            <a href="#" className="text-foreground text-sm font-normal leading-5 hover:underline">
+            <a href="/use-cases/ai" className="text-muted-foreground text-sm font-normal leading-5 hover:text-foreground transition-colors">
               Automate Campaigns with AI
             </a>
           </div>
         </div>
         <div className="flex flex-col justify-start items-start gap-3">
-          <h3 className="font-bold text-sm  leading-5  text-primary">Resources</h3>
+          <h3 className="font-bold text-sm leading-5 text-primary">Resources</h3>
           <div className="flex flex-col justify-center items-start gap-2">
-            <a href="#" className="text-foreground text-sm font-normal leading-5 hover:underline">
-              API Reference
-            </a>
-            <a href="#" className="text-foreground text-sm font-normal leading-5 hover:underline">
+            <a href="/docs" className="text-muted-foreground text-sm font-normal leading-5 hover:text-foreground transition-colors">
               Documentation
             </a>
-            <a href="#" className="text-foreground text-sm font-normal leading-5 hover:underline">
+            <a href="/api" className="text-muted-foreground text-sm font-normal leading-5 hover:text-foreground transition-colors">
+              API Reference
+            </a>
+            <a href="/community" className="text-muted-foreground text-sm font-normal leading-5 hover:text-foreground transition-colors">
               Community
             </a>
-            <a href="/faq" className="text-foreground text-sm font-normal leading-5 hover:underline">
+            <a href="/faq" className="text-muted-foreground text-sm font-normal leading-5 hover:text-foreground transition-colors">
               FAQ
-            </a>
-            <a href="#" className="text-foreground text-sm font-normal leading-5 hover:underline">
-              Support
             </a>
           </div>
         </div>
