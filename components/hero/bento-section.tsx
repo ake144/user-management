@@ -18,7 +18,10 @@ type BentoCardProps = {
 }
 
 const BentoCard: FC<BentoCardProps> = ({ title, description, icon: Icon, className, component: Component }) => (
-  <CardContainer className={`overflow-hidden inter-var rounded-2xl border border-white/20 flex flex-col justify-start items-start relative ${className}`}>
+  <CardContainer 
+    containerClassName="py-1 md:py-4 w-full h-full"
+    className={`overflow-hidden inter-var rounded-2xl border border-white/20 flex flex-col justify-start items-start relative ${className}`}
+  >
     
 
   <div >
@@ -125,7 +128,7 @@ export function BentoSection() {
             </p>
           </div>
         </div>
-        <div className="self-stretch grid grid-cols-1 md:grid-cols-3 gap-6 z-10 max-w-[1200px] mx-auto">
+        <div className="self-stretch grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-6 z-10 max-w-[1200px] mx-auto">
           {cards.map((card) => (
             <BentoCard key={card.title} {...card} />
           ))}

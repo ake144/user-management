@@ -225,13 +225,12 @@ export function HeroSection() {
               <ArrowRight className="ml-2 h-5 w-5" />
             </Link>
           </Button>
-          <Button variant="outline" className="bg-background/50 cursor-pointer backdrop-blur-sm px-8 py-6 rounded-full font-semibold text-lg transition-all duration-300 hover:scale-105 hover:bg-background/80 hover:border-primary/50 hover:shadow-lg hover:shadow-primary/10 hover:text-primary">
+          {/* <Button variant="outline" className="bg-background/50 cursor-pointer backdrop-blur-sm px-8 py-6 rounded-full font-semibold text-lg transition-all duration-300 hover:scale-105 hover:bg-background/80 hover:border-primary/50 hover:shadow-lg hover:shadow-primary/10 hover:text-primary">
             <a href="#whyus">
-              {/* <HyperText className="text-md" as="span"> */}
-                Why Esperanza
-              {/* </HyperText> */}
+                            Why Esperanza
+            
             </a>
-          </Button>
+          </Button> */}
         </div>
 
         {/* Visual Element: Referral Tree embedded */}

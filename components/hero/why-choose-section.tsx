@@ -7,7 +7,7 @@ export function WhyChooseSection() {
     return (
         <section id="whyus" className="w-full py-24 bg-background text-white relative overflow-hidden">
             <Spotlight
-                className="-top-40 left-0 md:left-60 md:-top-20"
+                className="-top-30 left-0 md:left-60 md:-top-20"
                 fill=""
             />
             
@@ -16,14 +16,18 @@ export function WhyChooseSection() {
                 <h2 className="text-4xl md:text-6xl font-bold mb-6 tracking-tight bg-clip-text text-transparent bg-linear-to-b from-neutral-50 to-neutral-400">
                     Global Scale, Local Roots.
                 </h2>
-                <p className="text-neutral-400 text-lg md:text-xl max-w-3xl mb-20">
+                <p className="text-neutral-400 text-lg md:text-xl max-w-3xl sm:mb-4 md:mb-14 lg:mb-20">
                     We bridge the gap between African potential and the global digital economy. 
                     One Platform provides the infrastructure, you bring the ambition.
                 </p>
 
                 {/* Central Visual - Map */}
-                <div className="relative w-full mb-24 perspective-1000">
+                <div className="relative w-full sm:mb-15 md:mb-24 perspective-1000">
                     <div className="absolute inset-0 bg-linear-to-t from-background to-transparent z-10 bottom-0 h-20" />
+                      <Spotlight
+                  className="-top-5 left-20 md:left-90 md:-top-5"
+                  fill=""
+                       />
                     <MapComponenet />
                 </div>
 
@@ -55,7 +59,7 @@ export function WhyChooseSection() {
 
 function FeatureCard({ icon, title, description }: { icon: React.ReactNode, title: string, description: string }) {
     return (
-        <div className="flex flex-col items-start text-left p-8 rounded-2xl border border-white/10 bg-white/5 hover:bg-white/10 transition-colors duration-300 backdrop-blur-sm">
+        <div className="flex flex-col items-start text-left p-4 md:p-8 rounded-2xl border border-white/10 bg-white/5 hover:bg-white/10 transition-colors duration-300 backdrop-blur-sm">
             <div className="mb-4 p-3 rounded-xl bg-white/5 w-fit">
                 {icon}
             </div>

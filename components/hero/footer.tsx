@@ -71,7 +71,7 @@ export function FooterSection() {
             <a href="#" className="text-foreground text-sm font-normal leading-5 hover:underline">
               Community
             </a>
-            <a href="#" className="text-foreground text-sm font-normal leading-5 hover:underline">
+            <a href="/faq" className="text-foreground text-sm font-normal leading-5 hover:underline">
               FAQ
             </a>
             <a href="#" className="text-foreground text-sm font-normal leading-5 hover:underline">

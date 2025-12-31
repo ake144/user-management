@@ -21,9 +21,9 @@ const StatCard = ({ value, label }: StatCardProps) => (
 
 export function StatsSection() {
     const stats = [
-        { value: "10K+", label: "Active Users" },
-        { value: "50+", label: "Countries" },
-        { value: "1M+", label: "Transactions" },
+        { value: "3+", label: "Active Users" },
+        { value: "1+", label: "Countries" },
+        { value: "7+", label: "Companies" },
         { value: "99.9%", label: "Uptime" },
     ]
 

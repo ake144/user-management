@@ -3,8 +3,6 @@
 import type React from "react"
 
 import { Button } from "@/components/ui/button"
-import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet"
-import { Menu } from "lucide-react"
 import Link from "next/link" // Import Link for client-side navigation
 import { HyperText } from "../ui/hyper-text"
 import { ShimmerButton } from "../ui/shimmer-button"
@@ -46,47 +44,9 @@ export function Header() {
           </nav>
         </div>
         <div className="flex items-center gap-4">
-          <Link href="/auth/login"  rel="noopener noreferrer" className="hidden md:block">
-            <ShimmerButton>Try for Free</ShimmerButton>
-            {/* <Button className="bg-secondary cursor-pointer text-secondary-foreground hover:bg-secondary/90 px-6 py-2 rounded-full font-medium shadow-sm"> */}
-             {/* <HyperText className="text-md">
-              Try for Free
-              </HyperText>   */}
-              {/* Try for Free
-            </Button> */}
+          <Link href="/auth/login" rel="noopener noreferrer">
+            <ShimmerButton className="h-9 px-4 md:h-10 md:px-6 text-sm md:text-base">Try for Free</ShimmerButton>
           </Link>
-          <Sheet>
-            <SheetTrigger asChild className="md:hidden">
-              <Button variant="ghost" size="icon" className="text-foreground">
-                <Menu className="h-7 w-7" />
-                <span className="sr-only">Toggle navigation menu</span>
-              </Button>
-            </SheetTrigger>
-            <SheetContent side="bottom" className="bg-background border-t border-border text-foreground">
-              <SheetHeader>
-                <SheetTitle className="text-left text-xl font-semibold text-foreground">Navigation</SheetTitle>
-              </SheetHeader>
-              <nav className="flex flex-col gap-4 mt-6">
-                {navItems.map((item) => (
-                  <Link
-                    key={item.name}
-                    href={item.href}
-                    onClick={(e) => handleScroll(e, item.href)} // Add onClick handler
-                    className="text-[#888888] hover:text-foreground justify-start text-lg py-2"
-                  >
-                    {item.name}
-                  </Link>
-                ))}
-                <Link href="/auth/login" rel="noopener noreferrer" className="w-full mt-4">
-                  <Button className="bg-secondary cursor-pointer text-secondary-foreground hover:bg-secondary/90 px-6 py-2 rounded-full font-medium shadow-sm">
-                    <HyperText className="text-md">
-                      Try for Free
-                    </HyperText>
-                  </Button>
-                </Link>
-              </nav>
-            </SheetContent>
-          </Sheet>
         </div>
       </div>
     </header>
