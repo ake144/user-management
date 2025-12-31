@@ -35,7 +35,7 @@ async function getUserData(userId: string) {
     },
   });
   if (user && !user.referralCode) {
-    // Generate missing referral code
+
     const cleanName = (user.name || "user").toLowerCase().replace(/[^a-z0-9]/g, '');
     const randomStr = Math.random().toString(36).substring(2, 7);
     const newCode = `${cleanName}-${randomStr}`;
@@ -64,7 +64,6 @@ export default async function DashboardPage() {
     return <div>User not found</div>;
   }
 
-  // Mock data for fallback
   const isDemoMode = user.transactions.length === 0;
   const mockTransactions = [
     { amount: 120.50, createdAt: new Date(Date.now() - 6 * 24 * 60 * 60 * 1000) },
