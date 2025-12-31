@@ -80,12 +80,12 @@ export default async function DashboardPage() {
   const displayTotalEarned = isDemoMode ? 2450.00 : user.totalEarnings;
   const displayTransactions = isDemoMode ? mockTransactions : user.transactions;
 
-  // Calculate active modules
+
   const activeModulesMap = new Map<string, number>();
   
   if (isDemoMode) {
-    // Mock active modules for demo
-    activeModulesMap.set("e-learning", 1250.00);
+
+    activeModulesMap.set("e-learning", 1000.00);
     activeModulesMap.set("e-commerce", 850.00);
     activeModulesMap.set("video-generator", 350.00);
   } else {
