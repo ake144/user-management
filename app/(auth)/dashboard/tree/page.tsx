@@ -126,19 +126,21 @@ export default async function TreePage() {
     let hasError = false;
 
     try {
-        // MOCK DATA MODE
-        // const rawTree = await getDownlineTree(session.user.id, MAX_TREE_DEPTH, false);
-        const rawTree = getMockTreeData(session.user.id);
+        // REAL DATA MODE
+        const rawTree = await getDownlineTree(session.user.id, MAX_TREE_DEPTH, false);
+        // MOCK DATA MODE (Commented out)
+        // const rawTree = getMockTreeData(session.user.id);
+        
         treeData = transformToNestedTree(rawTree);
 
         // Get tree statistics
-        // stats = await getTreeStats(session.user.id);
-        stats = {
-            totalDescendants: 69,
-            activeDescendants: 55,
-            totalLevels: 8,
-            directReferrals: 6
-        };
+        stats = await getTreeStats(session.user.id);
+        // stats = {
+        //     totalDescendants: 69,
+        //     activeDescendants: 55,
+        //     totalLevels: 8,
+        //     directReferrals: 6
+        // };
     } catch (error) {
         console.error("Error fetching referral tree:", error);
         hasError = true;

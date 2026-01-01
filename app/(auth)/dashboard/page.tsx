@@ -16,6 +16,8 @@ import { MODULES } from "@/lib/modules";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
+import { getTreeStats } from "@/lib/services/referral-service";
+
 async function getUserData(userId: string) {
   const user = await prisma.user.findUnique({
     where: { id: userId },
@@ -59,11 +61,20 @@ export default async function DashboardPage() {
   }
 
   const user = await getUserData(session.user.id);
+  const treeStats = await getTreeStats(session.user.id);
 
   if (!user) {
     return <div>User not found</div>;
   }
 
+  // REAL DATA MODE
+  const displayBalance = user.currentBalance;
+  const displayReferrals = treeStats.directReferrals; // Use tree stats for accurate count
+  const displayTotalEarned = user.totalEarnings;
+  const displayTransactions = user.transactions;
+
+  // MOCK DATA MODE (Commented out)
+  /*
   const isDemoMode = user.transactions.length === 0;
   const mockTransactions = [
     { amount: 120.50, createdAt: new Date(Date.now() - 6 * 24 * 60 * 60 * 1000) },
@@ -79,24 +90,28 @@ export default async function DashboardPage() {
   const displayReferrals = isDemoMode ? 12 : user._count.referrals;
   const displayTotalEarned = isDemoMode ? 2450.00 : user.totalEarnings;
   const displayTransactions = isDemoMode ? mockTransactions : user.transactions;
+  */
 
 
   const activeModulesMap = new Map<string, number>();
   
-  if (isDemoMode) {
+  // REAL DATA PROCESSING
+  user.transactions.forEach(t => {
+    // Assuming referenceId stores the module key for commission transactions
+    if (t.amount > 0 && t.referenceId && MODULES[t.referenceId]) {
+      const current = activeModulesMap.get(t.referenceId) || 0;
+      activeModulesMap.set(t.referenceId, current + t.amount);
+    }
+  });
 
+  // MOCK DATA PROCESSING (Commented out)
+  /*
+  if (isDemoMode) {
     activeModulesMap.set("e-learning", 1000.00);
     activeModulesMap.set("e-commerce", 850.00);
     activeModulesMap.set("video-generator", 350.00);
-  } else {
-    user.transactions.forEach(t => {
-      // Assuming referenceId stores the module key for commission transactions
-      if (t.amount > 0 && t.referenceId && MODULES[t.referenceId]) {
-        const current = activeModulesMap.get(t.referenceId) || 0;
-        activeModulesMap.set(t.referenceId, current + t.amount);
-      }
-    });
   }
+  */
 
   const activeModules = Array.from(activeModulesMap.entries())
     .map(([id, amount]) => ({
@@ -115,12 +130,28 @@ export default async function DashboardPage() {
   };
 
   // Prepare chart data (reverse to show chronological order)
-  const chartData = displayTransactions
-    .map(t => ({
-      date: t.createdAt.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }),
-      amount: t.amount,
-    }))
-    .reverse();
+  // Group by date for cleaner chart
+  const chartDataMap = new Map<string, number>();
+  
+  // Initialize last 7 days with 0
+  for (let i = 6; i >= 0; i--) {
+    const d = new Date();
+    d.setDate(d.getDate() - i);
+    const dateStr = d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+    chartDataMap.set(dateStr, 0);
+  }
+
+  displayTransactions.forEach(t => {
+    const dateStr = t.createdAt.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+    if (chartDataMap.has(dateStr)) {
+      chartDataMap.set(dateStr, (chartDataMap.get(dateStr) || 0) + t.amount);
+    }
+  });
+
+  const chartData = Array.from(chartDataMap.entries()).map(([date, amount]) => ({
+    date,
+    amount
+  }));
 
   return (
     <div className="flex flex-col gap-8">
@@ -128,21 +159,10 @@ export default async function DashboardPage() {
       <div className="flex flex-col gap-2">
         <div className="flex items-center gap-3">
           <div className="flex justify-between w-full">
-          <h1 className="text-3xl font-bold tracking-tight">Dashboard
-
-             {isDemoMode && (
-            <span className="px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider bg-primary/10 text-primary border border-primary/20 rounded-full">
-              Demo Mode
-            </span>
-          )}
-          </h1>
+          <h1 className="text-3xl font-bold tracking-tight">Dashboard</h1>
          <p className="text-sm font-bold text-green-500 rounded-2xl">
             {user.level !== undefined ? `Level ${user.level} Affiliate` : "Affiliate"}
          </p>
-
-          
-        
-           
           </div>
         </div>
         <p className="text-muted-foreground">
@@ -193,7 +213,7 @@ export default async function DashboardPage() {
           <div className="p-6 flex flex-col gap-1 border-b">
             <h3 className="font-semibold leading-none tracking-tight">Earnings Overview</h3>
             <p className="text-sm text-muted-foreground">
-              {isDemoMode ? "Sample commission activity" : "Recent commission activity"}
+              Recent commission activity (Last 7 Days)
             </p>
           </div>
           <div className="p-6 pt-4 pl-0">
