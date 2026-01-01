@@ -5,7 +5,7 @@ services:
     image: ghcr.io/ake144/user-management:latest
     container_name: nextjs_app
     environment:
-      - DATABASE_URL=postgresql://myuser:your_secure_password@postgres_db:5432/myapp
+      - DATABASE_URL=postgresql://myuser:your_secure_password@localhost:5433/myapp
    
 
     env_file:
@@ -20,7 +20,7 @@ services:
     image: postgres:16
     container_name: postgres_db
     ports:
-      - "0.0.0.0:5432:5432"
+      - "0.0.0.0:5433:5432"
     environment:
       POSTGRES_DB: ${POSTGRES_DB:-myapp}
       POSTGRES_USER: ${POSTGRES_USER:-myuser}
