@@ -234,7 +234,7 @@ export function HeroSection() {
         </div>
 
         {/* Visual Element: Referral Tree embedded */}
-        <div className="mt-16 w-full max-w-6xl relative">
+        {/* <div className="mt-16 w-full max-w-6xl relative">
           <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent z-20 h-full w-full pointer-events-none" />
           <div className="relative bg-card/30 backdrop-blur-sm border rounded-3xl overflow-hidden shadow-2xl p-8 transform perspective-1000 rotate-x-12 scale-95 opacity-90 hover:opacity-100 hover:scale-100 transition-all duration-700">
             <div className="absolute top-4 left-6 flex gap-2">
@@ -252,10 +252,10 @@ export function HeroSection() {
               />
             
           
-              {/* <ReferralTree /> */}
+              <ReferralTree /> 
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
     </section>
    </>

@@ -44,9 +44,14 @@ const markers = [
 
 export function MapComponenet() {
   return (
-    <div className="relative h-[500px] w-full overflow-hidden ">
-      <div className="to-background absolute inset-0 bg-radial from-transparent to-70%" />
-      <DottedMap markers={markers} />
+    <div className="relative h-[500px] w-full overflow-hidden">
+      <DottedMap 
+        markers={markers} 
+        className="text-foreground/30 opacity-100"
+        markerColor="var(--primary)"
+        mapSamples={20000}
+        dotRadius={0.22}
+      />
     </div>
   )
 }
