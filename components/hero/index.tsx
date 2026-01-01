@@ -38,13 +38,13 @@ export default function LandingPage() {
         >
           <WhyChooseSection />
         </AnimatedSection>
-        <AnimatedSection id="features-section" className="relative z-10 max-w-[1320px] mx-auto mt-16" delay={0.2}>
+        <AnimatedSection id="features-section" className="relative z-10 max-w-[1320px] mx-auto mt-1" delay={0.2}>
           <BentoSection />
         </AnimatedSection>
         
         <AnimatedSection
           id="testimonials-section"
-          className="relative z-10 max-w-[1320px] mx-auto mt-8 md:mt-16"
+          className="relative z-10 max-w-[1320px] mx-auto mt-1"
           delay={0.2}
         >
           <TestimonialGridSection />
@@ -52,10 +52,10 @@ export default function LandingPage() {
         {/* <AnimatedSection id="faq-section" className="relative z-10 max-w-[1320px] mx-auto mt-8 md:mt-16" delay={0.2}>
           <FAQSection />
         </AnimatedSection> */}
-        <AnimatedSection className="relative z-10 max-w-[1320px] mx-auto mt-8 md:mt-16" delay={0.2}>
+        <AnimatedSection className="relative z-10 max-w-[1320px] mx-auto mt-4 md:mt-7" delay={0.2}>
           <CTASection />
         </AnimatedSection>
-        <AnimatedSection className="relative z-10 max-w-[1320px] mx-auto mt-8 md:mt-16" delay={0.2}>
+        <AnimatedSection className="relative z-10 max-w-[1320px] mx-auto mt-1 md:mt-2" delay={0.2}>
           <FooterSection />
         </AnimatedSection>
       </div>

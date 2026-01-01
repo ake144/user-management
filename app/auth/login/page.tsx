@@ -8,7 +8,7 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Card, CardContent, CardHeader } from "@/components/ui/card"
 import { BookOpen, Mail, Lock, Eye, EyeOff, ArrowRight } from "lucide-react"
-import { signIn } from "@/lib/auth-client"
+import { signIn,useSession } from "@/lib/auth-client"
 
 export default function LoginPage() {
     const router = useRouter()
@@ -60,6 +60,7 @@ export default function LoginPage() {
             }
         })
     }
+
 
     return (
         <div className="min-h-screen bg-background flex items-center justify-center p-4">

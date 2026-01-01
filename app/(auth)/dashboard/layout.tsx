@@ -148,7 +148,7 @@ export default function DashboardLayout({
                     isSidebarOpen ? "translate-x-0" : "-translate-x-full"
                 )}
             >
-                <div className="flex h-16 items-center justify-between px-6 border-b">
+                <div className="flex h-16 sticky top-0 z-50 items-center justify-between px-6 border-b">
                     <Link href='/'>
                    
                     <span className="text-xl font-bold tracking-tight">Esperanza</span>
@@ -162,7 +162,7 @@ export default function DashboardLayout({
                     </button>
                 </div>
 
-                <div className="flex flex-col h-[calc(100vh-4rem)] justify-between p-4">
+                <div className="flex sticky top-16 flex-col h-[calc(100vh-4rem)] justify-between p-4">
                     <nav className="space-y-8">
                         {navItems.map((group) => (
                             <div key={group.title}>
