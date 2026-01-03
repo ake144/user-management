@@ -144,58 +144,59 @@ export default function DashboardLayout({
             {/* Sidebar */}
             <aside
                 className={cn(
-                    "fixed inset-y-0 left-0 z-50 w-64 transform border-r bg-card transition-transform duration-200 ease-in-out lg:static lg:translate-x-0",
+                    "fixed inset-y-0 left-0 z-50 w-64 transform border-r bg-card transition-transform duration-200 ease-in-out lg:sticky lg:top-0 lg:h-screen lg:translate-x-0",
                     isSidebarOpen ? "translate-x-0" : "-translate-x-full"
                 )}
             >
-                <div className="flex h-16 sticky top-0 z-50 items-center justify-between px-6 border-b">
-                    <Link href='/'>
-                   
-                    <span className="text-xl font-bold tracking-tight">Esperanza</span>
-                     </Link>
-                     
-                    <button
-                        onClick={() => setIsSidebarOpen(false)}
-                        className="lg:hidden"
-                    >
-                        <X className="h-6 w-6" />
-                    </button>
-                </div>
+                <div className="flex h-full flex-col">
+                    <div className="flex h-16 shrink-0 items-center justify-between px-6 border-b">
+                        <Link href='/'>
+                            <span className="text-xl font-bold tracking-tight">Esperanza</span>
+                        </Link>
+                        
+                        <button
+                            onClick={() => setIsSidebarOpen(false)}
+                            className="lg:hidden"
+                        >
+                            <X className="h-6 w-6" />
+                        </button>
+                    </div>
 
-                <div className="flex sticky top-16 flex-col h-[calc(100vh-4rem)] justify-between p-4">
-                    <nav className="space-y-8">
-                        {navItems.map((group) => (
-                            <div key={group.title}>
-                                <h3 className="mb-2 px-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-                                    {group.title}
-                                </h3>
-                                <div className="space-y-1">
-                                    {group.items.map((item) => {
-                                        const isActive = pathname === item.href;
-                                        return (
-                                            <Link
-                                                key={item.href}
-                                                href={item.href}
-                                                onClick={() => setIsSidebarOpen(false)}
-                                                className={cn(
-                                                    "flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition-colors",
-                                                    isActive
-                                                        ? "bg-primary text-primary-foreground"
-                                                        : "text-muted-foreground hover:bg-accent hover:text-accent-foreground"
-                                                )}
-                                            >
-                                                <item.icon className="h-4 w-4" />
-                                                {item.title}
-                                                {isActive && <ChevronRight className="ml-auto h-4 w-4 opacity-50" />}
-                                            </Link>
-                                        );
-                                    })}
+                    <div className="flex-1 overflow-y-auto p-4">
+                        <nav className="space-y-8">
+                            {navItems.map((group) => (
+                                <div key={group.title}>
+                                    <h3 className="mb-2 px-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+                                        {group.title}
+                                    </h3>
+                                    <div className="space-y-1">
+                                        {group.items.map((item) => {
+                                            const isActive = pathname === item.href;
+                                            return (
+                                                <Link
+                                                    key={item.href}
+                                                    href={item.href}
+                                                    onClick={() => setIsSidebarOpen(false)}
+                                                    className={cn(
+                                                        "flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition-colors",
+                                                        isActive
+                                                            ? "bg-primary text-primary-foreground"
+                                                            : "text-muted-foreground hover:bg-accent hover:text-accent-foreground"
+                                                    )}
+                                                >
+                                                    <item.icon className="h-4 w-4" />
+                                                    {item.title}
+                                                    {isActive && <ChevronRight className="ml-auto h-4 w-4 opacity-50" />}
+                                                </Link>
+                                            );
+                                        })}
+                                    </div>
                                 </div>
-                            </div>
-                        ))}
-                    </nav>
+                            ))}
+                        </nav>
+                    </div>
 
-                    <div className="border-t p-2">
+                    <div className="border-t p-2 shrink-0">
                         <DropdownMenu>
                             <DropdownMenuTrigger asChild>
                                 <Button variant="ghost" className="w-full justify-start px-2 h-auto py-2 hover:bg-accent hover:text-accent-foreground">
