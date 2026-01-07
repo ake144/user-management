@@ -28,6 +28,16 @@ export const UserRole = {
 export type UserRole = (typeof UserRole)[keyof typeof UserRole]
 
 
+export const MemberStatus = {
+  UNVERIFIED: 'UNVERIFIED',
+  BASIC: 'BASIC',
+  GOLD: 'GOLD',
+  PREMIUM: 'PREMIUM'
+} as const
+
+export type MemberStatus = (typeof MemberStatus)[keyof typeof MemberStatus]
+
+
 export const TransactionType = {
   REFERRAL_COMMISSION: 'REFERRAL_COMMISSION',
   DOWNLINE_EARNING: 'DOWNLINE_EARNING',

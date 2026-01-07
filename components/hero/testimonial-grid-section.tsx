@@ -43,7 +43,7 @@ const testimonials: Testimonial[] = [
   },
   {
     quote:
-      "From zero to $10K monthly passive income! Esperanza's multi-tier rewards system is the real deal for serious affiliate marketers.",
+      "From zero to $10K monthly income! Esperanza's Transparent Referral Rewards system is the real deal for serious affiliate marketers.",
     name: "David Okonkwo",
     company: "Affiliate Pro",
     icon: "trending-up",

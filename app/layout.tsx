@@ -16,19 +16,19 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: "Esperanza - Turn Your Network Into Passive Income",
+    default: "Esperanza - Turn Your Network Into income",
     template: "%s | Esperanza"
   },
-  description: "Join the Esperanza Affiliate Program and earn lifetime commissions. Multi-tier rewards, instant payouts, and powerful tools to grow your network.",
-  keywords: ["affiliate program", "passive income", "referral rewards", "Esperanza", "multi-tier marketing", "developer tools", "tech affiliate"],
+  description: "Join the Esperanza Affiliate Program and earn lifetime commissions. Transparent Referral Rewards, instant payouts, and powerful tools to grow your network.",
+  keywords: ["affiliate program", "income", "referral rewards", "Esperanza", "multi-tier marketing", "developer tools", "tech affiliate"],
   authors: [{ name: "Esperanza Team" }],
   creator: "Esperanza Team",
   openGraph: {
     type: "website",
     locale: "en_US",
     url: "https://esperanza.com",
-    title: "Esperanza Affiliate Program - Turn Your Network Into Passive Income",
-    description: "Join the Esperanza Affiliate Program and earn lifetime commissions. Multi-tier rewards, instant payouts, and powerful tools to grow your network.",
+    title: "Esperanza Affiliate Program - Turn Your Network Into income",
+    description: "Join the Esperanza Affiliate Program and earn lifetime commissions. Transparent Referral Rewards, instant payouts, and powerful tools to grow your network.",
     siteName: "Esperanza Affiliate Program",
     images: [
       {
@@ -42,8 +42,8 @@ export const metadata: Metadata = {
 
   twitter: {
     card: "summary_large_image",
-    title: "Esperanza Affiliate Program - Turn Your Network Into Passive Income",
-    description: "Join the Esperanza Affiliate Program and earn lifetime commissions. Multi-tier rewards, instant payouts, and powerful tools to grow your network.",
+    title: "Esperanza Affiliate Program - Turn Your Network Into income",
+    description: "Join the Esperanza Affiliate Program and earn lifetime commissions. Transparent Referral Rewards, instant payouts, and powerful tools to grow your network.",
     images: ["/images/og-image.png"],
     creator: "@esperanza_affiliate",
   },

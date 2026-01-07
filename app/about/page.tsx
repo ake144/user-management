@@ -25,7 +25,7 @@ export default function AboutPage() {
                 Empowering the Future of <br /> Affiliate Marketing
               </h1>
               <p className="text-lg md:text-xl text-muted-foreground max-w-[700px] mx-auto">
-                Esperanza is built for creators, developers, and entrepreneurs who want to build sustainable passive income streams through a powerful, transparent network.
+                Esperanza is built for creators, developers, and entrepreneurs who want to build sustainable income streams through a powerful, transparent network.
               </p>
             </div>
           </div>

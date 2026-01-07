@@ -42,6 +42,7 @@ model User {
   withdrawals        Withdrawal[]
   referredBy         User?         @relation("ReferralTree", fields: [referredById], references: [id])
   referrals          User[]        @relation("ReferralTree")
+  memberStatus       MemberStatus  @default(UNVERIFIED)
 
   @@index([referredById])
   @@index([level])
@@ -135,6 +136,13 @@ enum UserRole {
   ADMIN
   AFFILIATE
   USER
+}
+
+enum MemberStatus {
+  UNVERIFIED
+  BASIC
+  GOLD
+  PREMIUM
 }
 
 enum TransactionType {

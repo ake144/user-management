@@ -32,7 +32,7 @@ export default function LandingPage() {
         </AnimatedSection>
         <AnimatedSection
           id="pricing-section"
-          className="relative z-10 max-w-[1320px] mx-auto mt-1 md:mt-2"
+          className="relative z-10 max-w-[1320px] mx-auto mt-0 md:mt-1"
           delay={0.2}
         >
           <WhyChooseSection />

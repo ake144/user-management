@@ -51,7 +51,7 @@ export function WhyChooseSection() {
                     <FeatureCard 
                         icon={<TrendingUp className="w-6 h-6 text-emerald-500" />}
                         title="Uncapped Earnings"
-                        description="Our multi-tier affiliate system is built for scale. Grow your network and multiply your revenue streams."
+                        description="Our Flexible affiliate program with transparent rewards is built for scale.  Maximize your reach and earnings with our integrated tools."
                         gradient="from-emerald-500/20 to-transparent"
                     />
                 </div>

@@ -45,6 +45,10 @@ export const auth = betterAuth({
         input: true,
         defaultValue: "Ethiopia"
       },
+      memberStatus: {
+        type: "string",
+        defaultValue: "UNVERIFIED"
+      },
       city: {
         type: "string",
         required: false,

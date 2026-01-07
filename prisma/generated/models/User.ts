@@ -74,6 +74,7 @@ export type UserMinAggregateOutputType = {
   lifetimeCommission: number | null
   parentPath: string | null
   pendingCommission: number | null
+  memberStatus: $Enums.MemberStatus | null
 }
 
 export type UserMaxAggregateOutputType = {
@@ -104,6 +105,7 @@ export type UserMaxAggregateOutputType = {
   lifetimeCommission: number | null
   parentPath: string | null
   pendingCommission: number | null
+  memberStatus: $Enums.MemberStatus | null
 }
 
 export type UserCountAggregateOutputType = {
@@ -134,6 +136,7 @@ export type UserCountAggregateOutputType = {
   lifetimeCommission: number
   parentPath: number
   pendingCommission: number
+  memberStatus: number
   _all: number
 }
 
@@ -186,6 +189,7 @@ export type UserMinAggregateInputType = {
   lifetimeCommission?: true
   parentPath?: true
   pendingCommission?: true
+  memberStatus?: true
 }
 
 export type UserMaxAggregateInputType = {
@@ -216,6 +220,7 @@ export type UserMaxAggregateInputType = {
   lifetimeCommission?: true
   parentPath?: true
   pendingCommission?: true
+  memberStatus?: true
 }
 
 export type UserCountAggregateInputType = {
@@ -246,6 +251,7 @@ export type UserCountAggregateInputType = {
   lifetimeCommission?: true
   parentPath?: true
   pendingCommission?: true
+  memberStatus?: true
   _all?: true
 }
 
@@ -363,6 +369,7 @@ export type UserGroupByOutputType = {
   lifetimeCommission: number
   parentPath: string | null
   pendingCommission: number
+  memberStatus: $Enums.MemberStatus
   _count: UserCountAggregateOutputType | null
   _avg: UserAvgAggregateOutputType | null
   _sum: UserSumAggregateOutputType | null
@@ -416,6 +423,7 @@ export type UserWhereInput = {
   lifetimeCommission?: Prisma.FloatFilter<"User"> | number
   parentPath?: Prisma.StringNullableFilter<"User"> | string | null
   pendingCommission?: Prisma.FloatFilter<"User"> | number
+  memberStatus?: Prisma.EnumMemberStatusFilter<"User"> | $Enums.MemberStatus
   accounts?: Prisma.AccountListRelationFilter
   sessions?: Prisma.SessionListRelationFilter
   transactions?: Prisma.TransactionListRelationFilter
@@ -452,6 +460,7 @@ export type UserOrderByWithRelationInput = {
   lifetimeCommission?: Prisma.SortOrder
   parentPath?: Prisma.SortOrderInput | Prisma.SortOrder
   pendingCommission?: Prisma.SortOrder
+  memberStatus?: Prisma.SortOrder
   accounts?: Prisma.AccountOrderByRelationAggregateInput
   sessions?: Prisma.SessionOrderByRelationAggregateInput
   transactions?: Prisma.TransactionOrderByRelationAggregateInput
@@ -491,6 +500,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   lifetimeCommission?: Prisma.FloatFilter<"User"> | number
   parentPath?: Prisma.StringNullableFilter<"User"> | string | null
   pendingCommission?: Prisma.FloatFilter<"User"> | number
+  memberStatus?: Prisma.EnumMemberStatusFilter<"User"> | $Enums.MemberStatus
   accounts?: Prisma.AccountListRelationFilter
   sessions?: Prisma.SessionListRelationFilter
   transactions?: Prisma.TransactionListRelationFilter
@@ -527,6 +537,7 @@ export type UserOrderByWithAggregationInput = {
   lifetimeCommission?: Prisma.SortOrder
   parentPath?: Prisma.SortOrderInput | Prisma.SortOrder
   pendingCommission?: Prisma.SortOrder
+  memberStatus?: Prisma.SortOrder
   _count?: Prisma.UserCountOrderByAggregateInput
   _avg?: Prisma.UserAvgOrderByAggregateInput
   _max?: Prisma.UserMaxOrderByAggregateInput
@@ -565,6 +576,7 @@ export type UserScalarWhereWithAggregatesInput = {
   lifetimeCommission?: Prisma.FloatWithAggregatesFilter<"User"> | number
   parentPath?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   pendingCommission?: Prisma.FloatWithAggregatesFilter<"User"> | number
+  memberStatus?: Prisma.EnumMemberStatusWithAggregatesFilter<"User"> | $Enums.MemberStatus
 }
 
 export type UserCreateInput = {
@@ -594,6 +606,7 @@ export type UserCreateInput = {
   lifetimeCommission?: number
   parentPath?: string | null
   pendingCommission?: number
+  memberStatus?: $Enums.MemberStatus
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   transactions?: Prisma.TransactionCreateNestedManyWithoutUserInput
@@ -630,6 +643,7 @@ export type UserUncheckedCreateInput = {
   lifetimeCommission?: number
   parentPath?: string | null
   pendingCommission?: number
+  memberStatus?: $Enums.MemberStatus
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   transactions?: Prisma.TransactionUncheckedCreateNestedManyWithoutUserInput
@@ -664,6 +678,7 @@ export type UserUpdateInput = {
   lifetimeCommission?: Prisma.FloatFieldUpdateOperationsInput | number
   parentPath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   pendingCommission?: Prisma.FloatFieldUpdateOperationsInput | number
+  memberStatus?: Prisma.EnumMemberStatusFieldUpdateOperationsInput | $Enums.MemberStatus
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   transactions?: Prisma.TransactionUpdateManyWithoutUserNestedInput
@@ -700,6 +715,7 @@ export type UserUncheckedUpdateInput = {
   lifetimeCommission?: Prisma.FloatFieldUpdateOperationsInput | number
   parentPath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   pendingCommission?: Prisma.FloatFieldUpdateOperationsInput | number
+  memberStatus?: Prisma.EnumMemberStatusFieldUpdateOperationsInput | $Enums.MemberStatus
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   transactions?: Prisma.TransactionUncheckedUpdateManyWithoutUserNestedInput
@@ -735,6 +751,7 @@ export type UserCreateManyInput = {
   lifetimeCommission?: number
   parentPath?: string | null
   pendingCommission?: number
+  memberStatus?: $Enums.MemberStatus
 }
 
 export type UserUpdateManyMutationInput = {
@@ -764,6 +781,7 @@ export type UserUpdateManyMutationInput = {
   lifetimeCommission?: Prisma.FloatFieldUpdateOperationsInput | number
   parentPath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   pendingCommission?: Prisma.FloatFieldUpdateOperationsInput | number
+  memberStatus?: Prisma.EnumMemberStatusFieldUpdateOperationsInput | $Enums.MemberStatus
 }
 
 export type UserUncheckedUpdateManyInput = {
@@ -794,6 +812,7 @@ export type UserUncheckedUpdateManyInput = {
   lifetimeCommission?: Prisma.FloatFieldUpdateOperationsInput | number
   parentPath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   pendingCommission?: Prisma.FloatFieldUpdateOperationsInput | number
+  memberStatus?: Prisma.EnumMemberStatusFieldUpdateOperationsInput | $Enums.MemberStatus
 }
 
 export type UserNullableScalarRelationFilter = {
@@ -839,6 +858,7 @@ export type UserCountOrderByAggregateInput = {
   lifetimeCommission?: Prisma.SortOrder
   parentPath?: Prisma.SortOrder
   pendingCommission?: Prisma.SortOrder
+  memberStatus?: Prisma.SortOrder
 }
 
 export type UserAvgOrderByAggregateInput = {
@@ -879,6 +899,7 @@ export type UserMaxOrderByAggregateInput = {
   lifetimeCommission?: Prisma.SortOrder
   parentPath?: Prisma.SortOrder
   pendingCommission?: Prisma.SortOrder
+  memberStatus?: Prisma.SortOrder
 }
 
 export type UserMinOrderByAggregateInput = {
@@ -909,6 +930,7 @@ export type UserMinOrderByAggregateInput = {
   lifetimeCommission?: Prisma.SortOrder
   parentPath?: Prisma.SortOrder
   pendingCommission?: Prisma.SortOrder
+  memberStatus?: Prisma.SortOrder
 }
 
 export type UserSumOrderByAggregateInput = {
@@ -984,6 +1006,10 @@ export type IntFieldUpdateOperationsInput = {
 
 export type NullableDateTimeFieldUpdateOperationsInput = {
   set?: Date | string | null
+}
+
+export type EnumMemberStatusFieldUpdateOperationsInput = {
+  set?: $Enums.MemberStatus
 }
 
 export type UserUpdateOneWithoutReferralsNestedInput = {
@@ -1107,6 +1133,7 @@ export type UserCreateWithoutReferralsInput = {
   lifetimeCommission?: number
   parentPath?: string | null
   pendingCommission?: number
+  memberStatus?: $Enums.MemberStatus
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   transactions?: Prisma.TransactionCreateNestedManyWithoutUserInput
@@ -1142,6 +1169,7 @@ export type UserUncheckedCreateWithoutReferralsInput = {
   lifetimeCommission?: number
   parentPath?: string | null
   pendingCommission?: number
+  memberStatus?: $Enums.MemberStatus
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   transactions?: Prisma.TransactionUncheckedCreateNestedManyWithoutUserInput
@@ -1180,6 +1208,7 @@ export type UserCreateWithoutReferredByInput = {
   lifetimeCommission?: number
   parentPath?: string | null
   pendingCommission?: number
+  memberStatus?: $Enums.MemberStatus
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   transactions?: Prisma.TransactionCreateNestedManyWithoutUserInput
@@ -1214,6 +1243,7 @@ export type UserUncheckedCreateWithoutReferredByInput = {
   lifetimeCommission?: number
   parentPath?: string | null
   pendingCommission?: number
+  memberStatus?: $Enums.MemberStatus
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   transactions?: Prisma.TransactionUncheckedCreateNestedManyWithoutUserInput
@@ -1269,6 +1299,7 @@ export type UserUpdateWithoutReferralsInput = {
   lifetimeCommission?: Prisma.FloatFieldUpdateOperationsInput | number
   parentPath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   pendingCommission?: Prisma.FloatFieldUpdateOperationsInput | number
+  memberStatus?: Prisma.EnumMemberStatusFieldUpdateOperationsInput | $Enums.MemberStatus
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   transactions?: Prisma.TransactionUpdateManyWithoutUserNestedInput
@@ -1304,6 +1335,7 @@ export type UserUncheckedUpdateWithoutReferralsInput = {
   lifetimeCommission?: Prisma.FloatFieldUpdateOperationsInput | number
   parentPath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   pendingCommission?: Prisma.FloatFieldUpdateOperationsInput | number
+  memberStatus?: Prisma.EnumMemberStatusFieldUpdateOperationsInput | $Enums.MemberStatus
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   transactions?: Prisma.TransactionUncheckedUpdateManyWithoutUserNestedInput
@@ -1357,6 +1389,7 @@ export type UserScalarWhereInput = {
   lifetimeCommission?: Prisma.FloatFilter<"User"> | number
   parentPath?: Prisma.StringNullableFilter<"User"> | string | null
   pendingCommission?: Prisma.FloatFilter<"User"> | number
+  memberStatus?: Prisma.EnumMemberStatusFilter<"User"> | $Enums.MemberStatus
 }
 
 export type UserCreateWithoutTransactionsInput = {
@@ -1386,6 +1419,7 @@ export type UserCreateWithoutTransactionsInput = {
   lifetimeCommission?: number
   parentPath?: string | null
   pendingCommission?: number
+  memberStatus?: $Enums.MemberStatus
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   withdrawals?: Prisma.WithdrawalCreateNestedManyWithoutUserInput
@@ -1421,6 +1455,7 @@ export type UserUncheckedCreateWithoutTransactionsInput = {
   lifetimeCommission?: number
   parentPath?: string | null
   pendingCommission?: number
+  memberStatus?: $Enums.MemberStatus
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   withdrawals?: Prisma.WithdrawalUncheckedCreateNestedManyWithoutUserInput
@@ -1470,6 +1505,7 @@ export type UserUpdateWithoutTransactionsInput = {
   lifetimeCommission?: Prisma.FloatFieldUpdateOperationsInput | number
   parentPath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   pendingCommission?: Prisma.FloatFieldUpdateOperationsInput | number
+  memberStatus?: Prisma.EnumMemberStatusFieldUpdateOperationsInput | $Enums.MemberStatus
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   withdrawals?: Prisma.WithdrawalUpdateManyWithoutUserNestedInput
@@ -1505,6 +1541,7 @@ export type UserUncheckedUpdateWithoutTransactionsInput = {
   lifetimeCommission?: Prisma.FloatFieldUpdateOperationsInput | number
   parentPath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   pendingCommission?: Prisma.FloatFieldUpdateOperationsInput | number
+  memberStatus?: Prisma.EnumMemberStatusFieldUpdateOperationsInput | $Enums.MemberStatus
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   withdrawals?: Prisma.WithdrawalUncheckedUpdateManyWithoutUserNestedInput
@@ -1538,6 +1575,7 @@ export type UserCreateWithoutAccountsInput = {
   lifetimeCommission?: number
   parentPath?: string | null
   pendingCommission?: number
+  memberStatus?: $Enums.MemberStatus
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   transactions?: Prisma.TransactionCreateNestedManyWithoutUserInput
   withdrawals?: Prisma.WithdrawalCreateNestedManyWithoutUserInput
@@ -1573,6 +1611,7 @@ export type UserUncheckedCreateWithoutAccountsInput = {
   lifetimeCommission?: number
   parentPath?: string | null
   pendingCommission?: number
+  memberStatus?: $Enums.MemberStatus
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   transactions?: Prisma.TransactionUncheckedCreateNestedManyWithoutUserInput
   withdrawals?: Prisma.WithdrawalUncheckedCreateNestedManyWithoutUserInput
@@ -1622,6 +1661,7 @@ export type UserUpdateWithoutAccountsInput = {
   lifetimeCommission?: Prisma.FloatFieldUpdateOperationsInput | number
   parentPath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   pendingCommission?: Prisma.FloatFieldUpdateOperationsInput | number
+  memberStatus?: Prisma.EnumMemberStatusFieldUpdateOperationsInput | $Enums.MemberStatus
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   transactions?: Prisma.TransactionUpdateManyWithoutUserNestedInput
   withdrawals?: Prisma.WithdrawalUpdateManyWithoutUserNestedInput
@@ -1657,6 +1697,7 @@ export type UserUncheckedUpdateWithoutAccountsInput = {
   lifetimeCommission?: Prisma.FloatFieldUpdateOperationsInput | number
   parentPath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   pendingCommission?: Prisma.FloatFieldUpdateOperationsInput | number
+  memberStatus?: Prisma.EnumMemberStatusFieldUpdateOperationsInput | $Enums.MemberStatus
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   transactions?: Prisma.TransactionUncheckedUpdateManyWithoutUserNestedInput
   withdrawals?: Prisma.WithdrawalUncheckedUpdateManyWithoutUserNestedInput
@@ -1690,6 +1731,7 @@ export type UserCreateWithoutSessionsInput = {
   lifetimeCommission?: number
   parentPath?: string | null
   pendingCommission?: number
+  memberStatus?: $Enums.MemberStatus
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
   transactions?: Prisma.TransactionCreateNestedManyWithoutUserInput
   withdrawals?: Prisma.WithdrawalCreateNestedManyWithoutUserInput
@@ -1725,6 +1767,7 @@ export type UserUncheckedCreateWithoutSessionsInput = {
   lifetimeCommission?: number
   parentPath?: string | null
   pendingCommission?: number
+  memberStatus?: $Enums.MemberStatus
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
   transactions?: Prisma.TransactionUncheckedCreateNestedManyWithoutUserInput
   withdrawals?: Prisma.WithdrawalUncheckedCreateNestedManyWithoutUserInput
@@ -1774,6 +1817,7 @@ export type UserUpdateWithoutSessionsInput = {
   lifetimeCommission?: Prisma.FloatFieldUpdateOperationsInput | number
   parentPath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   pendingCommission?: Prisma.FloatFieldUpdateOperationsInput | number
+  memberStatus?: Prisma.EnumMemberStatusFieldUpdateOperationsInput | $Enums.MemberStatus
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
   transactions?: Prisma.TransactionUpdateManyWithoutUserNestedInput
   withdrawals?: Prisma.WithdrawalUpdateManyWithoutUserNestedInput
@@ -1809,6 +1853,7 @@ export type UserUncheckedUpdateWithoutSessionsInput = {
   lifetimeCommission?: Prisma.FloatFieldUpdateOperationsInput | number
   parentPath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   pendingCommission?: Prisma.FloatFieldUpdateOperationsInput | number
+  memberStatus?: Prisma.EnumMemberStatusFieldUpdateOperationsInput | $Enums.MemberStatus
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
   transactions?: Prisma.TransactionUncheckedUpdateManyWithoutUserNestedInput
   withdrawals?: Prisma.WithdrawalUncheckedUpdateManyWithoutUserNestedInput
@@ -1842,6 +1887,7 @@ export type UserCreateWithoutWithdrawalsInput = {
   lifetimeCommission?: number
   parentPath?: string | null
   pendingCommission?: number
+  memberStatus?: $Enums.MemberStatus
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   transactions?: Prisma.TransactionCreateNestedManyWithoutUserInput
@@ -1877,6 +1923,7 @@ export type UserUncheckedCreateWithoutWithdrawalsInput = {
   lifetimeCommission?: number
   parentPath?: string | null
   pendingCommission?: number
+  memberStatus?: $Enums.MemberStatus
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   transactions?: Prisma.TransactionUncheckedCreateNestedManyWithoutUserInput
@@ -1926,6 +1973,7 @@ export type UserUpdateWithoutWithdrawalsInput = {
   lifetimeCommission?: Prisma.FloatFieldUpdateOperationsInput | number
   parentPath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   pendingCommission?: Prisma.FloatFieldUpdateOperationsInput | number
+  memberStatus?: Prisma.EnumMemberStatusFieldUpdateOperationsInput | $Enums.MemberStatus
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   transactions?: Prisma.TransactionUpdateManyWithoutUserNestedInput
@@ -1961,6 +2009,7 @@ export type UserUncheckedUpdateWithoutWithdrawalsInput = {
   lifetimeCommission?: Prisma.FloatFieldUpdateOperationsInput | number
   parentPath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   pendingCommission?: Prisma.FloatFieldUpdateOperationsInput | number
+  memberStatus?: Prisma.EnumMemberStatusFieldUpdateOperationsInput | $Enums.MemberStatus
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   transactions?: Prisma.TransactionUncheckedUpdateManyWithoutUserNestedInput
@@ -1994,6 +2043,7 @@ export type UserCreateManyReferredByInput = {
   lifetimeCommission?: number
   parentPath?: string | null
   pendingCommission?: number
+  memberStatus?: $Enums.MemberStatus
 }
 
 export type UserUpdateWithoutReferredByInput = {
@@ -2023,6 +2073,7 @@ export type UserUpdateWithoutReferredByInput = {
   lifetimeCommission?: Prisma.FloatFieldUpdateOperationsInput | number
   parentPath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   pendingCommission?: Prisma.FloatFieldUpdateOperationsInput | number
+  memberStatus?: Prisma.EnumMemberStatusFieldUpdateOperationsInput | $Enums.MemberStatus
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   transactions?: Prisma.TransactionUpdateManyWithoutUserNestedInput
@@ -2057,6 +2108,7 @@ export type UserUncheckedUpdateWithoutReferredByInput = {
   lifetimeCommission?: Prisma.FloatFieldUpdateOperationsInput | number
   parentPath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   pendingCommission?: Prisma.FloatFieldUpdateOperationsInput | number
+  memberStatus?: Prisma.EnumMemberStatusFieldUpdateOperationsInput | $Enums.MemberStatus
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   transactions?: Prisma.TransactionUncheckedUpdateManyWithoutUserNestedInput
@@ -2091,6 +2143,7 @@ export type UserUncheckedUpdateManyWithoutReferredByInput = {
   lifetimeCommission?: Prisma.FloatFieldUpdateOperationsInput | number
   parentPath?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   pendingCommission?: Prisma.FloatFieldUpdateOperationsInput | number
+  memberStatus?: Prisma.EnumMemberStatusFieldUpdateOperationsInput | $Enums.MemberStatus
 }
 
 
@@ -2188,6 +2241,7 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   lifetimeCommission?: boolean
   parentPath?: boolean
   pendingCommission?: boolean
+  memberStatus?: boolean
   accounts?: boolean | Prisma.User$accountsArgs<ExtArgs>
   sessions?: boolean | Prisma.User$sessionsArgs<ExtArgs>
   transactions?: boolean | Prisma.User$transactionsArgs<ExtArgs>
@@ -2225,6 +2279,7 @@ export type UserSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   lifetimeCommission?: boolean
   parentPath?: boolean
   pendingCommission?: boolean
+  memberStatus?: boolean
   referredBy?: boolean | Prisma.User$referredByArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -2256,6 +2311,7 @@ export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   lifetimeCommission?: boolean
   parentPath?: boolean
   pendingCommission?: boolean
+  memberStatus?: boolean
   referredBy?: boolean | Prisma.User$referredByArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -2287,9 +2343,10 @@ export type UserSelectScalar = {
   lifetimeCommission?: boolean
   parentPath?: boolean
   pendingCommission?: boolean
+  memberStatus?: boolean
 }
 
-export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "firstName" | "lastName" | "email" | "password" | "phone" | "address" | "referralCode" | "referredById" | "isActive" | "role" | "totalEarnings" | "currentBalance" | "createdAt" | "updatedAt" | "city" | "country" | "emailVerified" | "image" | "name" | "childCount" | "descendantCount" | "lastSaleAt" | "level" | "lifetimeCommission" | "parentPath" | "pendingCommission", ExtArgs["result"]["user"]>
+export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "firstName" | "lastName" | "email" | "password" | "phone" | "address" | "referralCode" | "referredById" | "isActive" | "role" | "totalEarnings" | "currentBalance" | "createdAt" | "updatedAt" | "city" | "country" | "emailVerified" | "image" | "name" | "childCount" | "descendantCount" | "lastSaleAt" | "level" | "lifetimeCommission" | "parentPath" | "pendingCommission" | "memberStatus", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   accounts?: boolean | Prisma.User$accountsArgs<ExtArgs>
   sessions?: boolean | Prisma.User$sessionsArgs<ExtArgs>
@@ -2344,6 +2401,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     lifetimeCommission: number
     parentPath: string | null
     pendingCommission: number
+    memberStatus: $Enums.MemberStatus
   }, ExtArgs["result"]["user"]>
   composites: {}
 }
@@ -2800,6 +2858,7 @@ export interface UserFieldRefs {
   readonly lifetimeCommission: Prisma.FieldRef<"User", 'Float'>
   readonly parentPath: Prisma.FieldRef<"User", 'String'>
   readonly pendingCommission: Prisma.FieldRef<"User", 'Float'>
+  readonly memberStatus: Prisma.FieldRef<"User", 'MemberStatus'>
 }
     
 

@@ -238,8 +238,10 @@ export default function DashboardLayout({
                                 <DropdownMenuSeparator />
                                 <DropdownMenuGroup>
                                     <DropdownMenuItem>
+                                        <Link href="/dashboard/profile" className="flex items-center w-full">
                                         <User className="mr-2 h-4 w-4" />
-                                        Profile
+                                            Profile
+                                        </Link>
                                         <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
                                     </DropdownMenuItem>
                                     <DropdownMenuItem>

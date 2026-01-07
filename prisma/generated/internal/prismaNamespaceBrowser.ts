@@ -102,7 +102,8 @@ export const UserScalarFieldEnum = {
   level: 'level',
   lifetimeCommission: 'lifetimeCommission',
   parentPath: 'parentPath',
-  pendingCommission: 'pendingCommission'
+  pendingCommission: 'pendingCommission',
+  memberStatus: 'memberStatus'
 } as const
 
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
