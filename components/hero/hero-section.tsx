@@ -200,7 +200,7 @@ export function HeroSection() {
       <div className="relative z-10 flex flex-col items-center mt-24 md:mt-32 px-4 w-full">
         <div className="inline-flex items-center rounded-full border px-3 py-1 text-sm font-medium bg-secondary/50 backdrop-blur-sm mb-6">
           <Sparkles className="mr-2 h-3.5 w-3.5 text-primary" />
-          <span className="text-muted-foreground">The #1 Affiliate Platform</span>
+          <span className="text-muted-foreground">A Digital Platform for Creators, Businesses, and Innovators</span>
         </div>
 
         <h1 className="text-foreground text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight leading-tight max-w-4xl">

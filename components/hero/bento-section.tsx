@@ -62,8 +62,8 @@ export function BentoSection() {
   const cards = [
    
     {
-      title: "Multi-Tier Rewards",
-      description: "Earn from your direct referrals and their referrals. Build a deep, profitable network.",
+      title: "Transparent Referral Rewards",
+      description: "Esperanza offers a simple referral rewards program where you earn commissions when users you recommend successfully join and use the platform.",
       icon: Users,
       component: NetworkIllustration,
     },

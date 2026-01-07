@@ -1,78 +1,72 @@
 "use client"
 
-import { Twitter, Github, Linkedin } from "lucide-react"
+import Link from "next/link"
 
 export function FooterSection() {
   return (
-    <footer className="w-full max-w-[1320px] mx-auto px-5 flex flex-col md:flex-row justify-between items-start gap-8 md:gap-0 py-1 md:py-1.5">
-      {/* Left Section: Logo, Description, Social Links */}
-      <div className="flex flex-col justify-start items-start gap-8 p-4 md:p-8">
-        <div className="flex gap-3 items-stretch justify-center">
-          <div className="text-center text-foreground text-xl font-semibold leading-4">Esperanza</div>
-        </div>
-        <p className="text-foreground/90 text-sm font-medium leading-[18px] text-left">Scale Your Influence. Multiply Opportunities. Build Success.</p>
-        <div className="flex justify-start items-start gap-4">
-          <a href="https://twitter.com/Esperanza" target="_blank" rel="noopener noreferrer" aria-label="Twitter" className="flex items-center justify-center transition-colors hover:text-primary">
-            <Twitter className="w-5 h-5 text-muted-foreground hover:text-primary transition-colors" />
-          </a>
-          <a href="https://github.com/Esperanza" target="_blank" rel="noopener noreferrer" aria-label="GitHub" className="flex items-center justify-center transition-colors hover:text-primary">
-            <Github className="w-5 h-5 text-muted-foreground hover:text-primary transition-colors" />
-          </a>
-          <a href="https://linkedin.com/company/Esperanza" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="flex items-center justify-center transition-colors hover:text-primary">
-            <Linkedin className="w-5 h-5 text-muted-foreground hover:text-primary transition-colors" />
-          </a>
-        </div>
-      </div>
-      {/* Right Section: Product, Company, Resources */}
-      <div className="grid grid-cols-2 md:grid-cols-3 gap-8 md:gap-12 p-4 md:p-8 w-full md:w-auto">
-        <div className="flex flex-col justify-start items-start gap-3">
-          <h3 className="font-bold text-sm leading-5 text-primary">Company</h3>
-          <div className="flex flex-col justify-end items-start gap-2">
-            <a href="/about" className="text-muted-foreground text-sm font-normal leading-5 hover:text-foreground transition-colors">
-              About us
-            </a>
-            <a href="/terms" className="text-muted-foreground text-sm font-normal leading-5 hover:text-foreground transition-colors">
-              Terms & Conditions
-            </a>
-            <a href="/privacy" className="text-muted-foreground text-sm font-normal leading-5 hover:text-foreground transition-colors">
-              Privacy Policy
-            </a>
-            <a href="/contact" className="text-muted-foreground text-sm font-normal leading-5 hover:text-foreground transition-colors">
-              Contact Us
-            </a>
+    <footer className="w-full bg-background border-t border-border/40 pt-20 pb-8">
+      <div className="max-w-6xl mx-auto px-6">
+        
+        {/* Main Grid: Brand + 3 Columns */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-16">
+          
+          {/* Column 1: Brand */}
+          <div className="flex flex-col gap-4">
+             <Link href="/" className="flex items-center gap-2">
+                <div className="font-bold text-xl tracking-tight text-foreground">Esperanza</div>
+             </Link>
+             <p className="text-sm text-muted-foreground leading-relaxed max-w-xs">
+               Technology platform for digital growth, automation, and performance-driven systems.
+             </p>
           </div>
-        </div>
-        <div className="flex flex-col justify-start items-start gap-3">
-          <h3 className="font-bold text-sm leading-5 text-primary">Use Cases</h3>
-          <div className="flex flex-col justify-center items-start gap-2">
-            <a href="/use-cases/ecommerce" className="text-muted-foreground text-sm font-normal leading-5 hover:text-foreground transition-colors">
-             Drive E-commerce Sales
-            </a>
-            <a href="/use-cases/affiliate" className="text-muted-foreground text-sm font-normal leading-5 hover:text-foreground transition-colors">
-              Run Affiliate Programs
-            </a>
-            <a href="/use-cases/ai" className="text-muted-foreground text-sm font-normal leading-5 hover:text-foreground transition-colors">
-              Automate Campaigns with AI
-            </a>
+
+          {/* Column 2: Company */}
+          <div className="flex flex-col gap-6">
+            <h3 className="font-bold text-foreground text-xs uppercase tracking-wider">Company</h3>
+            <div className="flex flex-col gap-3 text-sm text-muted-foreground">
+              <Link href="/about" className="hover:text-foreground transition-colors">About Us</Link>
+              <Link href="#" className="hover:text-foreground transition-colors">Careers</Link>
+            </div>
           </div>
-        </div>
-        <div className="flex flex-col justify-start items-start gap-3">
-          <h3 className="font-bold text-sm leading-5 text-primary">Resources</h3>
-          <div className="flex flex-col justify-center items-start gap-2">
-            <a href="/docs" className="text-muted-foreground text-sm font-normal leading-5 hover:text-foreground transition-colors">
-              Documentation
-            </a>
-            <a href="/api" className="text-muted-foreground text-sm font-normal leading-5 hover:text-foreground transition-colors">
-              API Reference
-            </a>
-            <a href="/community" className="text-muted-foreground text-sm font-normal leading-5 hover:text-foreground transition-colors">
-              Community
-            </a>
-            <a href="/faq" className="text-muted-foreground text-sm font-normal leading-5 hover:text-foreground transition-colors">
-              FAQ
-            </a>
+
+          {/* Column 3: Legal */}
+          <div className="flex flex-col gap-6">
+             <h3 className="font-bold text-foreground text-xs uppercase tracking-wider">Legal</h3>
+             <div className="flex flex-col gap-3 text-sm text-muted-foreground">
+               <Link href="/terms" className="hover:text-foreground transition-colors">Terms & Conditions</Link>
+               <Link href="/privacy" className="hover:text-foreground transition-colors">Privacy Policy</Link>
+               <Link href="#" className="hover:text-foreground transition-colors">Cookie Policy</Link>
+               <Link href="#" className="hover:text-foreground transition-colors">Disclaimer</Link>
+             </div>
           </div>
+
+          {/* Column 4: Support */}
+          <div className="flex flex-col gap-6">
+            <h3 className="font-bold text-foreground text-xs uppercase tracking-wider">Support</h3>
+            <div className="flex flex-col gap-3 text-sm text-muted-foreground">
+              <Link href="/contact" className="hover:text-foreground transition-colors">Contact Us</Link>
+              <Link href="/faq" className="hover:text-foreground transition-colors">FAQ</Link>
+              <Link href="/docs" className="hover:text-foreground transition-colors">Documentation</Link>
+              <Link href="/api" className="hover:text-foreground transition-colors">API Reference</Link>
+            </div>
+          </div>
+
         </div>
+
+        {/* Disclaimer Line */}
+        <div className="border-t border-border/40 pt-8 pb-4">
+           <p className="text-center text-xs text-muted-foreground">
+             Esperanza is a digital services platform. Platform features and availability may vary.
+           </p>
+        </div>
+
+        {/* Copyright Line */}
+        <div className="text-center pt-4">
+           <p className="text-xs text-muted-foreground">
+             © 2026 Esperanza. All rights reserved.
+           </p>
+        </div>
+
       </div>
     </footer>
   )

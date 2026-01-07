@@ -6,34 +6,49 @@ import { ChevronDown } from "lucide-react"
 
 const faqData = [
   {
-    question: "How does the referral program work?",
+    question: "What is Esperanza?",
     answer:
-      "It's simple! Sign up to get your unique referral link. Share it with your network. When someone signs up using your link, they become part of your downline. You earn commissions on their activity and the activity of the people they refer.",
+      "Esperanza is a digital services platform that provides tools for online engagement, promotion, automation, and participation in reward-based programs tied to platform activity.",
   },
   {
-    question: "Is there a limit to how much I can earn?",
+    question: "What is the referral rewards program?",
     answer:
-      "No! There is absolutely no cap on your earnings. The more active your network is, the more you earn. Our top affiliates make over $10,000 per month.",
+      "Esperanza offers a referral rewards program where registered users may earn rewards for qualifying actions completed by users they refer, subject to the platform’s rules and conditions.",
   },
   {
-    question: "When do I get paid?",
+    question: "Is there a cost to participate?",
     answer:
-      "We process payouts instantly upon request. Once your earnings reach the minimum threshold of $50, you can withdraw them to your bank account, PayPal, or crypto wallet.",
+      "No. Creating an account and participating in the referral rewards program is free of charge.",
   },
   {
-    question: "Do I need to pay to join?",
+    question: "How are rewards calculated?",
     answer:
-      "No, joining our affiliate program is completely free. We believe in empowering you to earn without any upfront investment.",
+      "Rewards are calculated based on verified activities that meet program requirements. Actual rewards vary depending on usage and compliance with program rules.",
   },
   {
-    question: "How can I track my referrals?",
+    question: "How and when are rewards paid?",
     answer:
-      "Our comprehensive dashboard provides real-time tracking of clicks, sign-ups, and commissions. You can visualize your entire referral tree and see exactly where your earnings are coming from.",
+      "Rewards become eligible for withdrawal once applicable thresholds and verification requirements are met. Payments are processed through supported third-party payment providers.",
   },
   {
-    question: "Is my data secure?",
+    question: "How can I track my activity?",
     answer:
-      "Absolutely. We use enterprise-grade security measures including end-to-end encryption and secure data transmission to protect your personal information and earnings.",
+      "Users can track referral activity and reward status through the Esperanza dashboard.",
+  },
+  {
+    question: "Is my personal data secure?",
+    answer:
+      "Esperanza uses appropriate technical and organizational measures to protect personal data, as outlined in the Privacy Policy.",
+  },
+  {
+    question: "Does Esperanza guarantee income?",
+    answer:
+      "No. Esperanza does not guarantee earnings or financial outcomes. Results depend on individual usage, effort, and external factors.",
+  },
+  {
+    question: "Where can I find legal information?",
+    answer:
+      "Our Terms & Conditions and Privacy Policy are available on our website.",
   },
 ]
 
@@ -99,7 +114,7 @@ export function FAQSection() {
             Frequently Asked Questions
           </h2>
           <p className="self-stretch text-center text-muted-foreground text-sm font-medium leading-[18.20px] break-words">
-            Everything you need to know about our affiliate program and how to maximize your earnings.
+            Everything you need to know about Esperanza, from getting started to understanding our rewards.
           </p>
         </div>
       </div>

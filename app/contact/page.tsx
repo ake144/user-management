@@ -1,136 +1,275 @@
-import { Header } from "@/components/hero/header";
-import { FooterSection } from "@/components/hero/footer";
-import { AnimatedSection } from "@/components/hero/animated-section";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-import { Mail, MapPin, Phone, Send } from "lucide-react";
+"use client"
+
+import { useState } from "react"
+import { Header } from "@/components/hero/header"
+import { FooterSection } from "@/components/hero/footer"
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
+import { Textarea } from "@/components/ui/textarea"
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
+import { Badge } from "@/components/ui/badge"
+import { toast } from "sonner"
+import { Copy } from "lucide-react"
 
 export default function ContactPage() {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    topic: "",
+    subject: "",
+    message: "",
+  })
+  const [isSubmitting, setIsSubmitting] = useState(false)
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setIsSubmitting(true)
+
+    // Simulate API call
+    await new Promise((resolve) => setTimeout(resolve, 1500))
+
+    toast.success("Message sent successfully!", {
+      description: "We'll get back to you as soon as possible.",
+    })
+
+    setFormData({
+      name: "",
+      email: "",
+      topic: "",
+      subject: "",
+      message: "",
+    })
+    setIsSubmitting(false)
+  }
+
+  const copyToClipboard = (text: string, label: string) => {
+    navigator.clipboard.writeText(text)
+    toast.success("Copied to clipboard", {
+      description: `${label} email copied: ${text}`,
+    })
+  }
+
   return (
     <div className="min-h-screen bg-background relative overflow-hidden flex flex-col">
-      <Header />
-      
-      <main className="flex-1">
-        {/* Hero Section */}
-        <section className="relative w-full py-20 md:py-32 overflow-hidden">
-          <div className="absolute inset-0 w-full h-full bg-background z-0">
-            <div className="absolute top-[-10%] right-[-10%] w-[40%] h-[40%] rounded-full bg-primary/5 blur-[120px]" />
-            <div className="absolute bottom-[-10%] left-[-10%] w-[40%] h-[40%] rounded-full bg-purple-500/5 blur-[120px]" />
-          </div>
+      <div className="relative z-10 max-w-[1320px] mx-auto w-full px-6 flex-1 flex flex-col">
+        <Header />
+        
+        <main className="mt-24 md:mt-32 w-full max-w-[1200px] mx-auto pb-20">
           
-          <div className="container px-4 md:px-6 mx-auto relative z-10">
-            <div className="flex flex-col items-center text-center space-y-4">
-              <h1 className="text-4xl md:text-6xl font-bold tracking-tighter bg-clip-text text-transparent bg-gradient-to-b from-foreground to-foreground/70">
-                Get in Touch
-              </h1>
-              <p className="text-lg md:text-xl text-muted-foreground max-w-[700px] mx-auto">
-                Have questions about the Esperanza Affiliate Program? We're here to help you grow your network and earnings.
-              </p>
+          {/* Header Section */}
+          <div className="flex flex-col gap-6 mb-12">
+            <h1 className="text-4xl md:text-5xl font-bold tracking-tight">Contact Us</h1>
+            <p className="text-muted-foreground text-lg md:text-xl max-w-2xl leading-relaxed">
+              Reach Esperanza for support, partnerships, or legal/privacy requests. We respond as quickly as possible during business hours.
+            </p>
+            <div>
+                 <Badge variant="outline" className="rounded-full px-4 py-1.5 text-sm font-medium border-primary/20 bg-primary/5 text-primary">
+                    Support • Partnerships • Legal
+                </Badge>
             </div>
+           
           </div>
-        </section>
 
-        {/* Contact Form & Info */}
-        <AnimatedSection className="container px-4 md:px-6 mx-auto pb-20" delay={0.1}>
-          <div className="grid lg:grid-cols-2 gap-12 items-start">
-            {/* Contact Information */}
-            <div className="space-y-8">
-              <div className="space-y-6">
-                <h2 className="text-3xl font-bold tracking-tight">Contact Information</h2>
-                <p className="text-muted-foreground text-lg">
-                  Fill out the form and our team will get back to you within 24 hours.
-                </p>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+            
+            {/* Left Column: Contact Form */}
+            <div className="rounded-xl border border-border bg-card/30 p-6 md:p-8 backdrop-blur-sm">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
+                <h2 className="text-xl font-bold">Send a Message</h2>
+                <Badge variant="secondary" className="w-fit text-xs font-normal">Typical response: 1–2 business days</Badge>
               </div>
 
-              <div className="grid gap-6">
-                <Card className="bg-card/50 backdrop-blur border-primary/10">
-                  <CardContent className="p-6 flex items-start gap-4">
-                    <div className="p-3 rounded-full bg-primary/10 text-primary mt-1">
-                      <Mail className="w-5 h-5" />
-                    </div>
-                    <div>
-                      <h3 className="font-semibold text-lg mb-1">Email Us</h3>
-                      <p className="text-muted-foreground mb-2">For general inquiries and support</p>
-                      <a href="mailto:support@esperanza.com" className="text-primary hover:underline">support@esperanza.com</a>
-                    </div>
-                  </CardContent>
-                </Card>
-
-                <Card className="bg-card/50 backdrop-blur border-primary/10">
-                  <CardContent className="p-6 flex items-start gap-4">
-                    <div className="p-3 rounded-full bg-purple-500/10 text-purple-500 mt-1">
-                      <MapPin className="w-5 h-5" />
-                    </div>
-                    <div>
-                      <h3 className="font-semibold text-lg mb-1">Visit Us</h3>
-                      <p className="text-muted-foreground mb-2">Our headquarters</p>
-                      <p className="text-foreground">123 Innovation Drive<br />Tech City, TC 90210</p>
-                    </div>
-                  </CardContent>
-                </Card>
-
-                <Card className="bg-card/50 backdrop-blur border-primary/10">
-                  <CardContent className="p-6 flex items-start gap-4">
-                    <div className="p-3 rounded-full bg-green-500/10 text-green-500 mt-1">
-                      <Phone className="w-5 h-5" />
-                    </div>
-                    <div>
-                      <h3 className="font-semibold text-lg mb-1">Call Us</h3>
-                      <p className="text-muted-foreground mb-2">Mon-Fri from 8am to 5pm</p>
-                      <a href="tel:+15550000000" className="text-primary hover:underline">+1 (555) 000-0000</a>
-                    </div>
-                  </CardContent>
-                </Card>
+              <div className="mb-6 text-sm text-muted-foreground">
+                <p>Fill in the form and we&apos;ll route your message to the right team. Please avoid sharing passwords or sensitive data.</p>
               </div>
+
+              <form onSubmit={handleSubmit} className="space-y-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div className="space-y-2">
+                    <Label htmlFor="name">Full Name</Label>
+                    <Input 
+                      id="name" 
+                      placeholder="Your name" 
+                      value={formData.name}
+                      onChange={(e) => setFormData({...formData, name: e.target.value})}
+                      required
+                      className="bg-background/50"
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="email">Email Address</Label>
+                    <Input 
+                      id="email" 
+                      type="email" 
+                      placeholder="you@example.com" 
+                      value={formData.email}
+                      onChange={(e) => setFormData({...formData, email: e.target.value})}
+                      required
+                      className="bg-background/50"
+                    />
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div className="space-y-2">
+                    <Label htmlFor="topic">Topic</Label>
+                    <Select 
+                      value={formData.topic} 
+                      onValueChange={(value) => setFormData({...formData, topic: value})}
+                      required
+                    >
+                      <SelectTrigger id="topic" className="bg-background/50">
+                        <SelectValue placeholder="Select a topic" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="support">General Support</SelectItem>
+                        <SelectItem value="sales">Business & Partnerships</SelectItem>
+                        <SelectItem value="legal">Legal & Privacy</SelectItem>
+                        <SelectItem value="other">Other</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="subject">Subject</Label>
+                    <Input 
+                      id="subject" 
+                      placeholder="How can we help?" 
+                      value={formData.subject}
+                      onChange={(e) => setFormData({...formData, subject: e.target.value})}
+                      required
+                      className="bg-background/50"
+                    />
+                  </div>
+                </div>
+
+                <div className="space-y-2">
+                  <Label htmlFor="message">Message</Label>
+                  <Textarea 
+                    id="message" 
+                    placeholder="Write your message..." 
+                    className="min-h-[150px] bg-background/50 resize-y" 
+                    value={formData.message}
+                    onChange={(e) => setFormData({...formData, message: e.target.value})}
+                    required
+                  />
+                </div>
+
+                <div className="pt-2 flex flex-col sm:flex-row items-center justify-between gap-4">
+                   <p className="text-xs text-muted-foreground order-2 sm:order-1">
+                    By sending this message, you agree to our <a href="/privacy" className="underline hover:text-foreground">Privacy Policy</a>.
+                   </p>
+                   <Button type="submit" className="w-full sm:w-auto order-1 sm:order-2" disabled={isSubmitting}>
+                     {isSubmitting ? "Sending..." : "Send Message"}
+                   </Button>
+                </div>
+              </form>
             </div>
 
-            {/* Contact Form */}
-            <Card className="border-primary/10 shadow-lg">
-              <CardHeader>
-                <CardTitle>Send us a message</CardTitle>
-                <CardDescription>
-                  We'd love to hear from you. Please fill out this form.
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <form className="space-y-6">
-                  <div className="grid grid-cols-2 gap-4">
-                    <div className="space-y-2">
-                      <label htmlFor="first-name" className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">First name</label>
-                      <Input id="first-name" placeholder="John" />
-                    </div>
-                    <div className="space-y-2">
-                      <label htmlFor="last-name" className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">Last name</label>
-                      <Input id="last-name" placeholder="Doe" />
-                    </div>
-                  </div>
-                  <div className="space-y-2">
-                    <label htmlFor="email" className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">Email</label>
-                    <Input id="email" placeholder="john@example.com" type="email" />
-                  </div>
-                  <div className="space-y-2">
-                    <label htmlFor="subject" className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">Subject</label>
-                    <Input id="subject" placeholder="How can we help?" />
-                  </div>
-                  <div className="space-y-2">
-                    <label htmlFor="message" className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">Message</label>
-                    <Textarea id="message" placeholder="Tell us more about your inquiry..." className="min-h-[150px]" />
-                  </div>
-                  <Button className="w-full gap-2">
-                    Send Message <Send className="w-4 h-4" />
-                  </Button>
-                </form>
-              </CardContent>
-            </Card>
-          </div>
-        </AnimatedSection>
-      </main>
+            {/* Right Column: Contact Info */}
+            <div className="space-y-6">
+                
+               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-2">
+                 <h2 className="text-xl font-bold">Contact Information</h2>
+                 <Badge variant="outline" className="w-fit text-xs font-normal border-orange-500/30 text-orange-500 bg-orange-500/10">Official channels</Badge>
+               </div>
 
-      <div className="container mx-auto px-4">
-        <FooterSection />
+               <p className="text-muted-foreground text-sm">
+                 We communicate only via official <span className="text-foreground font-medium">@esperanza.et</span> addresses. We will never ask you for your password.
+               </p>
+
+               <div className="grid gap-4">
+                  {/* Support Card */}
+                  <div className="p-4 rounded-lg bg-card/20 border border-border/50 hover:bg-card/40 transition-colors">
+                      <div className="flex flex-col gap-2">
+                          <span className="text-sm font-medium text-muted-foreground">General Support</span>
+                          <div className="flex items-center justify-between group">
+                              <div className="flex items-center gap-2">
+                                  <Badge variant="secondary" className="pointer-events-none text-xs h-6 px-2">Email</Badge>
+                                  <a href="mailto:support@esperanza.et" className="font-mono text-sm hover:underline hover:text-primary transition-colors">support@esperanza.et</a>
+                              </div>
+                              <Button 
+                                variant="ghost" 
+                                size="icon" 
+                                className="h-6 w-6 opacity-0 group-hover:opacity-100 transition-opacity"
+                                onClick={() => copyToClipboard('support@esperanza.et', 'Support')}
+                              >
+                                <Copy className="h-3 w-3" />
+                              </Button>
+                          </div>
+                      </div>
+                  </div>
+
+                  {/* Partnerships Card */}
+                  <div className="p-4 rounded-lg bg-card/20 border border-border/50 hover:bg-card/40 transition-colors">
+                      <div className="flex flex-col gap-2">
+                          <span className="text-sm font-medium text-muted-foreground">Business & Partnerships</span>
+                          <div className="flex items-center justify-between group">
+                              <div className="flex items-center gap-2">
+                                  <Badge variant="secondary" className="pointer-events-none text-xs h-6 px-2">Email</Badge>
+                                  <a href="mailto:partnerships@esperanza.et" className="font-mono text-sm hover:underline hover:text-primary transition-colors">partnerships@esperanza.et</a>
+                              </div>
+                               <Button 
+                                variant="ghost" 
+                                size="icon" 
+                                className="h-6 w-6 opacity-0 group-hover:opacity-100 transition-opacity"
+                                onClick={() => copyToClipboard('partnerships@esperanza.et', 'Partnerships')}
+                              >
+                                <Copy className="h-3 w-3" />
+                              </Button>
+                          </div>
+                          <p className="text-xs text-muted-foreground mt-1">For integrations, collaborations, and enterprise requests.</p>
+                      </div>
+                  </div>
+
+                   {/* Legal Card */}
+                   <div className="p-4 rounded-lg bg-card/20 border border-border/50 hover:bg-card/40 transition-colors">
+                      <div className="flex flex-col gap-2">
+                          <span className="text-sm font-medium text-muted-foreground">Legal & Privacy</span>
+                          <div className="flex items-center justify-between group">
+                              <div className="flex items-center gap-2">
+                                  <Badge variant="secondary" className="pointer-events-none text-xs h-6 px-2">Email</Badge>
+                                  <a href="mailto:legal@esperanza.et" className="font-mono text-sm hover:underline hover:text-primary transition-colors">legal@esperanza.et</a>
+                              </div>
+                               <Button 
+                                variant="ghost" 
+                                size="icon" 
+                                className="h-6 w-6 opacity-0 group-hover:opacity-100 transition-opacity"
+                                onClick={() => copyToClipboard('legal@esperanza.et', 'Legal')}
+                              >
+                                <Copy className="h-3 w-3" />
+                              </Button>
+                          </div>
+                           <p className="text-xs text-muted-foreground mt-1">For privacy requests, compliance questions, or policy issues.</p>
+                      </div>
+                  </div>
+
+                  {/* Hours Card */}
+                  <div className="p-4 rounded-lg bg-card/20 border border-border/50">
+                      <div className="flex flex-col gap-2">
+                          <span className="text-sm font-medium text-muted-foreground">Support Hours</span>
+                          <div className="flex items-center gap-2 md:gap-3">
+                              <Badge variant="outline" className="text-xs h-6 px-2">EAT</Badge>
+                              <span className="text-sm font-medium">Mon–Fri, 9:00 AM – 6:00 PM</span>
+                          </div>
+                           <p className="text-xs text-muted-foreground mt-1">Closed on weekends and public holidays.</p>
+                      </div>
+                  </div>
+
+               </div>
+            </div>
+
+          </div>
+
+        </main>
       </div>
+      <FooterSection />
     </div>
-  );
+  )
 }
