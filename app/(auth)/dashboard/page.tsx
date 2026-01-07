@@ -16,6 +16,8 @@ import { MODULES } from "@/lib/modules";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ReferralShare } from "@/components/referral-share";
+import { CurrencySelector } from "@/components/currency-selector";
+import { CurrencyDisplay } from "@/components/currency-display";
 
 import { getTreeStats } from "@/lib/services/referral-service";
 
@@ -122,14 +124,6 @@ export default async function DashboardPage() {
     }))
     .sort((a, b) => b.earned - a.earned);
 
-  // Format currency
-  const formatCurrency = (amount: number) => {
-    return new Intl.NumberFormat('en-US', {
-      style: 'currency',
-      currency: 'USD',
-    }).format(amount);
-  };
-
   // Prepare chart data (reverse to show chronological order)
   // Group by date for cleaner chart
   const chartDataMap = new Map<string, number>();
@@ -159,11 +153,14 @@ export default async function DashboardPage() {
       {/* Header */}
       <div className="flex flex-col gap-2">
         <div className="flex items-center gap-3">
-          <div className="flex justify-between w-full">
-          <h1 className="text-3xl font-bold tracking-tight">Dashboard</h1>
-         <p className="text-sm font-bold text-green-500 rounded-2xl">
-            {user.level !== undefined ? `Level ${user.level} Affiliate` : "Affiliate"}
-         </p>
+          <div className="flex justify-between w-full items-center">
+            <div className="flex items-center gap-3">
+              <h1 className="text-3xl font-bold tracking-tight">Dashboard</h1>
+              <p className="text-sm font-bold text-green-500 rounded-2xl bg-green-500/10 px-2 py-0.5">
+                {user.level !== undefined ? `Level ${user.level} Affiliate` : "Affiliate"}
+              </p>
+            </div>
+            <CurrencySelector />
           </div>
         </div>
         <p className="text-muted-foreground">
@@ -179,7 +176,9 @@ export default async function DashboardPage() {
             <h3 className="tracking-tight text-sm font-medium text-muted-foreground">Current Balance</h3>
             <DollarSign className="h-4 w-4 text-primary" />
           </div>
-          <div className="text-2xl font-bold">{formatCurrency(displayBalance)}</div>
+          <div className="text-2xl font-bold">
+            <CurrencyDisplay amount={displayBalance} />
+          </div>
           <p className="text-xs text-muted-foreground mt-1">Available for withdrawal</p>
         </div>
 
@@ -199,7 +198,9 @@ export default async function DashboardPage() {
             <h3 className="tracking-tight text-sm font-medium text-muted-foreground">Total Earned</h3>
             <TrendingUp className="h-4 w-4 text-green-500" />
           </div>
-          <div className="text-2xl font-bold">{formatCurrency(displayTotalEarned)}</div>
+          <div className="text-2xl font-bold">
+             <CurrencyDisplay amount={displayTotalEarned} />
+          </div>
           <p className="text-xs text-muted-foreground mt-1">Lifetime commissions</p>
         </div>
       </div>
@@ -273,7 +274,9 @@ export default async function DashboardPage() {
                   <module.icon className={`h-4 w-4 ${module.color}`} />
                 </CardHeader>
                 <CardContent>
-                  <div className="text-2xl font-bold">{formatCurrency(module.earned)}</div>
+                  <div className="text-2xl font-bold">
+                    <CurrencyDisplay amount={module.earned} />
+                  </div>
                   <p className="text-xs text-muted-foreground mt-1">
                     Total Earnings
                   </p>

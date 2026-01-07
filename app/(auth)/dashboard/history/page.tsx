@@ -15,6 +15,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { DollarSign, ArrowUpRight, ArrowDownLeft, TrendingUp } from "lucide-react";
 import { MODULES } from "@/lib/modules";
 import { ModuleHistoryChart } from "@/components/module-history-chart";
+import { CurrencyDisplay } from "@/components/currency-display";
 
 async function getUserTransactions(userId: string) {
     const user = await prisma.user.findUnique({
@@ -217,14 +218,14 @@ export default async function HistoryPage() {
                         <h3 className="tracking-tight text-sm font-medium text-muted-foreground">Total Earnings</h3>
                         <ArrowUpRight className="h-4 w-4 text-green-500" />
                     </div>
-                    <div className="text-2xl font-bold">{formatCurrency(totalEarnings)}</div>
+                    <div className="text-2xl font-bold"><CurrencyDisplay amount={totalEarnings} /></div>
                 </div>
                 <div className="rounded-xl border bg-card text-card-foreground shadow-sm p-6">
                     <div className="flex flex-row items-center justify-between space-y-0 pb-2">
                         <h3 className="tracking-tight text-sm font-medium text-muted-foreground">Available Balance</h3>
                         <DollarSign className="h-4 w-4 text-primary" />
                     </div>
-                    <div className="text-2xl font-bold">{formatCurrency(currentBalance)}</div>
+                    <div className="text-2xl font-bold"><CurrencyDisplay amount={currentBalance} /></div>
                 </div>
             </div>
 
@@ -254,7 +255,7 @@ export default async function HistoryPage() {
                                 <module.icon className={`h-4 w-4 ${module.color}`} />
                             </CardHeader>
                             <CardContent>
-                                <div className="text-2xl font-bold">{formatCurrency(module.total)}</div>
+                                <div className="text-2xl font-bold"><CurrencyDisplay amount={module.total} /></div>
                                 <p className="text-xs text-muted-foreground mt-1">
                                     Lifetime Earnings
                                 </p>
@@ -312,7 +313,7 @@ export default async function HistoryPage() {
                                     <td className="p-4 align-middle">{tx.description || '-'}</td>
                                     <td className={`p-4 align-middle text-right font-medium ${tx.amount > 0 ? 'text-green-600' : 'text-red-600'
                                         }`}>
-                                        {tx.amount > 0 ? '+' : '-'}{formatCurrency(tx.amount)}
+                                        {tx.amount > 0 ? '+' : '-'}<CurrencyDisplay amount={tx.amount} />
                                     </td>
                                 </tr>
                             ))}

@@ -1,5 +1,6 @@
 "use client";
 
+import { useCurrencyStore } from "@/store/currency-store";
 import {
     ResponsiveContainer,
     AreaChart,
@@ -16,6 +17,8 @@ interface ChartData {
 }
 
 export function DashboardCharts({ data }: { data: ChartData[] }) {
+    const { currency, exchangeRate } = useCurrencyStore();
+
     if (!data || data.length === 0) {
         return (
             <div className="flex h-[300px] items-center justify-center text-muted-foreground">
@@ -24,11 +27,31 @@ export function DashboardCharts({ data }: { data: ChartData[] }) {
         );
     }
 
+    const chartData = data.map(item => ({
+        ...item,
+        amount: currency === 'USD' ? item.amount : item.amount * exchangeRate
+    }));
+
+     const formatValue = (val: number | undefined) => {
+        if (val === undefined) return '';
+        if (currency === 'USD') {
+            return new Intl.NumberFormat('en-US', {
+                style: 'currency',
+                currency: 'USD',
+                maximumFractionDigits: 0,
+            }).format(val);
+        } else {
+             return `${new Intl.NumberFormat('en-US', {
+                maximumFractionDigits: 0,
+            }).format(val)} Birr`;
+        }
+    }
+
     return (
         <div className="h-[300px] w-full">
             <ResponsiveContainer width="100%" height="100%">
                 <AreaChart
-                    data={data}
+                    data={chartData}
                     margin={{
                         top: 10,
                         right: 30,
@@ -55,7 +78,7 @@ export function DashboardCharts({ data }: { data: ChartData[] }) {
                         fontSize={12}
                         tickLine={false}
                         axisLine={false}
-                        tickFormatter={(value) => `$${value}`}
+                        tickFormatter={(value) => formatValue(value)}
                     />
                     <Tooltip
                         contentStyle={{
@@ -65,7 +88,7 @@ export function DashboardCharts({ data }: { data: ChartData[] }) {
                             color: 'var(--card-foreground)'
                         }}
                         itemStyle={{ color: 'var(--primary)' }}
-                        formatter={(value: number | string | undefined) => [`$${value}`, 'Earnings']}
+                        formatter={(value: number | undefined) => [formatValue(value), 'Earnings']}
                     />
                     <Area
                         type="monotone"
