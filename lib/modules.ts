@@ -30,6 +30,7 @@ export const MODULES: Record<string, {
     features: { title: string; desc: string; icon: any }[];
     color: string;
     gradient: string;
+    image?: string;
 }> = {
     "e-learning": {
         title: "E-Learning Suite",
@@ -93,6 +94,7 @@ export const MODULES: Record<string, {
             { title: "Multi-Device Access", desc: "Watch on TV, mobile, tablet, and desktop.", icon: Globe },
             { title: "Exclusive Content", desc: "Original shows and movies you can't find elsewhere.", icon: Sparkles }
         ],
+        image: "/images/hoora.jpg",
         color: "text-red-500",
         gradient: "from-red-500/20 via-pink-500/10 to-transparent"
     },

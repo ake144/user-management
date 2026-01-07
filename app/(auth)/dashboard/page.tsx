@@ -15,6 +15,7 @@ import { DashboardCharts } from "@/components/dashboard-charts"; // Client compo
 import { MODULES } from "@/lib/modules";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { ReferralShare } from "@/components/referral-share";
 
 import { getTreeStats } from "@/lib/services/referral-service";
 
@@ -249,21 +250,11 @@ export default async function DashboardPage() {
           </div>
 
           {/* Referral Link Card */}
-          <div className="rounded-xl border bg-gradient-to-br from-primary/10 to-purple-500/10 p-6">
-            <h3 className="font-semibold mb-2">Your Referral Code</h3>
-            <div
-              className="bg-background/50 border rounded-md p-3 font-mono text-center text-sm sm:text-lg tracking-widest break-all"
-              aria-label="Your referral link"
-            >
-              {/* {`${(process.env.NEXT_PUBLIC_BASE_URL ?? "").replace(/\/$/, "")}?ref=${encodeURIComponent(
+          <ReferralShare 
+            referralLink={`${(process.env.NEXT_PUBLIC_BASE_URL ?? "").replace(/\/$/, "")}?ref=${encodeURIComponent(
               user.referralCode ?? "GENERATE-CODE"
-              )}`} */}
-              {encodeURIComponent(
-              user.referralCode ?? "GENERATE-CODE"
-              )}
-            </div>
-            <p className="text-xs text-muted-foreground mt-2 text-center">Share this code to grow your empire.</p>
-          </div>
+            )}`} 
+          />
         </div>
       </div>
 

@@ -102,6 +102,13 @@ export default function DashboardLayout({
                 { title: "Adulian", href: "/dashboard/modules/adulian", icon: Store },
             ],
         },
+         {
+            title: "Entertainment & Media",
+            items: [
+                { title: "Video Generator", href: "/dashboard/modules/video-generator", icon: Video },
+                { title: "Hooraflix", href: "/dashboard/modules/hooraflix", icon: Film },
+            ],
+        },
         {
             title: "Education & Learning",
             items: [
@@ -110,13 +117,7 @@ export default function DashboardLayout({
                 { title: "Global Pathway Academy", href: "/dashboard/modules/global-pathway-academy", icon: Globe2 },
             ],
         },
-        {
-            title: "Entertainment & Media",
-            items: [
-                { title: "Video Generator", href: "/dashboard/modules/video-generator", icon: Video },
-                { title: "Hooraflix", href: "/dashboard/modules/hooraflix", icon: Film },
-            ],
-        },
+       
         {
             title: "Technology & Innovation",
             items: [

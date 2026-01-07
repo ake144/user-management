@@ -1,6 +1,7 @@
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
+import Image from "next/image";
 import {
     Copy,
     Check,
@@ -67,56 +68,96 @@ export default async function ModulePage({ params }: { params: Promise<{ id: str
     return (
         <div className="flex flex-col gap-10 max-w-6xl mx-auto pb-10">
             {/* Hero Section */}
-            <div className={`relative overflow-hidden rounded-3xl border bg-gradient-to-br ${moduleData.gradient} p-8 md:p-12`}>
-                <div className="relative z-10 flex flex-col md:flex-row gap-8 items-start md:items-center justify-between">
-                    <div className="flex flex-col gap-4 max-w-2xl">
-                        <div className="flex items-center gap-3">
-                            <div className={`h-12 w-12 rounded-xl bg-background/50 backdrop-blur flex items-center justify-center ${moduleData.color} shadow-sm`}>
-                                <Icon className="h-6 w-6" />
-                            </div>
-                            <Badge variant="outline" className="bg-background/30 backdrop-blur border-primary/20 text-foreground px-3 py-1 text-sm">
-                                Premium Module
-                            </Badge>
+            {moduleData.image ? (
+                <div className="relative overflow-hidden rounded-3xl border bg-background">
+                    <div className="flex flex-col lg:flex-row">
+                        <div className="relative w-full lg:w-[75%] min-h-[300px] lg:min-h-[500px] bg-muted/20">
+                            <Image
+                                src={moduleData.image}
+                                alt={moduleData.title}
+                                fill
+                                className="object-contain p-4"
+                                priority
+                            />
                         </div>
-                        <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight text-foreground">
-                            {moduleData.title}
-                        </h1>
-                        <p className="text-lg text-muted-foreground leading-relaxed">
-                            {moduleData.description}
-                        </p>
-                        <div className="flex flex-wrap gap-3 mt-2">
-                            <Badge className={`text-base px-4 py-1.5 ${moduleData.color} bg-background/80 backdrop-blur border-0 shadow-sm`}>
-                                {moduleData.commission} Commission
-                            </Badge>
-                            <Badge variant="secondary" className="text-base px-4 py-1.5 bg-background/50 backdrop-blur">
-                                Recurring Revenue
-                            </Badge>
-                        </div>
-                    </div>
-
-                    {/* Hero Stats/Visual (Optional decorative element) */}
-                    <div className="hidden lg:flex flex-col gap-3 p-6 bg-background/40 backdrop-blur-md rounded-2xl border border-white/10 shadow-xl rotate-3 hover:rotate-0 transition-transform duration-500">
-                        <div className="flex items-center gap-3">
-                            <div className="h-10 w-10 rounded-full bg-green-500/20 flex items-center justify-center text-green-600">
-                                <DollarSign className="h-5 w-5" />
+                        <div className="flex-1 flex flex-col justify-center p-6 lg:p-8 border-t lg:border-t-0 lg:border-l bg-card/50">
+                            <div className="flex flex-col gap-4">
+                                <div className="flex items-center gap-3">
+                                    <div className={`h-10 w-10 rounded-lg bg-muted/50 backdrop-blur flex items-center justify-center ${moduleData.color} shadow-sm`}>
+                                        <Icon className="h-5 w-5" />
+                                    </div>
+                                    <Badge variant="outline" className="text-xs">Premium</Badge>
+                                </div>
+                                <h1 className="text-2xl md:text-3xl font-extrabold tracking-tight text-foreground">
+                                    {moduleData.title}
+                                </h1>
+                                <p className="text-sm text-muted-foreground leading-relaxed">
+                                    {moduleData.description}
+                                </p>
+                                <div className="flex flex-wrap gap-2 mt-2">
+                                    <Badge className={`${moduleData.color} bg-opacity-10 text-current border-0`}>
+                                        {moduleData.commission}
+                                    </Badge>
+                                    <Badge variant="secondary">
+                                        Recurring
+                                    </Badge>
+                                </div>
                             </div>
-                            <div>
-                                <p className="text-xs text-muted-foreground font-medium uppercase tracking-wider">Avg. Earning</p>
-                                <p className="text-xl font-bold">$1,250/mo</p>
-                            </div>
-                        </div>
-                        <div className="h-px bg-border/50 w-full" />
-                        <div className="flex items-center gap-2 text-xs text-muted-foreground">
-                            <TrendingUp className="h-3 w-3 text-green-500" />
-                            <span>Top performing vertical</span>
                         </div>
                     </div>
                 </div>
+            ) : (
+                <div className={`relative overflow-hidden rounded-3xl border bg-gradient-to-br ${moduleData.gradient} p-8 md:p-12`}>
+                    <div className="relative z-10 flex flex-col md:flex-row gap-8 items-start md:items-center justify-between">
+                        <div className="flex flex-col gap-4 max-w-2xl">
+                            <div className="flex items-center gap-3">
+                                <div className={`h-12 w-12 rounded-xl bg-background/50 backdrop-blur flex items-center justify-center ${moduleData.color} shadow-sm`}>
+                                    <Icon className="h-6 w-6" />
+                                </div>
+                                <Badge variant="outline" className="bg-background/30 backdrop-blur border-primary/20 text-foreground px-3 py-1 text-sm">
+                                    Premium Module
+                                </Badge>
+                            </div>
+                            <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight text-foreground">
+                                {moduleData.title}
+                            </h1>
+                            <p className="text-lg text-muted-foreground leading-relaxed">
+                                {moduleData.description}
+                            </p>
+                            <div className="flex flex-wrap gap-3 mt-2">
+                                <Badge className={`text-base px-4 py-1.5 ${moduleData.color} bg-background/80 backdrop-blur border-0 shadow-sm`}>
+                                    {moduleData.commission} Commission
+                                </Badge>
+                                <Badge variant="secondary" className="text-base px-4 py-1.5 bg-background/50 backdrop-blur">
+                                    Recurring Revenue
+                                </Badge>
+                            </div>
+                        </div>
 
-                {/* Background Pattern */}
-                <div className="absolute top-0 right-0 -mt-20 -mr-20 h-96 w-96 rounded-full bg-primary/5 blur-3xl" />
-                <div className="absolute bottom-0 left-0 -mb-20 -ml-20 h-96 w-96 rounded-full bg-primary/5 blur-3xl" />
-            </div>
+                        {/* Hero Stats/Visual (Optional decorative element) */}
+                        <div className="hidden lg:flex flex-col gap-3 p-6 bg-background/40 backdrop-blur-md rounded-2xl border border-white/10 shadow-xl rotate-3 hover:rotate-0 transition-transform duration-500">
+                            <div className="flex items-center gap-3">
+                                <div className="h-10 w-10 rounded-full bg-green-500/20 flex items-center justify-center text-green-600">
+                                    <DollarSign className="h-5 w-5" />
+                                </div>
+                                <div>
+                                    <p className="text-xs text-muted-foreground font-medium uppercase tracking-wider">Avg. Earning</p>
+                                    <p className="text-xl font-bold">$1,250/mo</p>
+                                </div>
+                            </div>
+                            <div className="h-px bg-border/50 w-full" />
+                            <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                                <TrendingUp className="h-3 w-3 text-green-500" />
+                                <span>Top performing vertical</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Background Pattern */}
+                    <div className="absolute top-0 right-0 -mt-20 -mr-20 h-96 w-96 rounded-full bg-primary/5 blur-3xl" />
+                    <div className="absolute bottom-0 left-0 -mb-20 -ml-20 h-96 w-96 rounded-full bg-primary/5 blur-3xl" />
+                </div>
+            )}
 
             <div className="grid gap-8 lg:grid-cols-3">
                 {/* Left Column: Main Actions */}
