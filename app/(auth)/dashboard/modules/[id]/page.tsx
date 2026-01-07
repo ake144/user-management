@@ -38,6 +38,7 @@ import { Badge } from "@/components/ui/badge";
 import ClientCopyButton from "@/components/client-copy-button";
 
 import { MODULES } from "@/lib/modules";
+import Link from "next/link";
 
 export default async function ModulePage({ params }: { params: Promise<{ id: string }> }) {
     const { id } = await params;
@@ -62,14 +63,14 @@ export default async function ModulePage({ params }: { params: Promise<{ id: str
 
     // const referralLink = `http://localhost:3000/${id}?ref=${(session.user as any).referralCode ?? session.user.id}`;
 
-    const referralLink = `${process.env.NEXT_PUBLIC_BASE_URL || "https://esperanza.et"}/${id}?ref=${(session.user as any).referralCode ?? session.user.id}`;
+    const referralLink = `${moduleData.referralLink}?ref=${(session.user as any).referralCode ?? session.user.id}`
     const Icon = moduleData.icon;
 
     return (
         <div className="flex flex-col gap-10 max-w-6xl mx-auto pb-10">
-            {/* Hero Section */}
-            {moduleData.image ? (
-                <div className="relative overflow-hidden rounded-3xl border bg-background">
+        {/* Hero Section */}
+        {moduleData.image ? (
+            <div className="relative overflow-hidden rounded-3xl border bg-background">
                     <div className="flex flex-col lg:flex-row">
                         <div className="relative w-full lg:w-[75%] min-h-[300px] lg:min-h-[500px] bg-muted/20">
                             <Image
@@ -158,7 +159,6 @@ export default async function ModulePage({ params }: { params: Promise<{ id: str
                     <div className="absolute bottom-0 left-0 -mb-20 -ml-20 h-96 w-96 rounded-full bg-primary/5 blur-3xl" />
                 </div>
             )}
-
             <div className="grid gap-8 lg:grid-cols-3">
                 {/* Left Column: Main Actions */}
                 <div className="lg:col-span-2 flex flex-col gap-8">
@@ -180,21 +180,28 @@ export default async function ModulePage({ params }: { params: Promise<{ id: str
                                 <div className="flex-1 w-full flex items-center gap-3 p-3 rounded-lg bg-muted/50 border border-border/50 group hover:border-primary/30 transition-colors">
                                     <Globe className="h-4 w-4 text-muted-foreground group-hover:text-primary transition-colors" />
                                     <code className="flex-1 text-sm font-mono truncate text-foreground">
-                                        {referralLink}
+                                        {referralLink }
                                     </code>
                                 </div>
                                 <ClientCopyButton text={referralLink} />
                             </div>
                         </CardContent>
                         <CardFooter className="bg-muted/30 border-t border-border/50 py-4 flex flex-wrap gap-3">
-                            <Button variant="outline" size="sm" className="gap-2 hover:bg-background hover:text-primary hover:border-primary/30">
+                             <a target="_blank" href={referralLink}>
+                            <Button variant="outline" size="sm" className="gap-2 hover:bg-background cursor-pointer hover:text-primary hover:border-primary/30">
+                               
                                 <ExternalLink className="h-4 w-4" />
                                 Preview Landing Page
+                               
                             </Button>
-                            <Button variant="outline" size="sm" className="gap-2 hover:bg-background hover:text-primary hover:border-primary/30">
+                             </a>
+                            {/* <Button variant="outline" size="sm" className="gap-2 hover:bg-background hover:text-primary hover:border-primary/30">
+                              
+                               
                                 <Copy className="h-4 w-4" />
                                 Copy Email Template
-                            </Button>
+                                </a>
+                            </Button> */}
                         </CardFooter>
                     </Card>
 
@@ -252,7 +259,7 @@ export default async function ModulePage({ params }: { params: Promise<{ id: str
                     </Card>
 
                     {/* Testing Sandbox */}
-                    <Card className="border-2 border-dashed border-primary/20 bg-gradient-to-b from-primary/5 to-transparent overflow-hidden">
+                    {/* <Card className="border-2 border-dashed border-primary/20 bg-gradient-to-b from-primary/5 to-transparent overflow-hidden">
                         <div className="absolute top-0 right-0 p-2 opacity-10">
                             <DollarSign className="h-24 w-24 rotate-12" />
                         </div>
@@ -277,7 +284,7 @@ export default async function ModulePage({ params }: { params: Promise<{ id: str
                                 System Operational
                             </div>
                         </CardContent>
-                    </Card>
+                    </Card> */}
                 </div>
             </div>
         </div>

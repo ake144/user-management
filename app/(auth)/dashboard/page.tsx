@@ -9,8 +9,12 @@ import {
   TrendingUp,
   ArrowRight,
   History,
-  Network
+  Network,
+  Lock,
+  ExternalLink,
+  Copy
 } from "lucide-react";
+import ClientCopyButton from "@/components/client-copy-button";
 import { DashboardCharts } from "@/components/dashboard-charts"; // Client component for Recharts
 import { MODULES } from "@/lib/modules";
 import { Badge } from "@/components/ui/badge";
@@ -123,6 +127,12 @@ export default async function DashboardPage() {
       earned: amount
     }))
     .sort((a, b) => b.earned - a.earned);
+
+  const allModulesList = Object.entries(MODULES).map(([id, module]) => ({
+    id,
+    ...module,
+    earned: activeModulesMap.get(id) || 0
+  }));
 
   // Prepare chart data (reverse to show chronological order)
   // Group by date for cleaner chart
@@ -259,44 +269,69 @@ export default async function DashboardPage() {
         </div>
       </div>
 
-      {/* Active Modules */}
+      {/* Affiliate Modules */}
       <div className="flex flex-col gap-4">
-        <h2 className="text-xl font-semibold tracking-tight">Active Modules</h2>
+        <h2 className="text-xl font-semibold tracking-tight">Affiliate Modules</h2>
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-          {activeModules.length > 0 ? (
-            activeModules.map((module) => (
-              <Card key={module.id} className="overflow-hidden">
-                <div className={`h-2 w-full bg-gradient-to-r ${module.gradient}`} />
-                <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                  <CardTitle className="text-sm font-medium">
-                    {module.title}
-                  </CardTitle>
-                  <module.icon className={`h-4 w-4 ${module.color}`} />
-                </CardHeader>
-                <CardContent>
-                  <div className="text-2xl font-bold">
-                    <CurrencyDisplay amount={module.earned} />
-                  </div>
-                  <p className="text-xs text-muted-foreground mt-1">
-                    Total Earnings
-                  </p>
-                  <div className="mt-4 flex items-center gap-2">
-                    <Badge variant="secondary" className="text-xs">
-                      {module.commission} Commission
-                    </Badge>
-                    <Link href={`/dashboard/modules/${module.id}`} className="text-xs text-primary hover:underline ml-auto flex items-center gap-1">
-                      View Details <ArrowRight className="h-3 w-3" />
-                    </Link>
-                  </div>
-                </CardContent>
-              </Card>
-            ))
+          {allModulesList.length > 0 ? (
+            allModulesList.map((module) => {
+              const isClickable = !!module.isActive;
+              const uniqueRefLink = module.referralLink 
+                ? `${module.referralLink}?ref=${user.referralCode}`
+                : `${(process.env.NEXT_PUBLIC_BASE_URL ?? "").replace(/\/$/, "")}/${module.id}?ref=${user.referralCode}`;
+
+              const CardWrapper = isClickable ? Link : 'div';
+              const wrapperProps = isClickable ? { href: `/dashboard/modules/${module.id}` } as any : {};
+
+              return (
+                <Card key={module.id} className={`overflow-hidden transition-all duration-200 ${isClickable ? 'hover:shadow-lg hover:border-primary/50 cursor-pointer' : 'opacity-75 bg-muted/30 cursor-not-allowed'}`}>
+                  {/* @ts-ignore */}
+                  <CardWrapper {...wrapperProps} className="block h-full">
+                    <div className={`h-2 w-full bg-gradient-to-r ${module.gradient}`} />
+                    <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                       <div className="flex items-center gap-2">
+                          <CardTitle className="text-sm font-medium">
+                            {module.title}
+                          </CardTitle>
+                          {!isClickable && <Lock className="h-3 w-3 text-muted-foreground" />}
+                       </div>
+                      <module.icon className={`h-4 w-4 ${module.color} ${!isClickable && 'grayscale opacity-50'}`} />
+                    </CardHeader>
+                    <CardContent>
+                      <div className="flex flex-col gap-4">
+                          <div>
+                            <div className="text-2xl font-bold">
+                                {isClickable ? <CurrencyDisplay amount={module.earned} /> : <span className="text-muted-foreground text-lg">Locked</span>}
+                            </div>
+                            <p className="text-xs text-muted-foreground mt-1">
+                                {isClickable ? 'Total Earnings' : 'Coming Soon'}
+                            </p>
+                          </div>
+                          
+                          {isClickable && (
+                              <div className="flex items-center gap-2 mt-auto pt-2">
+                                  <div className="flex-1 bg-muted/50 border rounded text-[10px] font-mono p-1.5 truncate text-muted-foreground">
+                                      {uniqueRefLink}
+                                  </div>
+                                  <ClientCopyButton text={uniqueRefLink} className="h-7 w-7" />
+                              </div>
+                          )}
+                          
+                          <div className="flex items-center gap-2">
+                            <Badge variant={isClickable ? "secondary" : "outline"} className="text-xs">
+                              {module.commission} Commission
+                            </Badge>
+                            {isClickable && <ExternalLink className="h-3 w-3 ml-auto text-muted-foreground/50" />}
+                          </div>
+                      </div>
+                    </CardContent>
+                  </CardWrapper>
+                </Card>
+              );
+            })
           ) : (
             <div className="col-span-full p-8 text-center border rounded-xl bg-muted/20">
-              <p className="text-muted-foreground">No active modules yet. Start promoting to earn!</p>
-              <Link href="/dashboard/modules" className="text-primary hover:underline mt-2 inline-block">
-                Browse Modules
-              </Link>
+              <p className="text-muted-foreground">No modules available.</p>
             </div>
           )}
         </div>

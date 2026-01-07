@@ -5,10 +5,12 @@ import { Button } from "@/components/ui/button";
 import { Copy, Check } from "lucide-react";
 import { toast } from "sonner";
 
-export default function ClientCopyButton({ text }: { text: string }) {
+export default function ClientCopyButton({ text, className }: { text: string, className?: string }) {
     const [copied, setCopied] = useState(false);
 
-    const handleCopy = async () => {
+    const handleCopy = async (e: React.MouseEvent) => {
+        e.preventDefault();
+        e.stopPropagation();
         try {
             await navigator.clipboard.writeText(text);
             setCopied(true);
@@ -20,7 +22,12 @@ export default function ClientCopyButton({ text }: { text: string }) {
     };
 
     return (
-        <Button variant="ghost" size="icon" onClick={handleCopy}>
+        <Button 
+            variant="outline" 
+            size="icon" 
+            onClick={handleCopy}
+            className={className}
+        >
             {copied ? <Check className="h-4 w-4 text-green-500" /> : <Copy className="h-4 w-4" />}
         </Button>
     );

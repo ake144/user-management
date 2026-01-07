@@ -31,8 +31,11 @@ export const MODULES: Record<string, {
     color: string;
     gradient: string;
     image?: string;
+    isActive?: boolean;
+    referralLink?: string;
 }> = {
     "e-learning": {
+        isActive: false,
         title: "E-Learning Suite",
         description: "Empower the next generation of learners. Promote our comprehensive library of tech and business courses.",
         icon: BookOpen,
@@ -43,9 +46,11 @@ export const MODULES: Record<string, {
             { title: "High Conversion", desc: "Optimized landing pages ensure high sales.", icon: TrendingUp }
         ],
         color: "text-blue-500",
+
         gradient: "from-blue-500/20 via-cyan-500/10 to-transparent"
     },
     "e-commerce": {
+        isActive: false,
         title: "E-Commerce Starter",
         description: "The ultimate launchpad for entrepreneurs. Everything needed to start an online store in minutes.",
         icon: ShoppingBag,
@@ -59,6 +64,7 @@ export const MODULES: Record<string, {
         gradient: "from-purple-500/20 via-pink-500/10 to-transparent"
     },
     "video-generator": {
+        isActive: false,
         title: "AI Video Generator",
         description: "Transform text into cinematic videos. The viral AI tool everyone is talking about.",
         icon: Video,
@@ -76,18 +82,21 @@ export const MODULES: Record<string, {
         description: "The ultimate e-commerce platform for African entrepreneurs. Build, grow, and scale your online store with ease.",
         icon: Store,
         commission: "18%",
+        isActive:true,
         features: [
             { title: "Product Management", desc: "Easy-to-use catalog and inventory system.", icon: ShoppingCart },
             { title: "Payment Processing", desc: "Accept mobile money and international payments.", icon: DollarSign },
             { title: "Store Analytics", desc: "Track sales, visitors, and customer behavior.", icon: TrendingUp }
         ],
         color: "text-orange-600",
-        gradient: "from-orange-600/20 via-amber-500/10 to-transparent"
+        gradient: "from-orange-600/20 via-amber-500/10 to-transparent",
+        referralLink:'https://adulian-black.vercel.app'
     },
     "hooraflix": {
         title: "Hooraflix",
         description: "Stream unlimited movies, series, and exclusive content. The Netflix of Africa with local and international hits.",
         icon: Film,
+        isActive:true,
         commission: "22%",
         features: [
             { title: "HD Streaming", desc: "High-quality video playback on any device.", icon: PlayCircle },
@@ -96,13 +105,15 @@ export const MODULES: Record<string, {
         ],
         image: "/images/hoora.jpg",
         color: "text-red-500",
-        gradient: "from-red-500/20 via-pink-500/10 to-transparent"
+        gradient: "from-red-500/20 via-pink-500/10 to-transparent",
+        referralLink:'https://hooraflix.esperanza.et'
     },
     "visit-ethiopia": {
         title: "Visit Ethiopia",
         description: "Discover the beauty of Ethiopia. Book authentic tours, experiences, and adventures through the cradle of civilization.",
         icon: Plane,
         commission: "15%",
+        isActive:false,
         features: [
             { title: "Tour Packages", desc: "Curated trips to historic sites and natural wonders.", icon: MapPin },
             { title: "Local Guides", desc: "Expert guides who know the culture and history.", icon: Users },
@@ -116,6 +127,7 @@ export const MODULES: Record<string, {
         description: "Master in-demand skills with expert-led courses. From coding to design, launch your tech career today.",
         icon: Award,
         commission: "20%",
+        isActive:false,
         features: [
             { title: "Skill-Based Courses", desc: "Practical, job-ready training in tech and business.", icon: BookOpen },
             { title: "Certifications", desc: "Earn recognized credentials to boost your resume.", icon: Award },
@@ -129,6 +141,7 @@ export const MODULES: Record<string, {
         description: "Build a solid foundation for your future. Comprehensive learning programs designed to launch your career.",
         icon: Rocket,
         commission: "20%",
+        isActive:false,
         features: [
             { title: "Foundational Courses", desc: "Start from zero and master the fundamentals.", icon: BookOpen },
             { title: "Mentorship Program", desc: "One-on-one guidance from industry professionals.", icon: Users },
@@ -142,6 +155,7 @@ export const MODULES: Record<string, {
         description: "Cutting-edge technology solutions powered by AI. Automate your business and unlock next-level efficiency.",
         icon: Cpu,
         commission: "25%",
+        isActive:false,
         features: [
             { title: "AI-Powered Tools", desc: "Smart automation for your workflows.", icon: Sparkles },
             { title: "Tech Solutions", desc: "Custom software and integrations.", icon: Cpu },
@@ -155,6 +169,7 @@ export const MODULES: Record<string, {
         description: "Your gateway to international opportunities. Study abroad programs, language courses, and global certifications.",
         icon: Globe2,
         commission: "20%",
+        isActive:false,
         features: [
             { title: "International Programs", desc: "Study abroad and exchange opportunities.", icon: Globe },
             { title: "Language Courses", desc: "Learn English, French, Spanish, and more.", icon: BookOpen },

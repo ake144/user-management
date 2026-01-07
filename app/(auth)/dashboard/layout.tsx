@@ -26,7 +26,8 @@ import {
     CreditCard,
     Bell,
     ChevronsUpDown,
-    Sparkles
+    Sparkles,
+    Lock
 } from "lucide-react";
 
 import {
@@ -54,6 +55,7 @@ import { useState, useEffect } from "react";
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
 import { Button } from "@/components/ui/button";
+import { MODULES } from "@/lib/modules";
 
 function cn(...inputs: ClassValue[]) {
     return twMerge(clsx(inputs));
@@ -91,43 +93,43 @@ export default function DashboardLayout({
         {
             title: "Overview",
             items: [
-                { title: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
-                { title: "Affiliate History", href: "/dashboard/history", icon: History },
-                { title: "Referral Tree", href: "/dashboard/tree", icon: Network },
+                { title: "Dashboard", href: "/dashboard", icon: LayoutDashboard, active: true },
+                { title: "Affiliate History", href: "/dashboard/history", icon: History, active: true },
+                { title: "Referral Tree", href: "/dashboard/tree", icon: Network, active: true },
             ],
         },
         {
             title: "E-Commerce & Retail",
             items: [
-                { title: "Adulian", href: "/dashboard/modules/adulian", icon: Store },
+                { title: "Adulian", href: "/dashboard/modules/adulian", icon: Store, active: MODULES["adulian"]?.isActive },
             ],
         },
          {
             title: "Entertainment & Media",
             items: [
-                { title: "Video Generator", href: "/dashboard/modules/video-generator", icon: Video },
-                { title: "Hooraflix", href: "/dashboard/modules/hooraflix", icon: Film },
+                { title: "Video Generator", href: "/dashboard/modules/video-generator", icon: Video, active: MODULES["video-generator"]?.isActive },
+                { title: "Hooraflix", href: "/dashboard/modules/hooraflix", icon: Film, active: MODULES["hooraflix"]?.isActive },
             ],
         },
         {
             title: "Education & Learning",
             items: [
-                { title: "Kefita Skill Academy", href: "/dashboard/modules/kefita-skill-academy", icon: Award },
-                { title: "SolidStart Academy", href: "/dashboard/modules/solidstart-academy", icon: Rocket },
-                { title: "Global Pathway Academy", href: "/dashboard/modules/global-pathway-academy", icon: Globe2 },
+                { title: "Kefita Skill Academy", href: "/dashboard/modules/kefita-skill-academy", icon: Award, active: MODULES["kefita-skill-academy"]?.isActive },
+                { title: "SolidStart Academy", href: "/dashboard/modules/solidstart-academy", icon: Rocket, active: MODULES["solidstart-academy"]?.isActive },
+                { title: "Global Pathway Academy", href: "/dashboard/modules/global-pathway-academy", icon: Globe2, active: MODULES["global-pathway-academy"]?.isActive },
             ],
         },
        
         {
             title: "Technology & Innovation",
             items: [
-                { title: "Technova", href: "/dashboard/modules/technova", icon: Cpu },
+                { title: "Technova", href: "/dashboard/modules/technova", icon: Cpu, active: MODULES["technova"]?.isActive },
             ],
         },
         {
             title: "Travel & Tourism",
             items: [
-                { title: "Visit Ethiopia", href: "/dashboard/modules/visit-ethiopia", icon: Plane },
+                { title: "Visit Ethiopia", href: "/dashboard/modules/visit-ethiopia", icon: Plane, active: MODULES["visit-ethiopia"]?.isActive },
             ],
         },
     ];
@@ -173,22 +175,28 @@ export default function DashboardLayout({
                                     <div className="space-y-1">
                                         {group.items.map((item) => {
                                             const isActive = pathname === item.href;
+                                            const isClickable = !!item.active;
+                                            const Wrapper = (isClickable ? Link : 'div') as any;
+                                            const wrapperProps = isClickable ? { href: item.href, onClick: () => setIsSidebarOpen(false) } : {};
+                                            
                                             return (
-                                                <Link
+                                                <Wrapper
                                                     key={item.href}
-                                                    href={item.href}
-                                                    onClick={() => setIsSidebarOpen(false)}
+                                                    {...wrapperProps}
                                                     className={cn(
                                                         "flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition-colors",
                                                         isActive
                                                             ? "bg-primary text-primary-foreground"
-                                                            : "text-muted-foreground hover:bg-accent hover:text-accent-foreground"
+                                                            : isClickable 
+                                                                ? "text-muted-foreground hover:bg-accent hover:text-accent-foreground cursor-pointer" 
+                                                                : "text-muted-foreground/50 cursor-not-allowed bg-transparent"
                                                     )}
                                                 >
-                                                    <item.icon className="h-4 w-4" />
-                                                    {item.title}
+                                                    <item.icon className={cn("h-4 w-4", !isClickable && "opacity-50 grayscale")} />
+                                                    <span className={cn(!isClickable && "opacity-70")}>{item.title}</span>
                                                     {isActive && <ChevronRight className="ml-auto h-4 w-4 opacity-50" />}
-                                                </Link>
+                                                    {!isClickable && <Lock className="ml-auto h-3 w-3 opacity-40" />}
+                                                </Wrapper>
                                             );
                                         })}
                                     </div>
