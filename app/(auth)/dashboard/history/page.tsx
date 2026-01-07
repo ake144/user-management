@@ -29,64 +29,6 @@ async function getUserTransactions(userId: string) {
     return user;
 }
 
-// Mock Data with referenceId for modules
-const MOCK_TRANSACTIONS = [
-    {
-        id: "tx_mock_1",
-        createdAt: new Date(Date.now() - 1000 * 60 * 60 * 2), // 2 hours ago
-        type: "REFERRAL_COMMISSION",
-        amount: 150.00,
-        description: "Commission from User #8821",
-        status: "COMPLETED",
-        referenceId: "e-learning"
-    },
-    {
-        id: "tx_mock_2",
-        createdAt: new Date(Date.now() - 1000 * 60 * 60 * 24 * 2), // 2 days ago
-        type: "DOWNLINE_EARNING",
-        amount: 45.50,
-        description: "Level 2 earning from User #9912",
-        status: "COMPLETED",
-        referenceId: "e-commerce"
-    },
-    {
-        id: "tx_mock_3",
-        createdAt: new Date(Date.now() - 1000 * 60 * 60 * 24 * 5), // 5 days ago
-        type: "WITHDRAWAL",
-        amount: -500.00,
-        description: "Withdrawal to PayPal",
-        status: "COMPLETED",
-        referenceId: null
-    },
-    {
-        id: "tx_mock_4",
-        createdAt: new Date(Date.now() - 1000 * 60 * 60 * 24 * 7), // 1 week ago
-        type: "REFERRAL_COMMISSION",
-        amount: 200.00,
-        description: "Commission from User #7731",
-        status: "COMPLETED",
-        referenceId: "video-generator"
-    },
-    {
-        id: "tx_mock_5",
-        createdAt: new Date(Date.now() - 1000 * 60 * 60 * 24 * 10), // 10 days ago
-        type: "REFERRAL_COMMISSION",
-        amount: 120.00,
-        description: "Commission from User #5521",
-        status: "COMPLETED",
-        referenceId: "e-learning"
-    },
-    {
-        id: "tx_mock_6",
-        createdAt: new Date(Date.now() - 1000 * 60 * 60 * 24 * 12), // 12 days ago
-        type: "REFERRAL_COMMISSION",
-        amount: 300.00,
-        description: "Commission from User #1122",
-        status: "COMPLETED",
-        referenceId: "e-commerce"
-    },
-];
-
 const COLOR_MAP: Record<string, string> = {
     "text-blue-500": "#3b82f6",
     "text-purple-500": "#a855f7",
@@ -115,28 +57,14 @@ export default async function HistoryPage() {
         return <div>User not found</div>;
     }
 
-    // Use mock data if no transactions exist
-    const transactions = userData.transactions.length > 0
-        ? userData.transactions
-        : MOCK_TRANSACTIONS;
-
-    const isMock = userData.transactions.length === 0;
+    const transactions = userData.transactions;
 
     // Calculate totals
     const totalEarnings = transactions
         .filter(t => t.amount > 0)
         .reduce((sum, t) => sum + t.amount, 0);
 
-    const currentBalance = isMock
-        ? transactions.reduce((sum, t) => sum + t.amount, 0)
-        : userData.currentBalance;
-
-    const formatCurrency = (amount: number) => {
-        return new Intl.NumberFormat('en-US', {
-            style: 'currency',
-            currency: 'USD',
-        }).format(Math.abs(amount));
-    };
+    const currentBalance = userData.currentBalance;
 
     const formatDate = (date: Date | string) => {
         return new Date(date).toLocaleDateString('en-US', {
@@ -269,11 +197,6 @@ export default async function HistoryPage() {
             <div className="rounded-xl border bg-card text-card-foreground shadow-sm overflow-hidden">
                 <div className="p-6 border-b bg-muted/20">
                     <h3 className="font-semibold">Recent Transactions</h3>
-                    {isMock && (
-                        <p className="text-xs text-amber-600 mt-1">
-                            * Showing mock data for demonstration purposes. Start referring to see real data!
-                        </p>
-                    )}
                 </div>
                 <div className="relative w-full overflow-auto">
                     <table className="w-full caption-bottom text-sm">
