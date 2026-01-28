@@ -108,7 +108,7 @@ export default function DashboardLayout({
             title: "Entertainment & Media",
             items: [
                 { title: "Video Generator", href: "/dashboard/modules/video-generator", icon: Video, active: MODULES["video-generator"]?.isActive },
-                { title: "Hooraflix", href: "/dashboard/modules/hooraflix", icon: Film, active: MODULES["hooraflix"]?.isActive },
+                { title: "Hoorafilx", href: "/dashboard/modules/hoorafilx", icon: Film, active: MODULES["hoorafilx"]?.isActive },
             ],
         },
         {

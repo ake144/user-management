@@ -106,7 +106,7 @@ export const MODULES: Record<string, {
         image: "/images/hoora.jpg",
         color: "text-red-500",
         gradient: "from-red-500/20 via-pink-500/10 to-transparent",
-        referralLink:'https://hooraflix.esperanza.et'
+        referralLink:'https://hoorafilx.com/'
     },
     "visit-ethiopia": {
         title: "Visit Ethiopia",
