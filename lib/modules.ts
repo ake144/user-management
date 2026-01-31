@@ -92,8 +92,8 @@ export const MODULES: Record<string, {
         gradient: "from-orange-600/20 via-amber-500/10 to-transparent",
         referralLink:'https://adulian-black.vercel.app'
     },
-    "hooraflix": {
-        title: "Hooraflix",
+    "hoorafilx": {
+        title: "Hoorafilx",
         description: "Stream unlimited movies, series, and exclusive content. The Netflix of Africa with local and international hits.",
         icon: Film,
         isActive:true,
@@ -122,6 +122,7 @@ export const MODULES: Record<string, {
         color: "text-green-600",
         gradient: "from-green-600/20 via-teal-500/10 to-transparent"
     },
+    
     "kefita-skill-academy": {
         title: "Kefita Skill Academy",
         description: "Master in-demand skills with expert-led courses. From coding to design, launch your tech career today.",
