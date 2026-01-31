@@ -11,7 +11,7 @@ import { CardContainer } from "../ui/3d-card"
 
 type BentoCardProps = {
   title: string
-  description: string
+  description: React.ReactNode
   icon: React.ElementType
   className?: string
   component?: ComponentType<any>
@@ -62,10 +62,32 @@ export function BentoSection() {
   const cards = [
    
     {
-      title: "Transparent Referral Rewards",
-      description: "Esperanza offers a simple referral rewards program where you earn commissions when users you recommend successfully join and use the platform.",
-      icon: Users,
-      component: NetworkIllustration,
+      title:"Referral Rewards",
+      description: (
+        <span>
+          we offers a simple rewards for referring new users to our platform. Earn commissions when your referrals make purchases or engage with our services.
+        </span>
+      ),
+      icon: () => (
+        <span style={{ fontSize: '2rem', alignItems: 'center', }}>
+          <span role="img" aria-label="Handshake">🤝</span>
+  
+        </span>
+      ),
+      component: () => (
+        <div className="flex flex-col items-center justify-center h-full w-full">
+          <div className="flex flex-row items-center justify-center gap-4 mb-2 mt-3">
+            <span style={{ fontSize: '5rem' }} role="img" aria-label="Handshake">🤝</span>
+            <span style={{ fontSize: '5rem' }} role="img" aria-label="Checklist">📋</span>
+          </div>
+          <div className="flex items-end justify-end mt-4">
+            <span className="flex items-end gap-2 px-4 py-2 rounded-lg bg-black/70 text-white text-lg font-semibold border border-white/20 shadow-lg">
+              <span role="img" aria-label="Share" style={{ fontSize: '1.3em' }}>🔗</span>
+              124 Total Referrals
+            </span>
+          </div>
+        </div>
+      ),
     },
     {
       title: "Instant Payouts",
