@@ -43,7 +43,7 @@ const countries = [
 function SignupForm() {
     const router = useRouter()
     const searchParams = useSearchParams()
-    const [isLoading, setLoading] = useState(false)
+    const [isLoading, setLoading] = useState(true)
     const [referrer, setReferrer] = useState<{ id: string; name: string } | null>(null)
 
     const [formData, setFormData] = useState({
@@ -134,7 +134,7 @@ function SignupForm() {
 
         if (!validateForm()) return
 
-        setLoading(true)
+        // setLoading(true)
         setErrors({})
 
         const newReferralCode = generateReferralCode(formData.name);
@@ -164,7 +164,7 @@ function SignupForm() {
             },
             onError: (ctx: any) => {
                 setErrors({ submit: ctx.error.message || "Signup failed" })
-                setLoading(false)
+                // setLoading(false)
             }
         })
     }
