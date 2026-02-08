@@ -96,7 +96,7 @@ export const MODULES: Record<string, {
         title: "Hoorafilx",
         description: "Stream unlimited movies, series, and exclusive content. The Netflix of Africa with local and international hits.",
         icon: Film,
-        isActive:true,
+        isActive:false,
         commission: "22%",
         features: [
             { title: "HD Streaming", desc: "High-quality video playback on any device.", icon: PlayCircle },
